@@ -8,6 +8,7 @@ class Comment(db.Model):
     owner_id = db.Column(db.Integer,db.ForeignKey("users.id"),nullable=False)
     post_id = db.Column(db.Integer,db.ForeignKey("posts.id"),nullable=False)
     created_at = db.Column(db.DateTime(timezone=True),default=datetime.now())
+    parent_id = db.Column(db.Integer,db.ForeignKey("comments.id"))
 
     post = db.relationship("Post",back_populates="comments")
     owner = db.relationship("User",back_populates="comments")

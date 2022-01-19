@@ -1,5 +1,5 @@
 
-from app.models import db,Page
+from app.models import db,Post
 
 def seed_posts():
     post1 = Post(content="""Hi guy. 
