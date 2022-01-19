@@ -1,28 +1,15 @@
 import Nav from "../Nav";
-import LoginForm from "../auth/LoginForm";
 import "./mainpage.css";
+import { useSelector } from "react-redux";
+import FloatingLogin from "../FloatingLogin";
+import FloatingSignup from "../FloatingSignup";
 function MainPage() {
+  const loginShow = useSelector((state) => state.loginShow);
+  const signupShow = useSelector((state) => state.signupShow);
   return (
     <div>
-      <div className="blackout"></div>
-      <div className="loginForm">
-        <div>
-          <div className="side"></div>
-          <div>
-            <div className="loginDiv">
-              <p>Login</p>
-              <button>Demo Login</button>
-              <div className="divider">
-                <div></div> <p>OR</p> <div></div>
-              </div>
-              <LoginForm />
-              <div className="signlink">New to Guardian? <a href="/signup">SignUp</a></div>
-            </div>
-          </div>
-          <div class="span"></div>
-          <button id="exit"><i className="fas fa-times"></i></button>
-        </div>
-      </div>
+      {loginShow && <FloatingLogin />}
+      {signupShow && <FloatingSignup/>}
       <Nav />
     </div>
   );

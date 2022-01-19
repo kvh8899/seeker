@@ -3,12 +3,14 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import { toggle } from '../../store/loginShow';
 import "./LoginForm.css"
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
+  const loginShow = useSelector(state => state.loginShow);
   const dispatch = useDispatch();
   const labeluser = useRef(null);
   const labelpass = useRef(null);
@@ -21,7 +23,6 @@ const LoginForm = () => {
   };
 
   useEffect(() => {
-    console.log(username,labeluser.current.classList)
     if(username){
       labeluser.current.classList.add("labelChange")
     }else{
@@ -42,6 +43,7 @@ const LoginForm = () => {
   };
 
   if (user) {
+    if(loginShow) dispatch(toggle())
     return <Redirect to='/' />;
   }
 

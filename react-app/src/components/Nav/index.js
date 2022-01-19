@@ -1,13 +1,19 @@
 import { NavLink } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
 import { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
+import { toggle } from "../../store/loginShow";
+import { toggleSignup } from "../../store/signupShow";
 import "./nav.css";
+
 function Nav() {
   const session = useSelector((state) => state.session.user);
   const wrapper = useRef(null);
   const [showDiv, setShowDiv] = useState(false);
   const [showProfDiv, setShowProfDiv] = useState(false);
+  const loginShow = useSelector((state) => state.loginShow)
+  const signupShow = useSelector((state) => state.signupShow);
+  const dispatch = useDispatch();
   return (
     <div
       className="wrapper unselectable"
@@ -24,7 +30,6 @@ function Nav() {
               <NavLink
                 to="/"
                 exact={true}
-                activeClassName="active"
                 className="logo"
               >
                 <img src="Guardian.png" alt=""></img>Guardian
@@ -63,24 +68,25 @@ function Nav() {
             {!session && (
               <>
                 <li>
-                  <NavLink
-                    to="/login"
-                    exact={true}
-                    activeClassName="active"
+                  <button
                     className="login"
+                    onClick={(e) =>{
+                      if(!loginShow) dispatch(toggle())
+                    }}
                   >
                     Log in
-                  </NavLink>
+                  </button>
                 </li>
                 <li>
-                  <NavLink
+                  <button
                     to="/sign-up"
-                    exact={true}
-                    activeClassName="active"
                     className="signup"
+                    onClick={(e) =>{
+                      if(!signupShow) dispatch(toggleSignup())
+                    }}
                   >
                     Sign Up
-                  </NavLink>
+                  </button>
                 </li>
               </>
             )}

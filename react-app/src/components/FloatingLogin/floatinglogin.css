@@ -1,0 +1,95 @@
+.blackout{
+    background-color:black;
+    opacity:0.5;
+    position:fixed;
+    height:100%;
+    width:100%;
+    z-index:25;
+  }
+  .loginForm{
+    position:fixed;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:25;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+  }
+  .outer{
+    position:relative;
+    height:650px;
+    width:850px;
+    background-color:white;
+    border-radius:5px;
+    display:flex;
+    z-index:27;
+  }
+  
+  .side{
+    background-color:black;
+    height:100%;
+    width:125px;
+    border-top-left-radius:5px;
+    border-bottom-left-radius:5px;
+  }
+  .loginDiv{
+    display:flex;
+    flex-direction:column;
+    margin-left:25px;
+    margin-top:50px;
+    width:275px;
+  }
+  
+  .loginForm button{
+    width:100%;
+    padding-top:10px;
+    padding-bottom:10px;
+    border-radius:25px;
+    font-size:15px;
+    font-weight:bold;
+    border:none;
+    background-color:#1484d7;
+    color:white;
+  }
+  .loginDiv > p{
+    margin-bottom:50px;
+  }
+  .divider{
+    margin-top:15px;
+    margin-bottom:15px;
+    display:flex;
+    align-items:center;
+    width:100%;
+  }
+  .divider > div{
+    width:50%;
+    background-color:rgb(230, 230, 230);
+    height:1px;
+  }
+  .divider > p{
+    margin-left:15px;
+    color:rgb(156, 156, 156);
+    margin-right:15px;
+    font-weight:500;
+    font-size:14px;
+  }
+  .signlink{
+    font-size:13px;
+  }
+  .signlink a{
+    font-weight:bold;
+    color: #1484d7;
+  }
+  
+  #exit{
+    background-color:transparent;
+    color:gray;
+    height:40px;
+    width:40px;
+    font-size:25px;
+  }
+  .span{
+    width:380px;
+  }
