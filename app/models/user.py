@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     page = db.relationship("Page", back_populates="owner",cascade="all, delete")
     posts = db.relationship("Post", back_populates="owner",cascade="all, delete")
     comments = db.relationship("Comment",back_populates="owner",cascade="all, delete")
+    liked_posts = db.relationship("Post",backref="likers",secondary='likes',cascade='all, delete')
     
     @property
     def password(self):
