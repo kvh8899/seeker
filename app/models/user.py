@@ -1,4 +1,4 @@
-from .db import db
+from .models import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -15,8 +15,9 @@ class User(db.Model, UserMixin):
     page = db.relationship("Page", back_populates="owner",cascade="all, delete")
     posts = db.relationship("Post", back_populates="owner",cascade="all, delete")
     comments = db.relationship("Comment",back_populates="owner",cascade="all, delete")
-    liked_posts = db.relationship("Post",backref="likers",secondary='likes',cascade='all, delete')
-    
+    liked_posts = db.relationship("Post",backref="likers",secondary="likes",cascade='all, delete')
+    followed_posts = db.relationship("Post",backref="subscribers",secondary="page_follows",cascade="all, delete")
+
     @property
     def password(self):
         return self.hashed_password

@@ -1,7 +1,5 @@
-from db import db
-
-
-
+from .models import db
+from datetime import datetime
 
 class Page(db.Model):
     __tablename__ = "pages"
@@ -9,10 +7,11 @@ class Page(db.Model):
     title = db.Column(db.String(150),nullable=False)
     profile_image = db.Column(db.String)
     category = db.Column(db.String(50),nullable=False)
+    description = db.Column(db.Text)
     owner_id = db.Column(db.Integer,db.ForeignKey("users.id"),nullable=False)
     followers_type = db.Column(db.String,nullable=False)
     theme = db.Column(db.String)
-    created_at = db.Column(db.DateTime(timezone=True),default=func.now())
+    created_at = db.Column(db.DateTime(timezone=True),default=datetime.now())
 
     owner = db.relationship("User",back_populates="page",cascade="all, delete")
     posts = db.relationship("Post",back_populates="page",cascade="all, delete")
