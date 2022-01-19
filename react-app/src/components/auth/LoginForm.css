@@ -70,6 +70,6 @@ input:focus ~ .password {
   font-size: 10px;
   transition: 0.2s ease-in-out;
 }
-form > button{
-    margin-bottom:15px;
+form > button {
+  margin-bottom: 15px;
 }

@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../../store/session";
 import SignUpForm from "../auth/SignUpForm";
 import { toggleSignup } from "../../store/signupShow";
+import { toggle } from "../../store/loginShow";
 function FloatingSignup() {
   const dispatch = useDispatch();
   return (
@@ -30,7 +31,18 @@ function FloatingSignup() {
               </div>
               <SignUpForm />
               <div className="signlink">
-                Have an account? <a href="/login">Login</a>
+                {/*if time do routes properly */}
+                Have an account?{" "}
+                <a
+                  href="/"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(toggle());
+                    dispatch(toggleSignup());
+                  }}
+                >
+                  Login
+                </a>
               </div>
             </div>
           </div>

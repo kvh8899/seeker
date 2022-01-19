@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { toggle } from "../../store/loginShow";
+import { toggleSignup } from "../../store/signupShow";
 import { login } from "../../store/session";
 import LoginForm from "../auth/LoginForm";
 import "./floatinglogin.css"
@@ -27,7 +28,12 @@ function FloatingLogin() {
               </div>
               <LoginForm />
               <div className="signlink">
-                New to Guardian? <a href="/signup">SignUp</a>
+                {/*if time do routes properly */}
+                New to Guardian? <a href="/signup" onClick={(e) =>{
+                  e.preventDefault();
+                  dispatch(toggle());
+                  dispatch(toggleSignup());
+                }}>SignUp</a>
               </div>
             </div>
           </div>
