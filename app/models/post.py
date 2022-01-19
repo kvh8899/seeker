@@ -8,6 +8,7 @@ class Post(db.Model):
     page_id = db.Column(db.Integer,db.ForeignKey("pages.id"),nullable=False)
     created_at = db.Column(db.DateTime(timezone=True),default=datetime.now())
     owner_id = db.Column(db.Integer,db.ForeignKey("users.id"),nullable=False)
+    contentImage = db.Column(db.String)
 
     owner = db.relationship("User",back_populates="posts",cascade="all, delete")
     page = db.relationship("Page",back_populates="posts",cascade="all, delete")
