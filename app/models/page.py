@@ -12,7 +12,7 @@ class Page(db.Model):
     owner_id = db.Column(db.Integer,db.ForeignKey("users.id"),nullable=False)
     followers_type = db.Column(db.String,nullable=False)
     theme = db.Column(db.String)
-    created_at = db.Column(db.DateTime)
+    created_at = db.Column(db.DateTime(timezone=True),default=func.now())
 
     owner = db.relationship("User",back_populates="page",cascade="all, delete")
     posts = db.relationship("Post",back_populates="page",cascade="all, delete")
