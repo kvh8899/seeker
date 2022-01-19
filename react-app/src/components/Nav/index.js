@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
 import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import "./nav.css"
 function Nav() {
   //const session = useSelector((state) => state.session.user)
   const wrapper = useRef(null);
