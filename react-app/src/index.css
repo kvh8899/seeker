@@ -1,1 +1,28 @@
-/* TODO Add site wide styles */
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+body {
+  margin: 0px;
+  background-color: rgb(200, 200, 214);
+}
+nav {
+  background-color: white;
+}
+
+.unselectable {
+  user-select: none;
+}
+body{
+    font-family:sans-serif;
+}
+button{
+    cursor: pointer;
+    transition:0.5s ease;
+}
+button:hover{
+    opacity: 0.8;
+    transition:0.5s ease;
+}

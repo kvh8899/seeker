@@ -30,7 +30,6 @@ export const authenticate = () => async (dispatch) => {
 }
 
 export const login = (username, password) => async (dispatch) => {
-  console.log({username,password})
   const response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {

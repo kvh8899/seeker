@@ -1,16 +1,4 @@
-li {
-  list-style: none;
-}
-a {
-  text-decoration: none;
-}
-body {
-  margin: 0px;
-  background-color: rgb(200, 200, 214);
-}
-nav {
-  background-color: white;
-}
+
 @font-face {
   font-family: galaxy;
   src: url(earth-orbiter-font/EarthOrbiter-YZ12.otf);

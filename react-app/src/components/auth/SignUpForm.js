@@ -1,16 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import { toggleSignup } from '../../store/signupShow';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const labelRef = useRef([]);
   const user = useSelector(state => state.session.user);
+  const signupShow = useSelector((state) => state.signupShow)
   const dispatch = useDispatch();
 
+  useEffect(() => {
+   const inputs =  [username,password,repeatPassword]
+    labelRef.current.forEach((e,i) => {
+      if(inputs[i]){
+        e.classList.add("labelChange");
+      }else{
+        e.classList.remove("labelChange");
+      }
+    })
+
+  },[username,password,repeatPassword])
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
@@ -34,6 +48,7 @@ const SignUpForm = () => {
   };
 
   if (user) {
+    if(signupShow) dispatch(toggleSignup())
     return <Redirect to='/' />;
   }
 
@@ -45,25 +60,25 @@ const SignUpForm = () => {
         ))}
       </div>
       <div>
-        <label>User Name</label>
         <input
           type='text'
           name='username'
           onChange={updateUsername}
           value={username}
         ></input>
+        <label className="username" ref={(e) => labelRef.current[0] = e}>User Name</label>
       </div>
       <div>
-        <label>Password</label>
+        
         <input
           type='password'
           name='password'
           onChange={updatePassword}
           value={password}
         ></input>
+        <label className="password" ref={(e) => labelRef.current[1] = e }>Password</label>
       </div>
       <div>
-        <label>Confirm Password</label>
         <input
           type='password'
           name='repeat_password'
@@ -71,6 +86,7 @@ const SignUpForm = () => {
           value={repeatPassword}
           required={true}
         ></input>
+        <label className="password" ref={(e) => labelRef.current[2] = e }>Confirm Password</label>
       </div>
       <button type='submit'>Sign Up</button>
     </form>
