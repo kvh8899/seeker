@@ -10,7 +10,7 @@ def trending():
     posts_t = []
     for i in posts:
         posts_t.append(i.to_dict())
-    return posts_t
+    return {'posts_t':posts_t}
 
 
 
@@ -24,6 +24,6 @@ def page_posts(pageId):
     posts_t = []
     for i in posts:
         posts_t.append(i.to_dict())
-    return posts_t
+    return {'posts_t':posts_t}
 
 

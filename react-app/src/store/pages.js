@@ -1,34 +1,50 @@
-
-
-const USERLIST = "set/USERLIST"
-
+const USERLIST = "set/USERLIST";
+const ADDPAGE = "set/ADDPAGE";
+const addPage = (newPage) => {
+  return { type: ADDPAGE, newPage };
+};
 const getUserList = (list) => {
-    return {
-        type:USERLIST,
-        list
-    }
+  return {
+    type: USERLIST,
+    list,
+  };
+};
+
+export const fetchUserList = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/pages`);
+
+  if (res.ok) {
+    let { userPages } = await res.json();
+    dispatch(getUserList(userPages));
+    return userPages;
+  } else {
+    return null;
+  }
+};
+export const createPage = (data) => async (dispatch) => {
+  const res = await fetch("/api/pages/new", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
+  if (res.ok) {
+    let { page } = await res.json();
+    dispatch(addPage(page));
+    return page;
+  } else {
+    return null;
+  }
+};
+function pageList(state = [], action) {
+  switch (action.type) {
+    case USERLIST:
+      return action.list;
+    case ADDPAGE:
+      return [...state, action.newPage];
+    default:
+      return state;
+  }
 }
 
-export const fetchUserList = (userId) => async(dispatch) => {
-    const res = await fetch(`/api/users/${userId}/pages`)
-
-    if(res.ok){
-        let list = await res.json();
-        dispatch(getUserList(list.userPages))
-        return list;
-    }else{
-        return null;
-    }
-
-}
-function pageList(state=[],action){
-    switch(action.type){
-        case USERLIST:
-            return action.list
-        default:
-            return state
-    }
-}
-
-
-export default pageList
+export default pageList;
