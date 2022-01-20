@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import User
+from app.models import User, Page
 
 user_routes = Blueprint('users', __name__)
 
@@ -17,3 +17,15 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+# get all pages of a user
+# /api/users/:userId/pages
+
+@user_routes.route('/<int:id>/pages')
+def user_pages(id):
+    pages = Page.query.join(User).filter(id == User.id).all()
+    userPages = []
+    for i in pages:
+        userPages.append(i.to_dict())
+    return {'userPages':userPages}
+

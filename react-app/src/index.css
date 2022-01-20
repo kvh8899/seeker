@@ -6,7 +6,6 @@ a {
 }
 body {
   margin: 0px;
-  background-color: rgb(200, 200, 214);
 }
 nav {
   background-color: white;
@@ -18,6 +17,7 @@ nav {
 body {
   font-family: sans-serif;
   position: fixed;
+  background-color:lightgray;
   width: 100%;
   height:100%;
 }

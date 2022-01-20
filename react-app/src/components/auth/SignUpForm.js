@@ -1,17 +1,13 @@
 import React, { useState, useEffect, useRef} from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
 import { signUp } from '../../store/session';
 import { toggleSignup } from '../../store/signupShow';
-
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const labelRef = useRef([]);
-  const user = useSelector(state => state.session.user);
-  const signupShow = useSelector((state) => state.signupShow)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,7 +27,9 @@ const SignUpForm = () => {
       const data = await dispatch(signUp(username, password));
       if (data) {
         setErrors(data)
+        return;
       }
+      dispatch(toggleSignup());
     }
   };
 
@@ -46,11 +44,6 @@ const SignUpForm = () => {
   const updateRepeatPassword = (e) => {
     setRepeatPassword(e.target.value);
   };
-
-  if (user) {
-    if(signupShow) dispatch(toggleSignup())
-    return <Redirect to='/' />;
-  }
 
   return (
     <form onSubmit={onSignUp}>

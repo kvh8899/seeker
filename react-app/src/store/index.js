@@ -3,11 +3,14 @@ import thunk from 'redux-thunk';
 import session from './session'
 import loginShow from './loginShow';
 import signupShow from './signupShow';
-
+import pageList from './pages';
+import createPageShow from './createPageShow';
 const rootReducer = combineReducers({
   session,
   loginShow,
-  signupShow
+  signupShow,
+  pageList,
+  createPageShow
 });
 
 

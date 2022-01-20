@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import { authenticate } from "./store/session";
 import MainPage from "./components/MainPage";
@@ -26,9 +25,6 @@ function App() {
       <Switch>
         <Route path="/" exact={true}>
           <MainPage />
-        </Route>
-        <Route path="/login" exact={true}>
-          <LoginForm />
         </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpForm />

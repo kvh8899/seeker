@@ -1,0 +1,94 @@
+.createPageForm > div {
+  height: 500px;
+  width: 500px;
+  background-color: white;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+}
+
+.createPageForm {
+  position: relative;
+  z-index: 27;
+}
+h4 {
+  margin: 15px 0px;
+}
+.cpHeader {
+  display: flex;
+  align-items:center;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgray;
+  margin: auto;
+  margin-bottom: 15px;
+  width: 93%;
+}
+.cpHeader button {
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+  color: gray;
+}
+.cpForm {
+  width: 93%;
+  margin: auto;
+}
+.cpForm > input {
+  width: 97.5%;
+  padding: 10px 5px;
+  font: 20px;
+  margin-bottom: 25px;
+}
+.cpLabel {
+  margin-bottom: 25px;
+}
+.cpForm > p {
+  font-size: 11px;
+  color: gray;
+  margin-top: 5px;
+  margin-bottom: 25px;
+}
+.cpSubmit {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(233, 233, 233);
+  flex-grow: 1;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.cpSubmit > div {
+  display: flex;
+  margin-right: 15px;
+}
+button.cancel {
+  background-color: transparent;
+  border: 1px solid #0079d3;
+  color: #0079d3;
+  border-radius: 25px;
+  font-size: 14px;
+  padding: 8px 25px;
+}
+button.submit {
+  background-color: #0079d3;
+  border: 1px solid transparent;
+  color: white;
+  border-radius: 25px;
+  font-size: 14px;
+  padding: 8px 25px;
+  margin-left: 5px;
+}
+.createOuter {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 25;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
