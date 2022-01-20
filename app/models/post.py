@@ -4,6 +4,7 @@ from datetime import datetime
 class Post(db.Model):
     __tablename__ = "posts"
     id = db.Column(db.Integer,primary_key=True)
+    heading = db.Column(db.String(100),nullable=False)
     content = db.Column(db.Text)
     page_id = db.Column(db.Integer,db.ForeignKey("pages.id"),nullable=False)
     created_at = db.Column(db.DateTime(timezone=True),default=datetime.now())
@@ -20,5 +21,6 @@ class Post(db.Model):
             'content':self.content,
             'page_id':self.page_id,
             'created_at':self.created_at,
-            'owner_id':self.owner_id
+            'owner_id':self.owner_id,
+            'heading':self.heading
         }
