@@ -1,4 +1,4 @@
-
+//action types
 const TOGGLE = "signup/TOGGLE"
 
 export const toggleSignup = () => {
@@ -14,6 +14,5 @@ function signupShow(state=false,action){
             return state;
     }
 }
-
 
 export default signupShow;

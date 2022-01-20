@@ -1,5 +1,7 @@
+//action types
 const USERLIST = "set/USERLIST";
 const ADDPAGE = "set/ADDPAGE";
+
 const addPage = (newPage) => {
   return { type: ADDPAGE, newPage };
 };
@@ -21,6 +23,7 @@ export const fetchUserList = (userId) => async (dispatch) => {
     return null;
   }
 };
+
 export const createPage = (data) => async (dispatch) => {
   const res = await fetch("/api/pages/new", {
     method: "POST",
@@ -36,6 +39,7 @@ export const createPage = (data) => async (dispatch) => {
     return null;
   }
 };
+
 function pageList(state = [], action) {
   switch (action.type) {
     case USERLIST:

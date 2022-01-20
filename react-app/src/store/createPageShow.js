@@ -1,3 +1,4 @@
+//action types
 const TOGGLE = "set/TOGGLE"
 
 export const toggleCreatePage = () => {
