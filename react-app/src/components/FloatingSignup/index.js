@@ -21,7 +21,10 @@ function FloatingSignup() {
               <p>Sign Up</p>
               <button
                 onClick={async (e) => {
-                  await dispatch(login("Demo", "password"));
+                  const res = await dispatch(login("Demo", "password"));
+                  if (!res) {
+                    dispatch(toggleSignup());
+                  }
                 }}
               >
                 Demo Login

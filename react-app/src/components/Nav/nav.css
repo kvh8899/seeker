@@ -1,5 +1,6 @@
 .wrapper {
-  position: fixed;
+  position: absolute;
+  z-index: -1;
   height: 100%;
   width: 100%;
 }
@@ -27,7 +28,7 @@
 .home {
   top: 5px;
   left: 215px;
-  position: fixed;
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -37,7 +38,6 @@
   border-radius: 3px;
   background-color: white;
   border: 1px solid transparent;
-  font-family: sans-serif;
 }
 .home > div {
   width: 100%;
@@ -50,22 +50,20 @@
 }
 .home:hover {
   border: 1px solid rgb(201, 193, 193);
-  cursor: pointer;
 }
 
 .rightnav {
   display: flex;
   align-items: center;
   margin-right: 20px;
-  
 }
 .rightnav li {
   margin-left: 10px;
 }
-.rightnav > li > div{
-  display:flex;
-  align-items:center;
-  margin-right:10px;
+.rightnav > li > div {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
 }
 .leftnav {
   position: relative;
@@ -79,8 +77,67 @@
   top: 7px;
 }
 
-.test {
+.comBar {
   height: 400px;
+}
+div.comBar{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:flex-start;
+  width:100%;
+}
+div.comBar input{
+  width:80%;
+  align-self:center;
+  border-radius:1px;
+}
+div.comBar > div{
+  width:100%;
+  margin:0px;
+  
+}
+.createCom{
+  width:100%;
+  padding:0px;
+  margin:0px;
+  border:none;
+  height:30px;
+  font-size:15px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display:flex;
+  align-items:center;
+}
+.createCom i{
+  font-size:20px;
+  margin-left:30px;
+  margin-right:5px;
+}
+.createCom:hover{
+  cursor: pointer;
+  background-color:lightgray;
+}
+
+div.comBar input{
+  height:35px;
+  padding:0px;
+  padding-left:5px;
+  padding-right:5px;
+  font-size:15px;
+}
+.myComs{
+  padding-left:30px;
+  font-size:12px;
+  color:gray;
+}
+.comBar button > div{
+  display:flex;
+  padding-left:30px;
+  align-items:center;
+}
+.comBar button > div > i{
+  margin-right:5px;
 }
 .border {
   border: 1px solid rgb(201, 193, 193);
@@ -99,11 +156,9 @@
 
 .login {
   border: 1px solid rgb(82, 117, 235);
-  background-color:transparent;
+  background-color: transparent;
   color: rgb(82, 117, 235);
-  padding: 8px;
-  padding-right: 30px;
-  padding-left: 30px;
+  padding: 8px 30px;
   border-radius: 25px;
   font-family: sans-serif;
   font-size: 14px;
@@ -112,7 +167,7 @@
 
 .signup {
   background-color: rgb(82, 117, 235);
-  border:none;
+  border: none;
   color: white;
   padding: 8px;
   padding-right: 30px;
@@ -124,7 +179,7 @@
 }
 .profile {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   align-items: center;
   border: 1px solid lightgray;
   padding: 3px;
@@ -134,4 +189,43 @@
 }
 .profile i {
   margin-left: 10px;
+}
+.homeChild:hover{
+  cursor: pointer;
+}
+.communities{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  width:200px;
+  margin-left:30px;
+}
+.comContainer:hover{
+  background-color: lightgray;
+}
+.comName:hover{
+  cursor: pointer;
+}
+.communities img{
+  width:20px;
+  height:20px;
+  object-fit:cover;
+  border-radius:100%;
+  margin-right:5px;
+}
+.comName{
+  display:flex;
+  align-items:center;
+}
+.comName > p{
+  margin: 10px 5px;
+}
+.communities button{
+  border-radius:100%;
+  height:30px;
+  width:30px;
+  border:2px solid transparent;
+  background-color:rgb(235, 82, 82);
+  color:white;
+  font-size:15px;
 }

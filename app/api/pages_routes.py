@@ -1,4 +1,4 @@
-from Flask import Blueprint
+from flask import Blueprint
 from app.models import Page
 pages_routes = Blueprint('pages',__name__)
 
@@ -19,7 +19,7 @@ def post_by_id(id):
 def all_posts():
     pages = Page.query.all();
     page_t = []
-    for i in pages
+    for i in pages:
         page_t.append(i.to_dict())
     return page_t
 
