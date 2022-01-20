@@ -1,7 +1,6 @@
 .wrapper {
-  position: fixed;
-  height: 100%;
-  width: 100%;
+  position: relative;
+  z-index: -1;
 }
 .mainNav {
   display: flex;
@@ -27,7 +26,7 @@
 .home {
   top: 5px;
   left: 215px;
-  position: fixed;
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -37,7 +36,6 @@
   border-radius: 3px;
   background-color: white;
   border: 1px solid transparent;
-  font-family: sans-serif;
 }
 .home > div {
   width: 100%;
@@ -57,15 +55,14 @@
   display: flex;
   align-items: center;
   margin-right: 20px;
-  
 }
 .rightnav li {
   margin-left: 10px;
 }
-.rightnav > li > div{
-  display:flex;
-  align-items:center;
-  margin-right:10px;
+.rightnav > li > div {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
 }
 .leftnav {
   position: relative;
@@ -99,7 +96,7 @@
 
 .login {
   border: 1px solid rgb(82, 117, 235);
-  background-color:transparent;
+  background-color: transparent;
   color: rgb(82, 117, 235);
   padding: 8px;
   padding-right: 30px;
@@ -112,7 +109,7 @@
 
 .signup {
   background-color: rgb(82, 117, 235);
-  border:none;
+  border: none;
   color: white;
   padding: 8px;
   padding-right: 30px;
@@ -124,7 +121,7 @@
 }
 .profile {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   align-items: center;
   border: 1px solid lightgray;
   padding: 3px;

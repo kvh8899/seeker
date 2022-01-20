@@ -1,4 +1,4 @@
-from Flask import Blueprint
+from flask import Blueprint
 from app.models import Post
 post_routes = Blueprint('posts',__name__)
 
@@ -21,7 +21,7 @@ def trending():
 def page_posts(pageId):
     posts = Post.query.filter(pageId == Post.page_id).all()
 
-     posts_t = []
+    posts_t = []
     for i in posts:
         posts_t.append(i.to_dict())
     return posts_t

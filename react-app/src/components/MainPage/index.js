@@ -7,10 +7,19 @@ function MainPage() {
   const loginShow = useSelector((state) => state.loginShow);
   const signupShow = useSelector((state) => state.signupShow);
   return (
-    <div>
+    <div className="mainContent">
       {loginShow && <FloatingLogin />}
       {signupShow && <FloatingSignup/>}
       <Nav />
+      <div className="midContent">
+        <div className="postContent">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div className="sideBar"></div>
+      </div>
     </div>
   );
 }
