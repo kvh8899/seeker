@@ -1,7 +1,7 @@
-from flask import Blueprint
-from app.models import Page
+from flask import Blueprint, jsonify, session, request
+from app.models import db, Page
 pages_routes = Blueprint('pages',__name__)
-from app.forms import PageForm
+from app.forms.page_form import PageForm
 from flask_login import current_user, login_user, logout_user, login_required
 # get a page by id
 
@@ -32,10 +32,10 @@ def new_page():
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if(form.validate_on_submit()):
-        page = Page(title=form.title.data,category=form.category.data,followers_type=form.followers_type.data)
+        page = Page(title=form.title.data,category=form.category.data,followers_type=form.followers_type.data,owner_id=current_user.id)
         db.session.add(page)
         db.session.commit()
-        return {'page':page}
+        return {'page':page.to_dict()}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

@@ -70,7 +70,7 @@ function Nav() {
                   </div>
                 </div>
               )}
-              {!cPageShow && showDiv && (
+              {showDiv && (
                 <div className="comBar">
                   <input placeholder="Filter"></input>
                   <div>
@@ -160,7 +160,7 @@ function Nav() {
                 e.stopPropagation();
               }}
             >
-              {session && <LogoutButton />}
+              {session && <LogoutButton showDiv={showDiv} setShowDiv={setShowDiv}/>}
             </div>
           )}
         </ul>
