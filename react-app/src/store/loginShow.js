@@ -1,4 +1,4 @@
-
+//action types
 const TOGGLE = "setlogin/TOGGLE"
 
 export const toggle = () => {
@@ -15,6 +15,5 @@ function loginShow(state = false, action) {
       return state;
   }
 }
-
 
 export default loginShow

@@ -5,12 +5,14 @@ import loginShow from './loginShow';
 import signupShow from './signupShow';
 import pageList from './pages';
 import createPageShow from './createPageShow';
+import postList from './posts';
 const rootReducer = combineReducers({
   session,
   loginShow,
   signupShow,
   pageList,
-  createPageShow
+  createPageShow,
+  postList
 });
 
 

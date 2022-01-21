@@ -1,26 +1,44 @@
 import Nav from "../Nav";
 import "./mainpage.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import FloatingLogin from "../FloatingLogin";
 import FloatingSignup from "../FloatingSignup";
 import CreatePage from "../CreatePage";
+import Posts from "../Posts";
+import { useEffect } from "react";
+import { getAllPosts, getFollowPosts } from "../../store/posts";
 function MainPage() {
   const loginShow = useSelector((state) => state.loginShow);
   const signupShow = useSelector((state) => state.signupShow);
-  const createPageShow = useSelector((state) => state.createPageShow)
+  const createPageShow = useSelector((state) => state.createPageShow);
+  const session = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
+
+  async function loadAll() {
+    await dispatch(getAllPosts());
+  }
+
+  async function loadFollowed() {
+    await dispatch(getFollowPosts());
+  }
+
+  useEffect(() => {
+    if (!session) {
+      loadAll();
+    } else {
+      loadFollowed();
+    }
+  }, [session]);
+
   return (
     <div className="mainContent">
       <Nav />
       {loginShow && <FloatingLogin />}
-      {signupShow && <FloatingSignup/>}
-      {/*createPageShow && <CreatePage />*/}
+      {signupShow && <FloatingSignup />}
       {createPageShow && <CreatePage />}
       <div className="midContent">
         <div className="postContent">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+          <Posts />
         </div>
         <div className="sideBar"></div>
       </div>
