@@ -22,7 +22,7 @@ function Nav() {
   }
 
   //temporary fix to divs not closing, must use redux instead
-  document.body.addEventListener('click',() => {
+  document.body.addEventListener('click',(e) => {
     setShowDiv(false);
     setShowProfDiv(false);
     document.querySelector(".home").classList.remove("border");
