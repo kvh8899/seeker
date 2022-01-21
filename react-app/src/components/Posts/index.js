@@ -22,7 +22,7 @@ function Posts() {
                 <img
                   src={e.page.profile_image}
                   alt=""
-                  id={e.id}
+                  id={e.page_id}
                   onClick={(e) => {
                     e.stopPropagation();
                     hist.push(`/pages/${e.target.id}`);
@@ -30,7 +30,7 @@ function Posts() {
                 ></img>
                 <p
                   className="pageMeta"
-                  id={e.id}
+                  id={e.page_id}
                   onClick={(e) => {
                     e.stopPropagation();
                     hist.push(`/pages/${e.target.id}`);

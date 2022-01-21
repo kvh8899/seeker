@@ -10,9 +10,10 @@ pages_routes = Blueprint('pages',__name__)
 @pages_routes.route("/<int:id>")
 def post_by_id(id):
     page = Page.query.filter(id == Page.id).first()
-
+    currPage = page.to_dict()
+    currPage['subscribers'] = len(page.subscribers)
     if(page):
-        return page.to_dict();
+        return currPage
     else:
         return none;
 
@@ -31,7 +32,6 @@ def all_posts():
 @pages_routes.route('/<int:pageId>/posts')
 def page_posts(pageId):
     posts = Post.query.filter(pageId == Post.page_id).all()
-
     posts_t = []
     for i in posts:
         post = i.to_dict()

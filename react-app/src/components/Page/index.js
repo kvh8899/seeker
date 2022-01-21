@@ -20,9 +20,24 @@ function Page() {
     await dispatch(getPagePosts(id));
     await dispatch(getCurrentPage(id));
   }
+
+  function cap(str) {
+    return <>{str ? str[0].toUpperCase() + str.slice(1) : ""}</>;
+  }
+
+  function extractDate(str) {
+    const day = str.match(/ \d\d /);
+    const month = str.match(/ \w{3} /);
+    const year = str.match(/ \d{4} /);
+    return `${month.join().trim()} ${day.join().trim()}, ${year
+      .join()
+      .trim()} `;
+  }
+
   useEffect(() => {
     loadPage();
   }, [id]);
+
   return (
     <div className="mainContent">
       <Nav
@@ -42,12 +57,7 @@ function Page() {
                 alt=""
               ></img>
               <div className="ptitles">
-                <h2>
-                  {currentPage.followers_type
-                    ? currentPage.followers_type[0].toUpperCase() +
-                      currentPage.followers_type.slice(1)
-                    : ""}
-                </h2>
+                <h2>{cap(currentPage.followers_type)}</h2>
                 <p>{currentPage.title}</p>
               </div>
               <div className="bannerf">
@@ -65,7 +75,28 @@ function Page() {
         <div className="postContent">
           <Posts />
         </div>
-        <div className="sideBar"></div>
+        <div className="sideBar">
+          <div className="comSideBar">
+            <div className="aboutHeader">
+              <p>About Community</p>
+            </div>
+            <div className="aboutData">
+              <p>Welcome to {currentPage.title}</p>
+              <div>
+                <p>{currentPage.subscribers} </p>
+                <p>{cap(currentPage.followers_type)}</p>
+              </div>
+              <span></span>
+              <div>
+                <p><i className="fas fa-birthday-cake"></i> Created {currentPage.created_at && extractDate(currentPage.created_at)}</p>
+              </div>
+              <div>
+                  <button>Create Post</button>
+                  <button>Edit Page</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
