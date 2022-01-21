@@ -223,7 +223,7 @@ div.comBar input{
   height:30px;
   width:30px;
   border:2px solid transparent;
-  background-color:rgb(235, 82, 82);
-  color:white;
+  background-color: transparent;
+  color:rgb(235, 82, 82);
   font-size:15px;
 }
