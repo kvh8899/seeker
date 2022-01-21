@@ -21,6 +21,7 @@ function Nav({ name, icon }) {
   const signupShow = useSelector((state) => state.signupShow);
   const userPages = useSelector((state) => state.pageList);
   const dispatch = useDispatch();
+  
   async function loadData() {
     await dispatch(fetchUserList(session.id));
   }
