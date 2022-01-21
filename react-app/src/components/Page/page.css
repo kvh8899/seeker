@@ -19,8 +19,8 @@
 }
 .bannerData {
   position: absolute;
-  bottom: 5px;
-  width: 950px;
+  bottom: 10px;
+  width: 1000px;
   height: 125px;
 }
 .bannerData > div {
@@ -42,49 +42,84 @@
   color: gray;
   font-size: 15px;
 }
-.bannerf{
-    margin-left:20px;
+.bannerf {
+  margin-left: 20px;
 }
-.bannerf > button{
-    padding:5px 15px;
-    border-radius:25px;
-    background-color:transparent;
-    border: 1px solid black;
-    color:black;
-    font-size:15px;
-    font-weight:500;
+.bannerf > button {
+  padding: 5px 15px;
+  border-radius: 25px;
+  background-color: transparent;
+  border: 1px solid black;
+  color: black;
+  font-size: 15px;
+  font-weight: 500;
 }
-.comSideBar{
-    display:flex;
-    flex-direction:column;
-    align-items: center;
-    width:100%;
-    min-height:200px;
-    background-Color:white;
-    border:1px solid rgb(179, 179, 179);
-    border-radius:3px;
+.comSideBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 200px;
+  background-color: white;
+  border: 1px solid rgb(179, 179, 179);
+  border-radius: 3px;
 }
 
-.aboutHeader{
-    background-color:rgb(230, 230, 230);
-    width:100%;
-    height:45px;
-    border-radius:1px;
+.aboutHeader {
+  background-color: rgb(230, 230, 230);
+  width: 100%;
+  height: 45px;
+  border-radius: 1px;
+  display: flex;
+  align-items: center;
+}
+.aboutHeader > p {
+  margin: 0px 15px;
+  font-size: 15px;
+  font-weight: 550;
+}
+.aboutData {
+  height: 100%;
+  width: 90%;
+  margin-top: 15px;
+}
+.aboutData > span {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: lightgray;
+}
+.aboutData p {
+  margin: 0px;
+}
+
+.aboutData > p{
+    margin:10px 0px;
+}
+p.fn{
+    font-size:14px;
+    margin:5px 0px;
+}
+.mc{
+    margin:13px 0px;
+}
+.bd{
+    margin:13px 0px;
+}
+.bd > p{
+    margin:10px 0px;
+}
+.crd{
     display:flex;
-    align-items:center;
+    flex-direction:column;
+    margin:5px 0px;
 }
-.aboutHeader > p{
-    margin:0px 15px;
-    font-size:15px;
-    font-weight:550;
-}
-.aboutData{
-    height:100%;
-    width:90%;
-}
-.aboutData > span{
-    display:block;
-    width:100%;
-    height:1px;
-    background-color:lightgray;
+.crd > button{
+    padding:8px 15px;
+    border-radius:25px;
+    background-color:rgb(28, 138, 228);
+    border:none;
+    color:white;
+    font-size:16px;
+    margin:5px 0px;
 }

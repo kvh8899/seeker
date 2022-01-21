@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { useEffect } from "react";
 import { getCurrentPage } from "../../store/currentPage";
+import ComData from "../comData";
 import "./page.css";
 function Page() {
   const loginShow = useSelector((state) => state.loginShow);
@@ -23,15 +24,6 @@ function Page() {
 
   function cap(str) {
     return <>{str ? str[0].toUpperCase() + str.slice(1) : ""}</>;
-  }
-
-  function extractDate(str) {
-    const day = str.match(/ \d\d /);
-    const month = str.match(/ \w{3} /);
-    const year = str.match(/ \d{4} /);
-    return `${month.join().trim()} ${day.join().trim()}, ${year
-      .join()
-      .trim()} `;
   }
 
   useEffect(() => {
@@ -57,7 +49,7 @@ function Page() {
                 alt=""
               ></img>
               <div className="ptitles">
-                <h2>{cap(currentPage.followers_type)}</h2>
+                <h2>{cap(currentPage.title)}</h2>
                 <p>{currentPage.title}</p>
               </div>
               <div className="bannerf">
@@ -76,26 +68,7 @@ function Page() {
           <Posts />
         </div>
         <div className="sideBar">
-          <div className="comSideBar">
-            <div className="aboutHeader">
-              <p>About Community</p>
-            </div>
-            <div className="aboutData">
-              <p>Welcome to {currentPage.title}</p>
-              <div>
-                <p>{currentPage.subscribers} </p>
-                <p>{cap(currentPage.followers_type)}</p>
-              </div>
-              <span></span>
-              <div>
-                <p><i className="fas fa-birthday-cake"></i> Created {currentPage.created_at && extractDate(currentPage.created_at)}</p>
-              </div>
-              <div>
-                  <button>Create Post</button>
-                  <button>Edit Page</button>
-              </div>
-            </div>
-          </div>
+          <ComData />
         </div>
       </div>
     </div>

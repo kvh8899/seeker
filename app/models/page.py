@@ -24,5 +24,6 @@ class Page(db.Model):
             'owner_id':self.owner_id,
             'followers_type':self.followers_type,
             'theme':self.theme,
-            'created_at':self.created_at
+            'created_at':self.created_at,
+            'description':self.description
         }

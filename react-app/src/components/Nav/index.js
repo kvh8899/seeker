@@ -1,11 +1,11 @@
-import { toggleCreatePage } from "../../store/createPageShow";
+import { toggleCreatePage } from "../../store/toggles";
 import { getCurrentPage } from "../../store/currentPage";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleSignup } from "../../store/signupShow";
+import { toggleSignup } from "../../store/toggles";
 import { fetchUserList } from "../../store/pages";
 import { getPagePosts } from "../../store/posts";
 import LogoutButton from "../auth/LogoutButton";
-import { toggle } from "../../store/loginShow";
+import { toggleLogin} from "../../store/toggles";
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router";
 import { useRef, useState } from "react";
@@ -21,7 +21,7 @@ function Nav({ name, icon }) {
   const signupShow = useSelector((state) => state.signupShow);
   const userPages = useSelector((state) => state.pageList);
   const dispatch = useDispatch();
-  
+
   async function loadData() {
     await dispatch(fetchUserList(session.id));
   }
@@ -147,7 +147,7 @@ function Nav({ name, icon }) {
                   <button
                     className="login"
                     onClick={(e) => {
-                      if (!loginShow) dispatch(toggle());
+                      if (!loginShow) dispatch(toggleLogin());
                     }}
                   >
                     Log in

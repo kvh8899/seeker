@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { toggleCreatePage } from "../../store/createPageShow";
+import { toggleCreatePage } from "../../store/toggles";
 import { useState } from "react";
 import { createPage } from "../../store/pages";
 import { useHistory } from "react-router";
@@ -41,9 +41,11 @@ function CreatePage() {
               onSubmit={async (e) => {
                 e.preventDefault();
                 //how to handle validations?
-                
-                const page = await dispatch(createPage({ title, category, followers_type }));
-                hist.push(`/pages/${page.id}`)
+                const page = await dispatch(
+                  createPage({ title, category, followers_type })
+                );
+                toggle(e);
+                hist.push(`/pages/${page.id}`);
               }}
             >
               <label>Name</label>

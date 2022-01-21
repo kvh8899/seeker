@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { login } from "../../store/session";
 import SignUpForm from "../auth/SignUpForm";
-import { toggleSignup } from "../../store/signupShow";
-import { toggle } from "../../store/loginShow";
+import { toggleSignup } from "../../store/toggles";
+import { toggleLogin } from "../../store/toggles";
 function FloatingSignup() {
   const dispatch = useDispatch();
   return (
@@ -40,7 +40,7 @@ function FloatingSignup() {
                   href="/"
                   onClick={(e) => {
                     e.preventDefault();
-                    dispatch(toggle());
+                    dispatch(toggleLogin());
                     dispatch(toggleSignup());
                   }}
                 >
