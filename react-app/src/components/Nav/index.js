@@ -20,6 +20,14 @@ function Nav() {
   async function loadData() {
     await dispatch(fetchUserList(session.id));
   }
+
+  //temporary fix to divs not closing, must use redux instead
+  document.body.addEventListener('click',() => {
+    setShowDiv(false);
+    setShowProfDiv(false);
+    document.querySelector(".home").classList.remove("border");
+  });
+
   useEffect(() => {
     if (session) loadData();
   }, [session]);
@@ -89,7 +97,7 @@ function Nav() {
                         <div className="comContainer" key={e.id}>
                           <div className="communities">
                             <div className="comName">
-                              <img src={e.profile_image} alt=""></img>
+                             {e.profile_image ? <img src={e.profile_image} alt=""></img>:<img src="https://www.leadershipmartialartsct.com/wp-content/uploads/2017/04/default-image-620x600.jpg" alt=""></img>}
                               <p>{e.title}</p>
                             </div>
                             <div>
