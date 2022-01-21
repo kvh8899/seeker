@@ -38,7 +38,6 @@ def login():
     # form manually to validate_on_submit can be used
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.data['username'] == "Demo" and form.data['password'] == "password":
-            print(form.data['username'])
             user = User.query.filter(User.username == form.data['username']).first()
             login_user(user)
             return user.to_dict()
