@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import FloatingLogin from "../FloatingLogin";
 import FloatingSignup from "../FloatingSignup";
 import CreatePage from "../CreatePage";
+import Posts from "../Posts";
 import { useEffect } from "react";
 import { getAllPosts, getFollowPosts } from "../../store/posts";
 function MainPage() {
@@ -11,7 +12,6 @@ function MainPage() {
   const signupShow = useSelector((state) => state.signupShow);
   const createPageShow = useSelector((state) => state.createPageShow);
   const session = useSelector((state) => state.session.user);
-  const postList = useSelector((state) => state.postList);
   const dispatch = useDispatch();
 
   async function loadAll() {
@@ -38,24 +38,7 @@ function MainPage() {
       {createPageShow && <CreatePage />}
       <div className="midContent">
         <div className="postContent">
-          {postList.map((e) => {
-            return (
-              <div key={e.id}>
-                <div>
-                  <div></div>
-                  <div>
-                    <h4>{e.heading}</h4>
-                    <p></p>
-                  </div>
-                  <div>
-                    <p></p>
-                    <p></p>
-                  </div>
-                </div>
-                <div></div>
-              </div>
-            );
-          })}
+          <Posts />
         </div>
         <div className="sideBar"></div>
       </div>

@@ -1,0 +1,122 @@
+.postContent {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+.postContent > div {
+  display: flex;
+  width: 100%;
+  min-height: 100px;
+  margin-bottom: 20px;
+  background-color: white;
+  border: 1px solid rgb(187, 187, 187);
+  border-radius: 5px;
+}
+.postContent > div:hover {
+  cursor: pointer;
+}
+.ipContent {
+  display: flex;
+  justify-content: center;
+  width: 45px;
+  flex-grow: 1 0 auto;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  background-color: rgb(236, 236, 236);
+}
+.lSidebar {
+  margin-top: 15px;
+}
+.lSidebar > p {
+  text-align: center;
+  margin-top: 5px;
+}
+.postBel {
+  display: flex;
+  align-items: center;
+}
+.postBel img {
+  height: 20px;
+  width: 20px;
+  object-fit: cover;
+  border-radius: 100%;
+  margin-left: 5px;
+  margin-right: 3px;
+}
+.pageMeta {
+  font-size: 13px;
+  font-weight: bold;
+  margin: 10px 0px;
+}
+.posterMeta {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 100;
+  color: gray;
+}
+.posterMeta > i {
+  font-size: 2px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.posterMeta > p {
+  margin: 0px 1px;
+}
+.postHeadings {
+  position: relative;
+  width: 100%;
+}
+
+.mainData {
+  margin-left: 5px;
+}
+.mainData > h4 {
+  margin: 2px 0px;
+  font-weight: 400;
+}
+
+.mainData > p {
+  max-height: 200px;
+  overflow: hidden;
+  max-width: 580px;
+  font-size:15px;
+  font-weight:350;
+}
+.commentData {
+  position: absolute;
+  bottom: 1px;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 35%,
+    rgba(255, 255, 255, 0) 100%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  margin: 0px;
+  left: -1px;
+  display: flex;
+  align-items: flex-end;
+}
+.cDiv {
+  width: 100%;
+}
+.cDiv > div {
+  width: 100px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  color: gray;
+  margin: 0px 15px;
+}
+.cDiv > div:hover {
+  background-color: lightgray;
+}
+.cDiv p {
+  font-size: 12px;
+  font-weight: 800;
+  margin-left: 4px;
+}

@@ -15,7 +15,6 @@ function Nav() {
   const [showProfDiv, setShowProfDiv] = useState(false);
   const loginShow = useSelector((state) => state.loginShow);
   const signupShow = useSelector((state) => state.signupShow);
-  const cPageShow = useSelector((state) => state.createPageShow);
   const userPages = useSelector((state) => state.pageList);
   const dispatch = useDispatch();
   async function loadData() {

@@ -17,19 +17,9 @@
   justify-content: center;
   margin: auto;
   margin-top: 100px;
-  z-index: -2;
+  z-index: -1;
 }
-.postContent {
-  width: 100%;
-}
-.postContent > div {
-  width: 100%;
-  min-height: 100px;
-  margin-bottom: 20px;
-  background-color:white;
-  border: 1px solid rgb(187, 187, 187);
-  border-radius:5px;
-}
+
 .sideBar {
   margin-left: 30px;
   width: 400px;
