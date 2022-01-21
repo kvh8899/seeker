@@ -1,7 +1,14 @@
 //action types
 const ALLPOSTS = "set/ALLPOSTS";
 const FOLLOWPOSTS = "set/FOLLOWPOSTS";
+const PAGEPOSTS = "set/PAGEPOSTS";
 
+const getPage = (pagePosts) => {
+  return {
+    type: PAGEPOSTS,
+    pagePosts,
+  };
+};
 const getAll = (allPosts) => {
   return {
     type: ALLPOSTS,
@@ -39,12 +46,25 @@ export const getFollowPosts = () => async (dispatch) => {
   }
 };
 
+export const getPagePosts = (id) => async (dispatch) => {
+  const res = await fetch(`/api/pages/${id}/posts`);
+
+  if (res.ok) {
+    const { posts_t } = await res.json();
+    dispatch(getPage(posts_t));
+    return posts_t;
+  } else {
+    return null;
+  }
+};
 function postList(state = [], action) {
   switch (action.type) {
     case ALLPOSTS:
       return action.allPosts;
     case FOLLOWPOSTS:
       return action.followPosts;
+    case PAGEPOSTS:
+        return action.pagePosts;
     default:
       return state;
   }

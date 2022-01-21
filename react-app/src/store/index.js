@@ -6,13 +6,15 @@ import signupShow from './signupShow';
 import pageList from './pages';
 import createPageShow from './createPageShow';
 import postList from './posts';
+import currentPage from './currentPage';
 const rootReducer = combineReducers({
   session,
   loginShow,
   signupShow,
   pageList,
   createPageShow,
-  postList
+  postList,
+  currentPage
 });
 
 

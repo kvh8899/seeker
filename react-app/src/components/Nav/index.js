@@ -1,16 +1,20 @@
-import { NavLink } from "react-router-dom";
-import LogoutButton from "../auth/LogoutButton";
-import { useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { toggle } from "../../store/loginShow";
-import { toggleSignup } from "../../store/signupShow";
-import "./nav.css";
-import { useEffect } from "react";
-import { fetchUserList } from "../../store/pages";
 import { toggleCreatePage } from "../../store/createPageShow";
-function Nav() {
+import { getCurrentPage } from "../../store/currentPage";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleSignup } from "../../store/signupShow";
+import { fetchUserList } from "../../store/pages";
+import { getPagePosts } from "../../store/posts";
+import LogoutButton from "../auth/LogoutButton";
+import { toggle } from "../../store/loginShow";
+import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router";
+import { useRef, useState } from "react";
+import { useEffect } from "react";
+import "./nav.css";
+function Nav({ name, icon }) {
   const session = useSelector((state) => state.session.user);
   const wrapper = useRef(null);
+  const hist = useHistory();
   const [showDiv, setShowDiv] = useState(false);
   const [showProfDiv, setShowProfDiv] = useState(false);
   const loginShow = useSelector((state) => state.loginShow);
@@ -22,10 +26,10 @@ function Nav() {
   }
 
   //temporary fix to divs not closing, must use redux instead
-  document.body.addEventListener('click',(e) => {
+  document.body.addEventListener("click", (e) => {
     setShowDiv(false);
     setShowProfDiv(false);
-    document.querySelector(".home").classList.remove("border");
+    document.querySelector(".home")?.classList.remove("border");
   });
 
   useEffect(() => {
@@ -38,7 +42,9 @@ function Nav() {
         e.stopPropagation();
         setShowDiv(false);
         setShowProfDiv(false);
-        wrapper.current.classList.remove("border");
+        if (session) {
+          wrapper.current.classList.remove("border");
+        }
       }}
     >
       <nav>
@@ -46,22 +52,21 @@ function Nav() {
           <div className="leftnav">
             <li>
               <NavLink to="/" exact={true} className="logo">
-                <img src="Guardian.png" alt=""></img>Seeker
+                <img src="/Guardian.png" alt=""></img>Seeker
               </NavLink>
             </li>
-
-            <div
-              className="home"
-              onClick={(e) => {
-                e.stopPropagation();
-                if (!showDiv) {
-                  setShowDiv(true);
-                  wrapper.current.classList.add("border");
-                }
-              }}
-              ref={wrapper}
-            >
-              {session && (
+            {session && (
+              <div
+                className="home"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (!showDiv) {
+                    setShowDiv(true);
+                    wrapper.current.classList.add("border");
+                  }
+                }}
+                ref={wrapper}
+              >
                 <div
                   className="homeChild"
                   onClick={(e) => {
@@ -69,52 +74,70 @@ function Nav() {
                     wrapper.current.classList.remove("border");
                   }}
                 >
-                  <div>
-                    <i className="fas fa-home"></i> Home
+                  <div className="tof">
+                    {icon} {name}
                   </div>
                   <div>
                     <i className="fas fa-chevron-down"></i>
                   </div>
                 </div>
-              )}
-              {showDiv && (
-                <div className="comBar">
-                  <input placeholder="Filter"></input>
-                  <div>
-                    <div className="myComs">
-                      <p>My Communities</p>
-                    </div>
-                    <div
-                      className="createCom"
-                      onClick={(e) => {
-                        dispatch(toggleCreatePage());
-                      }}
-                    >
-                      <i className="fas fa-plus"></i> Create Community
-                    </div>
-                    {userPages.map((e) => {
-                      return (
-                        <div className="comContainer" key={e.id}>
-                          <div className="communities">
-                            <div className="comName">
-                             {e.profile_image ? <img src={e.profile_image} alt=""></img>:<img src="https://www.leadershipmartialartsct.com/wp-content/uploads/2017/04/default-image-620x600.jpg" alt=""></img>}
-                              <p>{e.title}</p>
-                            </div>
-                            <div>
-                              {session?.id === e.owner_id && (
-                                <button>
-                                  <i className="far fa-edit"></i>
-                                </button>
-                              )}
+                {showDiv && (
+                  <div className="comBar">
+                    <input placeholder="Filter"></input>
+                    <div>
+                      <div className="myComs">
+                        <p>My Communities</p>
+                      </div>
+                      <div
+                        className="createCom"
+                        onClick={(e) => {
+                          dispatch(toggleCreatePage());
+                        }}
+                      >
+                        <i className="fas fa-plus"></i> Create Community
+                      </div>
+                      {userPages.map((ex) => {
+                        return (
+                          <div
+                            className="comContainer"
+                            id={ex.id}
+                            key={ex.id}
+                            onClick={async (e) => {
+                              await dispatch(getPagePosts(ex.id));
+                              await dispatch(getCurrentPage(ex.id));
+                              setShowDiv(false);
+                              wrapper.current.classList.remove("border");
+                              hist.push(`/pages/${ex.id}`);
+                            }}
+                          >
+                            <div className="communities">
+                              <div className="comName">
+                                {ex.profile_image ? (
+                                  <img src={ex.profile_image} alt=""></img>
+                                ) : (
+                                  <img
+                                    src="https://www.leadershipmartialartsct.com/wp-content/uploads/2017/04/default-image-620x600.jpg"
+                                    alt=""
+                                  ></img>
+                                )}
+                                <p>{ex.title}</p>
+                              </div>
+                              <div>
+                                {session?.id === ex.owner_id && (
+                                  <button>
+                                    <i className="far fa-edit"></i>
+                                  </button>
+                                )}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
+            )}
           </div>
           <div className="rightnav">
             {!session && (
@@ -154,7 +177,7 @@ function Nav() {
               }}
             >
               <div>
-                <img src="./Guardian.png" width="30px" alt=""></img>
+                <img src="/Guardian.png" width="30px" alt=""></img>
                 <i className="fas fa-chevron-down"></i>
               </div>
               <div>{session && session.username}</div>
@@ -167,7 +190,9 @@ function Nav() {
                 e.stopPropagation();
               }}
             >
-              {session && <LogoutButton showDiv={showDiv} setShowDiv={setShowDiv}/>}
+              {session && (
+                <LogoutButton showDiv={showDiv} setShowDiv={setShowDiv} />
+              )}
             </div>
           )}
         </ul>

@@ -1,8 +1,10 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import db, Page
-pages_routes = Blueprint('pages',__name__)
+from app.models import db, Page, Post
 from app.forms.page_form import PageForm
 from flask_login import current_user, login_user, logout_user, login_required
+
+pages_routes = Blueprint('pages',__name__)
+
 # get a page by id
 
 @pages_routes.route("/<int:id>")
@@ -16,13 +18,32 @@ def post_by_id(id):
 
 
 # get all pages
-@pages_routes.route("/")
+@pages_routes.route("")
 def all_posts():
     pages = Page.query.all();
     page_t = []
     for i in pages:
         page_t.append(i.to_dict())
     return page_t
+
+#get posts of a page /api/posts/:pageId
+
+@pages_routes.route('/<int:pageId>/posts')
+def page_posts(pageId):
+    posts = Post.query.filter(pageId == Post.page_id).all()
+
+    posts_t = []
+    for i in posts:
+        post = i.to_dict()
+        likers = []
+        for x in i.likers:
+            likers.append(x.to_dict())
+        post['likers'] = likers
+        post['page'] = i.page.to_dict()
+        post['owner'] = i.owner.to_dict()
+        post['comments'] = len(i.comments)
+        posts_t.append(post)
+    return {'posts_t':posts_t}
 
 # create a page
 # /api/pages/new

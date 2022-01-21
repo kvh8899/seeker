@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import SignUpForm from "./components/auth/SignUpForm";
 import { authenticate } from "./store/session";
 import MainPage from "./components/MainPage";
-
+import Page from "./components/Page"
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -28,6 +28,9 @@ function App() {
         </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
+        </Route>
+        <Route path="/pages/:id" exact={true}>
+          <Page />
         </Route>
       </Switch>
     </BrowserRouter>

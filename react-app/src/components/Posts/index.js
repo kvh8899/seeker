@@ -1,9 +1,12 @@
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import "./posts.css";
 function Posts() {
   const postList = useSelector((state) => state.postList);
+  const hist = useHistory();
   return (
     <>
+    {postList.length ? "": "Be the first to make a post!"}
       {postList.map((e) => {
         return (
           <div key={e.id}>
@@ -16,8 +19,25 @@ function Posts() {
             </div>
             <div className="postHeadings">
               <div className="postBel">
-                <img src={e.page.profile_image} alt=""></img>
-                <p className="pageMeta">{e.page.title}</p>
+                <img
+                  src={e.page.profile_image}
+                  alt=""
+                  id={e.id}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    hist.push(`/pages/${e.target.id}`);
+                  }}
+                ></img>
+                <p
+                  className="pageMeta"
+                  id={e.id}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    hist.push(`/pages/${e.target.id}`);
+                  }}
+                >
+                  {e.page.title}
+                </p>
                 <div className="posterMeta">
                   <i className="fas fa-circle"></i>
                   <p>Posted by</p>
