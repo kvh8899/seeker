@@ -1,10 +1,19 @@
 //action types
 const USERLIST = "set/USERLIST";
 const ADDPAGE = "set/ADDPAGE";
+const DELETEPAGE = "set/DELETEPAGE";
 
 const addPage = (newPage) => {
   return { type: ADDPAGE, newPage };
 };
+
+const delPage = (id) => {
+  return {
+    type: DELETEPAGE,
+    id,
+  };
+};
+
 const getUserList = (list) => {
   return {
     type: USERLIST,
@@ -40,12 +49,29 @@ export const createPage = (data) => async (dispatch) => {
   }
 };
 
+export const deletePage = (id) => async (dispatch) => {
+  const res = await fetch(`/api/pages/${id}/delete`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(delPage(id));
+    return data;
+  } else {
+    return null;
+  }
+
+};
+
 function pageList(state = [], action) {
   switch (action.type) {
     case USERLIST:
       return action.list;
     case ADDPAGE:
       return [...state, action.newPage];
+    case DELETEPAGE:
+      return state.filter((e) => e.id !== action.id)
     default:
       return state;
   }
