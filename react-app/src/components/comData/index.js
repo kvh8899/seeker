@@ -1,7 +1,11 @@
 import { useSelector } from "react-redux";
-
+import { toggleEditPage } from "../../store/toggles";
+import { useDispatch } from "react-redux";
+import "./comdata.css";
 function ComData() {
   const currentPage = useSelector((state) => state.currentPage);
+  const session = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
 
   function extractDate(str) {
     const day = str.match(/ \d\d /);
@@ -11,9 +15,11 @@ function ComData() {
       .join()
       .trim()} `;
   }
+
   function cap(str) {
     return <>{str ? str[0].toUpperCase() + str.slice(1) : ""}</>;
   }
+
   return (
     <div className="comSideBar">
       <div className="aboutHeader">
@@ -37,7 +43,15 @@ function ComData() {
         </div>
         <div className="crd">
           <button>Create Post</button>
-          <button>Edit Page</button>
+          {session?.id === currentPage.owner_id && (
+            <button
+              onClick={(e) => {
+                dispatch(toggleEditPage());
+              }}
+            >
+              Edit Page
+            </button>
+          )}
         </div>
       </div>
     </div>
