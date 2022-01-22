@@ -48,6 +48,9 @@
   font-weight: bold;
   margin: 10px 0px;
 }
+.pageMeta:hover{
+    text-decoration:underline;
+}
 .posterMeta {
   display: flex;
   align-items: center;

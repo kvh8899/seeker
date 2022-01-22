@@ -64,23 +64,7 @@ h4 {
   display: flex;
   margin-right: 15px;
 }
-button.cancel {
-  background-color: transparent;
-  border: 1px solid #0079d3;
-  color: #0079d3;
-  border-radius: 25px;
-  font-size: 14px;
-  padding: 8px 25px;
-}
-button.submit {
-  background-color: #0079d3;
-  border: 1px solid transparent;
-  color: white;
-  border-radius: 25px;
-  font-size: 14px;
-  padding: 8px 25px;
-  margin-left: 5px;
-}
+
 .createOuter {
     position: fixed;
     display: flex;

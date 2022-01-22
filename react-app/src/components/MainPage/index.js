@@ -32,7 +32,7 @@ function MainPage() {
 
   return (
     <div className="mainContent">
-      <Nav />
+      <Nav icon={<i className="fas fa-home"></i>} name={"Home"}/>
       {loginShow && <FloatingLogin />}
       {signupShow && <FloatingSignup />}
       {createPageShow && <CreatePage />}

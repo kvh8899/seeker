@@ -1,0 +1,130 @@
+.banner {
+  display: flex;
+  position: relative;
+  align-items: flex-end;
+  z-index: -1;
+  width: 100%;
+  height: 275px;
+  background-color: rgb(25, 159, 221);
+}
+
+.banner > div {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: white;
+  height: 100px;
+}
+.bannerData {
+  position: absolute;
+  bottom: 10px;
+  width: 1000px;
+  height: 125px;
+}
+.bannerData > div {
+  display: flex;
+  align-items: center;
+}
+.bannerData img {
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
+  border: 5px solid white;
+}
+.ptitles h2 {
+  margin-top: 40px;
+  margin-bottom: 8px;
+}
+.ptitles p {
+  margin-top: 0px;
+  color: gray;
+  font-size: 15px;
+}
+.bannerf {
+  margin-left: 20px;
+}
+.bannerf > button {
+  padding: 5px 15px;
+  border-radius: 25px;
+  background-color: transparent;
+  border: 1px solid black;
+  color: black;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.editPage {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #dae0e6;
+}
+.editPage > div {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: white;
+  border: 1px solid rgb(190, 190, 190);
+  border-radius: 3px;
+  width: 500px;
+  height: 500px;
+}
+.editPage h2 {
+  margin-left: 50px;
+}
+
+.editPage form {
+  margin-bottom: 75px;
+  width: 80%;
+  align-self: center;
+}
+.epfbuttons {
+  position: absolute;
+  align-self: flex-end;
+  display: flex;
+  justify-content: space-between;
+  bottom: 0;
+  background-color: rgb(233, 233, 233);
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  width: 100%;
+  height: 100px;
+  align-items: center;
+}
+.epfbuttons button {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 550;
+}
+.epfbuttons > .delete {
+  margin-left: 45px;
+}
+.epfbuttons > div {
+  margin-right: 55px;
+}
+textarea {
+  width: 96%;
+  border-radius: 5px;
+  height: 100px;
+  resize: vertical;
+  max-height: 150px;
+}
+.editPage > button{
+    top:20px;
+    right:20px;
+    position:absolute;
+    border:none;
+    color:gray;
+    font-size:30px;
+    background-color:transparent;
+}

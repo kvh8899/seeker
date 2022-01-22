@@ -1,13 +1,15 @@
 import { useDispatch } from "react-redux";
-import { toggleCreatePage } from "../../store/createPageShow";
+import { toggleCreatePage } from "../../store/toggles";
 import { useState } from "react";
 import { createPage } from "../../store/pages";
+import { useHistory } from "react-router";
 import "./createpage.css";
 function CreatePage() {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [followers_type, setFollowers_type] = useState("");
+  const hist = useHistory();
   function toggle(e) {
     dispatch(toggleCreatePage());
   }
@@ -38,7 +40,12 @@ function CreatePage() {
               id="cpForm1"
               onSubmit={async (e) => {
                 e.preventDefault();
-                await dispatch(createPage({ title, category, followers_type }));
+                //how to handle validations?
+                const page = await dispatch(
+                  createPage({ title, category, followers_type })
+                );
+                toggle(e);
+                hist.push(`/pages/${page.id}`);
               }}
             >
               <label>Name</label>
@@ -48,6 +55,7 @@ function CreatePage() {
                 onChange={(e) => {
                   setTitle(e.target.value);
                 }}
+                required
               ></input>
               <div className="cpLabel">
                 <label>Category</label>
@@ -57,6 +65,7 @@ function CreatePage() {
                 onChange={(e) => {
                   setCategory(e.target.value);
                 }}
+                required
               ></input>
               <div className="cpLabel">
                 <label>Choose a name for members of this group</label>
@@ -66,6 +75,7 @@ function CreatePage() {
                 onChange={(e) => {
                   setFollowers_type(e.target.value);
                 }}
+                required
               ></input>
             </form>
             <div className="cpSubmit">

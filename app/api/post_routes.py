@@ -23,7 +23,7 @@ def trending():
 # get posts that the user follows /api/posts/following
 @post_routes.route("/following")
 def following():
-    posts = Post.query.filter(Page_Follow.user_id == current_user.id)
+    posts = Post.query.join(Page).join(Page_Follow).filter(Page_Follow.user_id == current_user.id)
     posts_t = []
     for i in posts:
         post = i.to_dict()
@@ -37,17 +37,5 @@ def following():
         posts_t.append(post)
     return {'posts_t':posts_t}
 
-
-
-#get posts of a page /api/posts/:pageId
-
-@post_routes.route("/<int>:pageId")
-def page_posts(pageId):
-    posts = Post.query.filter(pageId == Post.page_id).all()
-
-    posts_t = []
-    for i in posts:
-        posts_t.append(i.to_dict())
-    return {'posts_t':posts_t}
 
 

@@ -75,67 +75,66 @@
   top: 7px;
 }
 
-div.comBar{
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
-  align-items:flex-start;
-  width:100%;
+div.comBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
   height: 400px;
-  overflow:scroll;
+  overflow: scroll;
 }
-div.comBar input{
-  width:80%;
-  align-self:center;
-  border-radius:1px;
-  margin-top:10px;
+div.comBar input {
+  width: 80%;
+  align-self: center;
+  border-radius: 1px;
+  margin-top: 10px;
 }
-div.comBar > div{
-  width:100%;
-  margin:0px;
-  
+div.comBar > div {
+  width: 100%;
+  margin: 0px;
 }
-.createCom{
-  width:100%;
-  padding:0px;
-  margin:0px;
-  border:none;
-  height:30px;
-  font-size:15px;
+.createCom {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  height: 30px;
+  font-size: 15px;
   padding-top: 4px;
   padding-bottom: 4px;
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
 }
-.createCom i{
-  font-size:20px;
-  margin-left:30px;
-  margin-right:5px;
+.createCom i {
+  font-size: 20px;
+  margin-left: 30px;
+  margin-right: 5px;
 }
-.createCom:hover{
+.createCom:hover {
   cursor: pointer;
-  background-color:lightgray;
+  background-color: lightgray;
 }
 
-div.comBar input{
-  height:35px;
-  padding:0px;
-  padding-left:5px;
-  padding-right:5px;
-  font-size:15px;
+div.comBar input {
+  height: 35px;
+  padding: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 15px;
 }
-.myComs{
-  padding-left:30px;
-  font-size:12px;
-  color:gray;
+.myComs {
+  padding-left: 30px;
+  font-size: 12px;
+  color: gray;
 }
-.comBar button > div{
-  display:flex;
-  padding-left:30px;
-  align-items:center;
+.comBar button > div {
+  display: flex;
+  padding-left: 30px;
+  align-items: center;
 }
-.comBar button > div > i{
-  margin-right:5px;
+.comBar button > div > i {
+  margin-right: 5px;
 }
 .border {
   border: 1px solid rgb(201, 193, 193);
@@ -188,42 +187,60 @@ div.comBar input{
 .profile i {
   margin-left: 10px;
 }
-.homeChild:hover{
+.homeChild:hover {
   cursor: pointer;
 }
-.communities{
-  display:flex;
-  align-items:center;
+.communities {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  width:200px;
-  margin-left:30px;
+  width: 200px;
+  margin-left: 30px;
 }
-.comContainer:hover{
+.comContainer:hover {
   background-color: lightgray;
 }
-.comName:hover{
+.comName:hover {
   cursor: pointer;
 }
-.communities img{
-  width:20px;
-  height:20px;
-  object-fit:cover;
-  border-radius:100%;
-  margin-right:5px;
+.communities img {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 100%;
+  margin-right: 5px;
 }
-.comName{
-  display:flex;
-  align-items:center;
+.comName {
+  display: flex;
+  align-items: center;
 }
-.comName > p{
+.comName > p {
   margin: 10px 5px;
 }
-.communities button{
-  border-radius:100%;
-  height:30px;
-  width:30px;
-  border:2px solid transparent;
+.communities button {
+  border-radius: 100%;
+  height: 30px;
+  width: 30px;
+  border: 2px solid transparent;
   background-color: transparent;
-  color:rgb(235, 82, 82);
-  font-size:15px;
+  color: rgb(235, 82, 82);
+  font-size: 15px;
+}
+.tof {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.tof > img {
+  border-radius: 100%;
+  object-fit: cover;
+  width: 20px;
+  height: 20px;
+  margin-right:5px;
+}
+.tof > i{
+  margin-right:5px;
 }

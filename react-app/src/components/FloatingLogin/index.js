@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { toggle } from "../../store/loginShow";
-import { toggleSignup } from "../../store/signupShow";
+import { toggleLogin } from "../../store/toggles";
+import { toggleSignup } from "../../store/toggles";
 import { login } from "../../store/session";
 import React, { useState, useRef, useEffect} from 'react';
 import "./floatinglogin.css";
@@ -31,7 +31,7 @@ function FloatingLogin() {
       setErrors(data);
       return;
     }
-    dispatch(toggle());
+    dispatch(toggleLogin());
   };
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -46,7 +46,7 @@ function FloatingLogin() {
         <div
           className="blackout"
           onClick={(e) => {
-            dispatch(toggle());
+            dispatch(toggleLogin());
           }}
         ></div>
         <div className="outer">
@@ -58,7 +58,7 @@ function FloatingLogin() {
                 onClick={async (e) => {
                   const res = await dispatch(login("Demo", "password"));
                   if(!res){
-                    dispatch(toggle());
+                    dispatch(toggleLogin());
                   }
                 }}
               >
@@ -104,7 +104,7 @@ function FloatingLogin() {
                   href="/signup"
                   onClick={(e) => {
                     e.preventDefault();
-                    dispatch(toggle());
+                    dispatch(toggleLogin());
                     dispatch(toggleSignup());
                   }}
                 >
@@ -117,7 +117,7 @@ function FloatingLogin() {
           <button
             id="exit"
             onClick={(e) => {
-              dispatch(toggle());
+              dispatch(toggleLogin());
             }}
           >
             <i className="fas fa-times"></i>

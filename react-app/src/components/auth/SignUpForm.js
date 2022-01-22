@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef} from 'react';
 import { useDispatch } from 'react-redux'
 import { signUp } from '../../store/session';
-import { toggleSignup } from '../../store/signupShow';
+import { toggleSignup } from "../../store/toggles";
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
