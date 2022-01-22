@@ -62,7 +62,7 @@ def new_page():
 # edit a page
 #/api/pages/:id/edit
 
-@pages_routes.route("/<int:id>/edit")
+@pages_routes.route("/<int:id>/edit",methods=["PATCH"])
 def edit_page(id):
     form = EditPageForm();
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -74,13 +74,13 @@ def edit_page(id):
         page.theme = form.theme.data
         page.description = form.description.data
         db.session.commit()
-        return page
+        return page.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 # delete a page
 # /api/pages/:id/delete
 
-@pages_routes.route("/<int:id>/delete")
+@pages_routes.route("/<int:id>/delete",methods=["DELETE"])
 def delete_page(id):
     try:
         Page.query.filter(id == Page.id).delete()

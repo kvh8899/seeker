@@ -16,7 +16,7 @@ function Page() {
   const signupShow = useSelector((state) => state.signupShow);
   const createPageShow = useSelector((state) => state.createPageShow);
   const currentPage = useSelector((state) => state.currentPage);
-  const editPageShow = useSelector((state) => state.editPageShow)
+  const editPageShow = useSelector((state) => state.editPageShow);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -41,7 +41,14 @@ function Page() {
           icon={<img src={currentPage.profile_image} alt=""></img>}
           name={currentPage.title}
         />
-        <div className="banner">
+        <div
+          className="banner"
+          style={{
+            backgroundImage: `url(${currentPage.theme})`,
+            backgroundSize: "cover",
+            backgroundPosition:"center"
+          }}
+        >
           <div>
             <div className="bannerData">
               <div>
