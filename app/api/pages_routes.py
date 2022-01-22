@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from app.models import db, Page, Post
-from app.forms.page_form import PageForm
+from app.forms.page_form import PageForm,EditPageForm
 from flask_login import current_user, login_user, logout_user, login_required
 
 pages_routes = Blueprint('pages',__name__)
@@ -59,9 +59,35 @@ def new_page():
         return {'page':page.to_dict()}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
+# edit a page
+#/api/pages/:id/edit
 
+@pages_routes.route("/<int:id>/edit")
+def edit_page(id):
+    form = EditPageForm();
+    form['csrf_token'].data = request.cookies['csrf_token']
 
+    if(form.validate_on_submit()):
+        page = Page.query.filter(id == Page.id).first()
 
+        page.profile_image = form.profile_image.data
+        page.theme = form.theme.data
+        page.description = form.description.data
+        db.session.commit()
+        return page
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+# delete a page
+# /api/pages/:id/delete
+
+@pages_routes.route("/<int:id>/delete")
+def delete_page(id):
+    try:
+        Page.query.filter(id == Page.id).delete()
+        db.session.commit()
+        return {'delete':'success'}
+    except:
+        return 404
     
 
 
