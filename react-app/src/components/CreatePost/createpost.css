@@ -10,7 +10,9 @@
   position: relative;
   width: 300px;
   display: flex;
+  border:1px solid lightgray;
   justify-content: flex-start;
+  z-index:1;
 }
 .dropDown > input {
   background-color: white;
@@ -37,9 +39,40 @@
   height: 400px;
   width: 284px;
   background-color: white;
-  top: 42px;
+  border:1px solid lightgray;
+  border-top:none;
+  top: 43px;
+  left:-1px;
+  border-radius:3px;
   overflow: scroll;
 }
 .ccOff.comContainer:hover {
   background-color: white;
+}
+
+.createPForm{
+    position:relative;
+    z-index:0;
+    width:100%;
+    border-radius:5px;
+    background-color:white;
+}
+.createPForm form{
+    width:80%;
+    margin:auto;
+    padding-top:40px;
+}
+.createPForm textarea{
+    height:200px;
+    max-height:none;
+}
+
+.createPForm > div{
+    width:80%;
+    margin:auto;
+    height:50px;
+    display:flex;
+    align-items:center;
+    margin-right:75px;
+    justify-content:flex-end;
 }

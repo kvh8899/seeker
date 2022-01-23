@@ -2,6 +2,11 @@
 const ALLPOSTS = "set/ALLPOSTS";
 const FOLLOWPOSTS = "set/FOLLOWPOSTS";
 const PAGEPOSTS = "set/PAGEPOSTS";
+const ADDPOST = "set/ADDPOST";
+
+const addPost = (post) => {
+  return { type: ADDPOST, post };
+};
 
 const getPage = (pagePosts) => {
   return {
@@ -57,6 +62,22 @@ export const getPagePosts = (id) => async (dispatch) => {
     return null;
   }
 };
+
+export const addOnePost = (id, post) => async (dispatch) => {
+  const res = await fetch(`/api/pages/${id}/posts`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(post),
+  });
+
+  if (res.ok) {
+    const post = await res.json();
+    dispatch(addPost(post));
+    return post;
+  } else {
+    return null;
+  }
+};
 function postList(state = [], action) {
   switch (action.type) {
     case ALLPOSTS:
@@ -64,7 +85,9 @@ function postList(state = [], action) {
     case FOLLOWPOSTS:
       return action.followPosts;
     case PAGEPOSTS:
-        return action.pagePosts;
+      return action.pagePosts;
+    case ADDPOST:
+      return [...state, action.post];
     default:
       return state;
   }
