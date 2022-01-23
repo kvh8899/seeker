@@ -1,0 +1,45 @@
+.cPostForm {
+  width: 100%;
+  position: relative;
+}
+.divider {
+  border: 1px solid white;
+  width: 100%;
+}
+.dropDown {
+  position: relative;
+  width: 300px;
+  display: flex;
+  justify-content: flex-start;
+}
+.dropDown > input {
+  background-color: white;
+  font-size:15px;
+  padding-left: 10px;
+  width: 250px;
+  border: none;
+  border-radius: 5px 0px 0px 5px;
+}
+.dropDown > input:focus {
+  outline: none;
+}
+.dropDownButton {
+  padding: 15px 5px;
+  border-radius: 0px 5px 5px 0px;
+  border: none;
+  margin-bottom: 10px;
+  margin-left: -1px;
+  margin-top:2px;
+  background-color: white;
+}
+.pageList{
+  position: absolute;
+  height: 400px;
+  width: 284px;
+  background-color: white;
+  top: 42px;
+  overflow: scroll;
+}
+.ccOff.comContainer:hover {
+  background-color: white;
+}

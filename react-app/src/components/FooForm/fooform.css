@@ -1,0 +1,22 @@
+/* createpost component */
+.createPost.createPost{
+    min-height:70px;
+    height:70px;
+    width:100%;
+    display:flex;
+  }
+  .createPost > form{
+    width:90%;
+    display:flex;
+    align-items:center;
+  }
+  .createPost > form > input{
+    margin:0px;
+    padding:10px 5px;
+  }
+  .createPost img{
+    height:40px;
+    width:40px;
+    border-radius:100%;
+    margin: 0px 20px;
+  }

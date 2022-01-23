@@ -12,6 +12,7 @@ import {
   loginShow,
   signupShow,
   postPageShow,
+  pageSelect
 } from "./toggles";
 
 const rootReducer = combineReducers({
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   currentPage,
   editPageShow,
   postPageShow,
+  pageSelect,
   currentPost
 });
 

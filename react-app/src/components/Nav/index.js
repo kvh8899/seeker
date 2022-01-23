@@ -12,7 +12,6 @@ import {
   postPageOff,
   toggleCreatePage,
   toggleSignup,
-  toggleEditPage
 } from "../../store/toggles";
 import "./nav.css";
 
@@ -79,88 +78,88 @@ function Nav({ name, icon }) {
             </li>
             {session && (
               <div
-                className="home"
+              className="home"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (!showDiv) {
+                  setShowDiv(true);
+                  wrapper.current.classList.add("border");
+                }
+              }}
+              ref={wrapper}
+            >
+              <div
+                className="homeChild"
                 onClick={(e) => {
-                  e.stopPropagation();
-                  if (!showDiv) {
-                    setShowDiv(true);
-                    wrapper.current.classList.add("border");
-                  }
+                  setShowDiv(false);
+                  wrapper.current.classList.remove("border");
                 }}
-                ref={wrapper}
               >
-                <div
-                  className="homeChild"
-                  onClick={(e) => {
-                    setShowDiv(false);
-                    wrapper.current.classList.remove("border");
-                  }}
-                >
-                  <div className="tof">
-                    {icon} {name}
-                  </div>
-                  <div>
-                    <i className="fas fa-chevron-down"></i>
-                  </div>
+                <div className="tof">
+                  {icon} {name}
                 </div>
-                {showDiv && (
-                  <div className="comBar">
-                    <input placeholder="Filter"></input>
-                    <div>
-                      <div className="myComs">
-                        <p>My Communities</p>
-                      </div>
+                <div>
+                  <i className="fas fa-chevron-down"></i>
+                </div>
+              </div>
+              {showDiv && (
+                <div className="comBar">
+                <input placeholder="Filter"></input>
+                <div>
+                  <div className="myComs">
+                    <p>My Communities</p>
+                  </div>
+                  <div
+                    className="createCom"
+                    onClick={(e) => {
+                      dispatch(toggleCreatePage());
+                    }}
+                  >
+                    <i className="fas fa-plus"></i> Create Community
+                  </div>
+                  {userPages.map((ex) => {
+                    return (
                       <div
-                        className="createCom"
-                        onClick={(e) => {
-                          dispatch(toggleCreatePage());
+                        className="comContainer"
+                        id={ex.id}
+                        key={ex.id}
+                        onClick={async (e) => {
+                          await dispatch(getPagePosts(ex.id));
+                          await dispatch(getCurrentPage(ex.id));
+                          setShowDiv(false);
+                          dispatch(postPageOff());
+                          //dispatch(toggleEditPageOff());
+                          wrapper.current.classList.remove("border");
+                          hist.push(`/pages/${ex.id}`);
                         }}
                       >
-                        <i className="fas fa-plus"></i> Create Community
-                      </div>
-                      {userPages.map((ex) => {
-                        return (
-                          <div
-                            className="comContainer"
-                            id={ex.id}
-                            key={ex.id}
-                            onClick={async (e) => {
-                              await dispatch(getPagePosts(ex.id));
-                              await dispatch(getCurrentPage(ex.id));
-                              setShowDiv(false);
-                              dispatch(postPageOff());
-                              //dispatch(toggleEditPageOff());
-                              wrapper.current.classList.remove("border");
-                              hist.push(`/pages/${ex.id}`);
-                            }}
-                          >
-                            <div className="communities">
-                              <div className="comName">
-                                {ex.profile_image ? (
-                                  <img src={ex.profile_image} alt=""></img>
-                                ) : (
-                                  <img
-                                    src="https://www.leadershipmartialartsct.com/wp-content/uploads/2017/04/default-image-620x600.jpg"
-                                    alt=""
-                                  ></img>
-                                )}
-                                <p>{ex.title}</p>
-                              </div>
-                              <div>
-                                {session?.id === ex.owner_id && (
-                                  <button>
-                                    <i className="far fa-edit"></i>
-                                  </button>
-                                )}
-                              </div>
-                            </div>
+                        <div className="communities">
+                          <div className="comName">
+                            {ex.profile_image ? (
+                              <img src={ex.profile_image} alt=""></img>
+                            ) : (
+                              <img
+                                src="https://www.leadershipmartialartsct.com/wp-content/uploads/2017/04/default-image-620x600.jpg"
+                                alt=""
+                              ></img>
+                            )}
+                            <p>{ex.title}</p>
                           </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
+                          <div>
+                            {session?.id === ex.owner_id && (
+                              <button>
+                                <i className="far fa-edit"></i>
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
+              )}
+            </div>
             )}
           </div>
           <div className="rightnav">
