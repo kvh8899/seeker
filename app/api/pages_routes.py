@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import db, Page, Post
-from app.forms.page_form import PageForm,EditPageForm
+from app.models import db, Page, Post,Page_Follow
+from app.forms import PageForm,EditPageForm,Create_post
 from flask_login import current_user, login_user, logout_user, login_required
 
 pages_routes = Blueprint('pages',__name__)
@@ -56,6 +56,9 @@ def new_page():
         page = Page(title=form.title.data,category=form.category.data,followers_type=form.followers_type.data,owner_id=current_user.id)
         db.session.add(page)
         db.session.commit()
+        follow = Page_Follow(page_id=page.id,user_id=current_user.id)
+        db.session.add(follow)
+        db.session.commit()
         return {'page':page.to_dict()}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -89,5 +92,22 @@ def delete_page(id):
     except:
         return 404
     
+# add a post to a page
+# /api/pages/:id/posts
+
+@pages_routes.route("/<int:pageId>/posts",methods=["POST"])
+def create_post(pageId):
+    form = Create_post()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if(form.validate_on_submit()):
+        post = Post(heading=form.heading.data,contentImage=form.contentImage.data,
+        content=form.content.data,page_id=pageId,owner_id=current_user.id)
+        db.session.add(post)
+        db.session.commit()
+        return post.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    
+
+
 
 

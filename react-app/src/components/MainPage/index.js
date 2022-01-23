@@ -8,7 +8,7 @@ import Posts from "../Posts";
 import { useEffect } from "react";
 import { getAllPosts, getFollowPosts } from "../../store/posts";
 import PostPage from "../PostPage";
-
+import FooForm from "../FooForm";
 function MainPage() {
   const loginShow = useSelector((state) => state.loginShow);
   const signupShow = useSelector((state) => state.signupShow);
@@ -16,7 +16,6 @@ function MainPage() {
   const postPageShow = useSelector((state) => state.postPageShow);
   const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-
   async function loadAll() {
     await dispatch(getAllPosts());
   }
@@ -42,15 +41,7 @@ function MainPage() {
       {postPageShow && <PostPage />}
       <div className="midContent">
         <div className="postContent">
-          <div className="createPost">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-            >
-              <input placeholder="Create Post"></input>
-            </form>
-          </div>
+          <FooForm />
           <Posts />
         </div>
         <div className="sideBar"></div>

@@ -10,9 +10,11 @@ function CreatePage() {
   const [category, setCategory] = useState("");
   const [followers_type, setFollowers_type] = useState("");
   const hist = useHistory();
+  
   function toggle(e) {
     dispatch(toggleCreatePage());
   }
+
   return (
     <>
       <div
