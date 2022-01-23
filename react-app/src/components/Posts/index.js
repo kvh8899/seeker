@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { togglePostPage } from "../../store/toggles";
+import { getCurrentPost } from "../../store/currentPost";
 import "./posts.css";
 
 function Posts() {
@@ -14,8 +15,9 @@ function Posts() {
         return (
           <div
             key={e.id}
-            onClick={(e) => {
+            onClick={() => {
               dispatch(togglePostPage());
+              dispatch(getCurrentPost(e.id))
             }}
           >
             <div className="ipContent">

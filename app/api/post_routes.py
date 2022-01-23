@@ -37,5 +37,17 @@ def following():
         posts_t.append(post)
     return {'posts_t':posts_t}
 
+# get a specific post
+# /api/posts/:postId
+@post_routes.route("/<int:postId>")
+def get_post(postId):
+    post = Post.query.filter(postId == Post.id).first()
+    t_post = post.to_dict()
+    t_post['page'] = post.page.to_dict()
+    t_post['owner'] = post.owner.to_dict()
+    t_post['likers'] = len(post.likers)
+    t_post['comments'] = len(post.comments)
+    return t_post
+
 
 

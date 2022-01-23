@@ -12,7 +12,7 @@ import {
   postPageOff,
   toggleCreatePage,
   toggleSignup,
-  togglePostPage,
+  toggleEditPage
 } from "../../store/toggles";
 import "./nav.css";
 
@@ -30,13 +30,21 @@ function Nav({ name, icon }) {
   async function loadData() {
     await dispatch(fetchUserList(session.id));
   }
+  useEffect(() => {
+    //temporary fix to divs not closing, must use redux instead
+    function close(e) {
+      setShowDiv(false);
+      setShowProfDiv(false);
+      document.querySelector(".home")?.classList.remove("border");
+    }
 
-  //temporary fix to divs not closing, must use redux instead
-  document.body.addEventListener("click", (e) => {
-    setShowDiv(false);
-    setShowProfDiv(false);
-    document.querySelector(".home")?.classList.remove("border");
-  });
+    document.body.addEventListener("click",close);
+
+    return () => {
+      document.body.removeEventListener("click",close);
+    };
+
+  }, []);
 
   useEffect(() => {
     if (session) loadData();
@@ -57,9 +65,15 @@ function Nav({ name, icon }) {
         <ul className="mainNav">
           <div className="leftnav">
             <li>
-              <NavLink to="/" exact={true} className="logo" onClick={(e) => {
-                dispatch(postPageOff());
-              }}>
+              <NavLink
+                to="/"
+                exact={true}
+                className="logo"
+                onClick={(e) => {
+                  dispatch(postPageOff());
+                  //dispatch(toggleEditOff());
+                }}
+              >
                 <img src="/Guardian.png" alt=""></img>Seeker
               </NavLink>
             </li>
@@ -115,6 +129,7 @@ function Nav({ name, icon }) {
                               await dispatch(getCurrentPage(ex.id));
                               setShowDiv(false);
                               dispatch(postPageOff());
+                              //dispatch(toggleEditPageOff());
                               wrapper.current.classList.remove("border");
                               hist.push(`/pages/${ex.id}`);
                             }}

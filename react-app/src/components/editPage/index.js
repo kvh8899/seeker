@@ -4,6 +4,7 @@ import { editCurrentPage } from "../../store/currentPage";
 import { deletePage } from "../../store/pages";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
+import "./editpage.css"
 function EditPage() {
   const dispatch = useDispatch();
   const hist = useHistory();

@@ -35,13 +35,22 @@ function MainPage() {
 
   return (
     <div className="mainContent mainContentScroll">
-      <Nav icon={<i className="fas fa-home"></i>} name={"Home"}/>
+      <Nav icon={<i className="fas fa-home"></i>} name={"Home"} />
       {loginShow && <FloatingLogin />}
       {signupShow && <FloatingSignup />}
       {createPageShow && <CreatePage />}
       {postPageShow && <PostPage />}
       <div className="midContent">
         <div className="postContent">
+          <div className="createPost">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <input placeholder="Create Post"></input>
+            </form>
+          </div>
           <Posts />
         </div>
         <div className="sideBar"></div>

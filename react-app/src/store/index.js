@@ -4,6 +4,8 @@ import session from "./session";
 import pageList from "./pages";
 import postList from "./posts";
 import currentPage from "./currentPage";
+import currentPost from "./currentPost";
+
 import {
   createPageShow,
   editPageShow,
@@ -22,6 +24,7 @@ const rootReducer = combineReducers({
   currentPage,
   editPageShow,
   postPageShow,
+  currentPost
 });
 
 let enhancer;

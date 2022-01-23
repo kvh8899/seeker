@@ -1,9 +1,11 @@
 import "./postpage.css";
 import { togglePostPage } from "../../store/toggles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import PostContent from "./postcontent";
 
 function PostPage() {
   const dispatch = useDispatch();
+  const currentPost = useSelector((state) => state.currentPost);
   return (
     <>
       <div
@@ -18,17 +20,20 @@ function PostPage() {
             e.stopPropagation();
           }}
         >
-          <div className="space1">dsad</div>
+          <div className="space1"></div>
           <div className="mainPostContent">
             <div className="titleBar">
+              <p>{currentPost.heading}</p>
               <button
                 onClick={(e) => {
                   dispatch(togglePostPage());
                 }}
               >
-                Close
+                <i className="fas fa-times"></i> Close
               </button>
             </div>
+            <PostContent />
+            
           </div>
         </div>
       </div>
