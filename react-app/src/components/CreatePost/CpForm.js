@@ -1,19 +1,27 @@
 import { useState } from "react";
+import { addOnePost } from "../../store/posts";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 function CpForm({ currPage, currId, setErrors }) {
   const [heading, setHeading] = useState("");
   const [content, setContent] = useState("");
   const [contentImage, setContentImage] = useState("");
+  const dispatch = useDispatch();
+  const hist = useHistory();
   return (
     <div className="createPForm">
       <form
         id="postcreate"
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
+          console.log(currPage)
           if (!currPage) {
             setErrors(["Please Select a Community"]);
             return;
           }
           const post = { heading, content, contentImage };
+          await dispatch(addOnePost(currId, post));
+          hist.push(`/pages/${currId}`);
         }}
       >
         <input

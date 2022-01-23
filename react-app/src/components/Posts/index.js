@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { togglePostPage } from "../../store/toggles";
 import { getCurrentPost } from "../../store/currentPost";
+import ReactMarkdown from "react-markdown";
 import "./posts.css";
 
 function Posts() {
@@ -23,14 +24,14 @@ function Posts() {
             <div className="ipContent">
               <div className="lSidebar">
                 <i className="far fa-thumbs-up"></i>
-                <p>{e.likers.length}</p>
+                <p>{e.likers?.length}</p>
                 {/* <i class="fas fa-thumbs-up"></i>*/}
               </div>
             </div>
             <div className="postHeadings">
               <div className="postBel">
                 <img
-                  src={e.page.profile_image}
+                  src={e.page?.profile_image? e.page?.profile_image:"https://www.leadershipmartialartsct.com/wp-content/uploads/2017/04/default-image-620x600.jpg"}
                   alt=""
                   id={e.page_id}
                   onClick={(e) => {
@@ -46,17 +47,17 @@ function Posts() {
                     hist.push(`/pages/${e.target.id}`);
                   }}
                 >
-                  {e.page.title}
+                  {e.page?.title}
                 </p>
                 <div className="posterMeta">
                   <i className="fas fa-circle"></i>
                   <p>Posted by</p>
-                  <p>{e.owner.username}</p>
+                  <p>{e.owner?.username}</p>
                 </div>
               </div>
               <div className="mainData">
                 <h4>{e.heading}</h4>
-                <p>{e.content}</p>
+                <ReactMarkdown>{e.content}</ReactMarkdown>
                 <div className="commentData">
                   <div className="cDiv">
                     <div>

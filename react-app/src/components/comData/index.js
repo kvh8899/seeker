@@ -1,12 +1,13 @@
 import { useSelector } from "react-redux";
 import { toggleEditPage } from "../../store/toggles";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import "./comdata.css";
 function ComData() {
   const currentPage = useSelector((state) => state.currentPage);
   const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-
+  const hist = useHistory();
   function extractDate(str) {
     const day = str.match(/ \d\d /);
     const month = str.match(/ \w{3} /);
@@ -42,7 +43,13 @@ function ComData() {
           <p>{currentPage.description}</p>
         </div>
         <div className="crd">
-          <button>Create Post</button>
+          <button
+            onClick={(e) => {
+              hist.push("/posts/submit");
+            }}
+          >
+            Create Post
+          </button>
           {session?.id === currentPage.owner_id && (
             <button
               onClick={(e) => {

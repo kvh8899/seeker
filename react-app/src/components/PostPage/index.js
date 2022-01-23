@@ -33,7 +33,7 @@ function PostPage() {
               </button>
             </div>
             <PostContent />
-            
+            <span id="spacer"></span>
           </div>
         </div>
       </div>
