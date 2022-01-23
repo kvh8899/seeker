@@ -35,10 +35,13 @@ function CreatePost() {
 
   useEffect(() => {
     loadData();
+
     function el(e) {
       dispatch(togglePageOff());
     }
+
     document.body.addEventListener("click", el);
+    
     return () => {
       document.body.removeEventListener("click", el);
     };

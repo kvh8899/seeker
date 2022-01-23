@@ -12,6 +12,7 @@ function EditPage() {
   const [theme, setTheme] = useState("");
   const [description, setDescription] = useState("");
   const currentPage = useSelector((state) => state.currentPage);
+  
   return (
     <div className="editPage">
       <button

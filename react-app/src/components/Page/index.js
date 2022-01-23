@@ -13,6 +13,7 @@ import EditPage from "../editPage";
 import ComData from "../comData";
 import FooForm from "../FooForm";
 import "./page.css";
+
 function Page() {
   const loginShow = useSelector((state) => state.loginShow);
   const signupShow = useSelector((state) => state.signupShow);
