@@ -1,16 +1,21 @@
-import { toggleCreatePage } from "../../store/toggles";
 import { getCurrentPage } from "../../store/currentPage";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleSignup } from "../../store/toggles";
 import { fetchUserList } from "../../store/pages";
 import { getPagePosts } from "../../store/posts";
 import LogoutButton from "../auth/LogoutButton";
-import { toggleLogin} from "../../store/toggles";
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
+import {
+  toggleLogin,
+  postPageOff,
+  toggleCreatePage,
+  toggleSignup,
+  togglePostPage,
+} from "../../store/toggles";
 import "./nav.css";
+
 function Nav({ name, icon }) {
   const session = useSelector((state) => state.session.user);
   const wrapper = useRef(null);
@@ -52,7 +57,9 @@ function Nav({ name, icon }) {
         <ul className="mainNav">
           <div className="leftnav">
             <li>
-              <NavLink to="/" exact={true} className="logo">
+              <NavLink to="/" exact={true} className="logo" onClick={(e) => {
+                dispatch(postPageOff());
+              }}>
                 <img src="/Guardian.png" alt=""></img>Seeker
               </NavLink>
             </li>
@@ -107,6 +114,7 @@ function Nav({ name, icon }) {
                               await dispatch(getPagePosts(ex.id));
                               await dispatch(getCurrentPage(ex.id));
                               setShowDiv(false);
+                              dispatch(postPageOff());
                               wrapper.current.classList.remove("border");
                               hist.push(`/pages/${ex.id}`);
                             }}

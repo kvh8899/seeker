@@ -7,10 +7,13 @@ import CreatePage from "../CreatePage";
 import Posts from "../Posts";
 import { useEffect } from "react";
 import { getAllPosts, getFollowPosts } from "../../store/posts";
+import PostPage from "../PostPage";
+
 function MainPage() {
   const loginShow = useSelector((state) => state.loginShow);
   const signupShow = useSelector((state) => state.signupShow);
   const createPageShow = useSelector((state) => state.createPageShow);
+  const postPageShow = useSelector((state) => state.postPageShow);
   const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
@@ -31,11 +34,12 @@ function MainPage() {
   }, [session]);
 
   return (
-    <div className="mainContent">
+    <div className="mainContent mainContentScroll">
       <Nav icon={<i className="fas fa-home"></i>} name={"Home"}/>
       {loginShow && <FloatingLogin />}
       {signupShow && <FloatingSignup />}
       {createPageShow && <CreatePage />}
+      {postPageShow && <PostPage />}
       <div className="midContent">
         <div className="postContent">
           <Posts />

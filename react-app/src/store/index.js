@@ -2,9 +2,16 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import session from "./session";
 import pageList from "./pages";
-import { createPageShow, editPageShow, loginShow, signupShow } from "./toggles";
 import postList from "./posts";
 import currentPage from "./currentPage";
+import {
+  createPageShow,
+  editPageShow,
+  loginShow,
+  signupShow,
+  postPageShow,
+} from "./toggles";
+
 const rootReducer = combineReducers({
   session,
   loginShow,
@@ -14,6 +21,7 @@ const rootReducer = combineReducers({
   postList,
   currentPage,
   editPageShow,
+  postPageShow,
 });
 
 let enhancer;

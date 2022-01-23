@@ -2,7 +2,21 @@
 const TOGGLECREATE = "set/TOGGLECREATE";
 const TOGGLEEDIT = "set/TOGGLEEDIT";
 const TOGGLELOGIN = "set/TOGGLELOGIN";
-const TOGGLESIGNUP = "signup/TOGGLESIGNUP"
+const TOGGLESIGNUP = "signup/TOGGLESIGNUP";
+const TOGGLEPOST = "post/TOGGLEPOST";
+const SETPOSTOFF = "post/TOGGLEOFF";
+
+export const togglePostPage = () => {
+  return {
+    type: TOGGLEPOST,
+  };
+};
+
+export const postPageOff = () => {
+  return {
+    type: SETPOSTOFF,
+  };
+};
 
 export const toggleEditPage = () => {
   return {
@@ -23,9 +37,20 @@ export const toggleLogin = () => {
 };
 
 export const toggleSignup = () => {
-    return {
-        type:TOGGLESIGNUP
-    }
+  return {
+    type: TOGGLESIGNUP,
+  };
+};
+
+export function postPageShow(state = false, action) {
+  switch (action.type) {
+    case TOGGLEPOST:
+      return !state;
+    case SETPOSTOFF:
+      return false;
+    default:
+      return state;
+  }
 }
 
 export function createPageShow(state = false, action) {
@@ -55,11 +80,11 @@ export function loginShow(state = false, action) {
   }
 }
 
-export function signupShow(state=false,action){
-    switch(action.type){
-        case TOGGLESIGNUP:
-            return !state
-        default:
-            return state;
-    }
+export function signupShow(state = false, action) {
+  switch (action.type) {
+    case TOGGLESIGNUP:
+      return !state;
+    default:
+      return state;
+  }
 }

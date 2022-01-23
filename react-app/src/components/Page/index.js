@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { useEffect } from "react";
 import { getCurrentPage } from "../../store/currentPage";
+import PostPage from "../PostPage";
 import EditPage from "../editPage";
 import ComData from "../comData";
 import "./page.css";
@@ -17,6 +18,7 @@ function Page() {
   const createPageShow = useSelector((state) => state.createPageShow);
   const currentPage = useSelector((state) => state.currentPage);
   const editPageShow = useSelector((state) => state.editPageShow);
+  const postPageShow = useSelector((state) => state.postPageShow);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -36,7 +38,8 @@ function Page() {
   return (
     <>
       {editPageShow && <EditPage />}
-      <div className="mainContent">
+      {postPageShow && <PostPage />}
+      <div className="mainContent mainContentScroll">
         <Nav
           icon={<img src={currentPage.profile_image} alt=""></img>}
           name={currentPage.title}
@@ -46,7 +49,7 @@ function Page() {
           style={{
             backgroundImage: `url(${currentPage.theme})`,
             backgroundSize: "cover",
-            backgroundPosition:"center"
+            backgroundPosition: "center",
           }}
         >
           <div>

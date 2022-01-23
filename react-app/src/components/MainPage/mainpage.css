@@ -3,12 +3,17 @@
   src: url(earth-orbiter-font/EarthOrbiter-YZ12.otf);
 }
 .mainContent {
-  position: relative;
   width: 100%;
   height: 100%;
-  overflow: scroll;
-  z-index: -1;
 }
+.mainContentScroll {
+  overflow: scroll;
+}
+
+.mainContentHide {
+  overflow: hidden;
+}
+
 .midContent {
   position: relative;
   width: 1000px;
@@ -17,7 +22,7 @@
   justify-content: center;
   margin: auto;
   margin-top: 100px;
-  z-index: -1;
+  z-index: 0;
 }
 
 .sideBar {

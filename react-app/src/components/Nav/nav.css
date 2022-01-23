@@ -1,6 +1,9 @@
 .wrapper {
-  position: absolute;
+  position: sticky;
+  top:0;
   width: 100%;
+  z-index:1;
+  border-bottom:1px solid rgb(231, 231, 231);
 }
 .mainNav {
   display: flex;
@@ -8,6 +11,7 @@
   justify-content: space-between;
   margin: 0px;
   padding: 0px;
+  border-bottom:rgb(122, 122, 122);
 }
 
 .logo {

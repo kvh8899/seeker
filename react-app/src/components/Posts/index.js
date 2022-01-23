@@ -1,15 +1,23 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { togglePostPage } from "../../store/toggles";
 import "./posts.css";
+
 function Posts() {
   const postList = useSelector((state) => state.postList);
+  const dispatch = useDispatch();
   const hist = useHistory();
   return (
     <>
-    {postList.length ? "": "Be the first to make a post!"}
+      {postList.length ? "" : "Be the first to make a post!"}
       {postList.map((e) => {
         return (
-          <div key={e.id}>
+          <div
+            key={e.id}
+            onClick={(e) => {
+              dispatch(togglePostPage());
+            }}
+          >
             <div className="ipContent">
               <div className="lSidebar">
                 <i className="far fa-thumbs-up"></i>
