@@ -3,7 +3,7 @@ import { toggleEditPage } from "../../store/toggles";
 import { editCurrentPage } from "../../store/currentPage";
 import { deletePage } from "../../store/pages";
 import { useHistory } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./editpage.css";
 function EditPage() {
   const dispatch = useDispatch();

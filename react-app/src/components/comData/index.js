@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { toggleEditPage, toggleLogin } from "../../store/toggles";
+import { cap, extractDate } from "../utils";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import "./comdata.css";
@@ -8,18 +9,6 @@ function ComData() {
   const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const hist = useHistory();
-  function extractDate(str) {
-    const day = str.match(/ \d\d /);
-    const month = str.match(/ \w{3} /);
-    const year = str.match(/ \d{4} /);
-    return `${month.join().trim()} ${day.join().trim()}, ${year
-      .join()
-      .trim()} `;
-  }
-
-  function cap(str) {
-    return <>{str ? str[0].toUpperCase() + str.slice(1) : ""}</>;
-  }
 
   return (
     <div className="comSideBar">

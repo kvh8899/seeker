@@ -26,7 +26,6 @@ function FloatingLogin() {
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(username, password));
-    console.log(data)
     if (data) {
       setErrors(data);
       return;
