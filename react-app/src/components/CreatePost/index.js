@@ -1,14 +1,10 @@
 import "./createpost.css";
-import Nav from "../Nav";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchUserList } from "../../store/pages";
 import { useState } from "react";
-import FloatingLogin from "../FloatingLogin";
-import FloatingSignup from "../FloatingSignup";
-import CreatePage from "../CreatePage";
-import PostPage from "../PostPage";
 import CpForm from "./CpForm";
+import TopBar from "../Nav";
 import {
   togglePageSelect,
   togglePageOff,
@@ -45,17 +41,10 @@ function CreatePost() {
       document.body.removeEventListener("click", el);
     };
   }, []);
-  const loginShow = useSelector((state) => state.loginShow);
-  const signupShow = useSelector((state) => state.signupShow);
-  const createPageShow = useSelector((state) => state.createPageShow);
-  const postPageShow = useSelector((state) => state.postPageShow);
+
   return (
     <div className="mainContent mainContentScroll">
-      {loginShow && <FloatingLogin />}
-      {signupShow && <FloatingSignup />}
-      {createPageShow && <CreatePage />}
-      {postPageShow && <PostPage />}
-      <Nav icon={<i className="fas fa-plus"></i>} name={"Create Post"} />
+      <TopBar icon={<i className="fas fa-plus"></i>} name={"Create Post"}/>
       <div className="midContent">
         <div className="cPostForm">
           <h2>Create a Post</h2>

@@ -1,8 +1,4 @@
-import Nav from "../Nav";
 import Posts from "../Posts";
-import FloatingLogin from "../FloatingLogin";
-import FloatingSignup from "../FloatingSignup";
-import CreatePage from "../CreatePage";
 import { getPagePosts } from "../../store/posts";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
@@ -12,12 +8,10 @@ import PostPage from "../PostPage";
 import EditPage from "../editPage";
 import ComData from "../comData";
 import FooForm from "../FooForm";
+import TopBar from "../Nav/index";
 import "./page.css";
 
 function Page() {
-  const loginShow = useSelector((state) => state.loginShow);
-  const signupShow = useSelector((state) => state.signupShow);
-  const createPageShow = useSelector((state) => state.createPageShow);
   const currentPage = useSelector((state) => state.currentPage);
   const editPageShow = useSelector((state) => state.editPageShow);
   const postPageShow = useSelector((state) => state.postPageShow);
@@ -42,7 +36,7 @@ function Page() {
       {editPageShow && <EditPage />}
       {postPageShow && <PostPage />}
       <div className="mainContent mainContentScroll">
-        <Nav
+        <TopBar
           icon={<img src={currentPage.profile_image} alt=""></img>}
           name={currentPage.title}
         />
@@ -77,9 +71,6 @@ function Page() {
             </div>
           </div>
         </div>
-        {loginShow && <FloatingLogin />}
-        {signupShow && <FloatingSignup />}
-        {createPageShow && <CreatePage />}
         <div className="midContent">
           <div className="postContent">
             <FooForm />
