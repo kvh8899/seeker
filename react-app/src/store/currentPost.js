@@ -32,6 +32,10 @@ export const editCurrentPost = (post, id) => async (dispatch) => {
 };
 
 export const getCurrentPost = (id) => async (dispatch) => {
+  if (!id) {
+    dispatch(getPost({}));
+    return null;
+  }
   const res = await fetch(`/api/posts/${id}`);
 
   if (res.ok) {

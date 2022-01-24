@@ -1,6 +1,7 @@
 import "./postpage.css";
 import { togglePostPage } from "../../store/toggles";
 import { useDispatch, useSelector } from "react-redux";
+import { getCurrentPost } from "../../store/currentPost";
 import PostContent from "./postcontent";
 
 function PostPage() {
@@ -10,8 +11,9 @@ function PostPage() {
     <>
       <div
         className="postPageb"
-        onClick={(e) => {
+        onClick={async(e) => {
           dispatch(togglePostPage());
+          await dispatch(getCurrentPost(null));
         }}
       >
         <div
