@@ -1,8 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { togglePostPage } from "../../store/toggles";
+import { togglePostPage, toggleLogin } from "../../store/toggles";
 import { getCurrentPost } from "../../store/currentPost";
-import { getAllPosts } from "../../store/posts";
 import { useEffect, useState, useRef } from "react";
 import { like, deleteLike, addLike, getLikes } from "../utils";
 import ReactMarkdown from "react-markdown";
@@ -11,6 +10,7 @@ import "./posts.css";
 function Posts() {
   const postList = useSelector((state) => state.postList);
   const currentPost = useSelector((state) => state.currentPost);
+  const session = useSelector((state) => state.session.user);
   const [likes, setLikes] = useState([]);
   const [numLikes, setNumLikes] = useState([]);
   const likeNum = useRef([]);
@@ -19,15 +19,17 @@ function Posts() {
 
   async function loadData() {
     let y = [];
-    let u = []
+    let u = [];
     for (let i = 0; i < postList.length; i++) {
-      const x = await like(postList[i].id);
+      if (session) {
+        const x = await like(postList[i].id);
+        y.push(x);
+      }
       const f = await getLikes(postList[i].id);
-      y.push(x);
       u.push(f);
     }
     setLikes(y);
-    setNumLikes(u)
+    setNumLikes(u);
   }
 
   useEffect(() => {
@@ -54,6 +56,10 @@ function Posts() {
                 <div
                   onClick={async (ex) => {
                     ex.stopPropagation();
+                    if (!session) {
+                      dispatch(toggleLogin());
+                      return;
+                    }
                     if (likes[i]) {
                       await deleteLike(e.id);
                     } else {

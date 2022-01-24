@@ -1,4 +1,4 @@
-import { togglePostPage } from "../../store/toggles";
+import { togglePostPage, toggleLogin } from "../../store/toggles";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
@@ -9,6 +9,7 @@ function PostContent() {
   const dispatch = useDispatch();
   const hist = useHistory();
   const currentPost = useSelector((state) => state.currentPost);
+  const session = useSelector((state) => state.session.user);
   const [isLike, setIsLike] = useState(false);
   const [numLikes, setNumLikes] = useState(0);
   const likeNum = useRef(null);
@@ -31,7 +32,10 @@ function PostContent() {
             <div className="lSidebar">
               <div
                 onClick={async (e) => {
-                    
+                  if (!session) {
+                    dispatch(toggleLogin());
+                    return;
+                  }
                   if (isLike) {
                     likeNum.current.innerText =
                       parseInt(likeNum.current.innerText) - 1;
