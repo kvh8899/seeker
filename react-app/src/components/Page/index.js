@@ -19,8 +19,10 @@ function Page() {
   const { id } = useParams();
 
   async function loadPage() {
-    await dispatch(getPagePosts(id));
-    await dispatch(getCurrentPage(id));
+    if (id) {
+      await dispatch(getPagePosts(id));
+      await dispatch(getCurrentPage(id));
+    }
   }
 
   function cap(str) {
@@ -37,16 +39,27 @@ function Page() {
       {postPageShow && <PostPage />}
       <div className="mainContent mainContentScroll">
         <TopBar
-          icon={<img src={currentPage.profile_image} alt=""></img>}
+          icon={
+            <img
+              src={
+                currentPage.profile_image
+                  ? currentPage.profile_image
+                  : "https://www.leadershipmartialartsct.com/wp-content/uploads/2017/04/default-image-620x600.jpg"
+              }
+              alt=""
+            ></img>
+          }
           name={currentPage.title}
         />
         <div
           className="banner"
-          style={{
-            backgroundImage: `url(${currentPage.theme})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
+          style={
+            currentPage.theme && {
+              backgroundImage: `url(${currentPage.theme})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }
+          }
         >
           <div>
             <div className="bannerData">

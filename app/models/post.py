@@ -11,8 +11,8 @@ class Post(db.Model):
     owner_id = db.Column(db.Integer,db.ForeignKey("users.id"),nullable=False)
     contentImage = db.Column(db.String)
 
-    owner = db.relationship("User",back_populates="posts",cascade="all, delete")
-    page = db.relationship("Page",back_populates="posts",cascade="all, delete")
+    owner = db.relationship("User",back_populates="posts")
+    page = db.relationship("Page",back_populates="posts")
     comments = db.relationship("Comment",back_populates="post",cascade="all, delete")
 
     def to_dict(self):

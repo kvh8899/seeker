@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from app.models import Post,Page,Page_Follow,Like,Comment
-from flask_login import current_user
+from flask_login import current_user, login_required
 post_routes = Blueprint('posts',__name__)
 
 #get trending posts /api/posts/
@@ -22,6 +22,7 @@ def trending():
 
 # get posts that the user follows /api/posts/following
 @post_routes.route("/following")
+@login_required
 def following():
     posts = Post.query.join(Page).join(Page_Follow).filter(Page_Follow.user_id == current_user.id)
     posts_t = []

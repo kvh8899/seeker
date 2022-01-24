@@ -101,14 +101,16 @@ function LeftNav({ icon, name }) {
                     >
                       <div className="communities">
                         <div className="comName">
-                          {ex.profile_image ? (
-                            <img src={ex.profile_image} alt=""></img>
-                          ) : (
+                          {
                             <img
-                              src="https://www.leadershipmartialartsct.com/wp-content/uploads/2017/04/default-image-620x600.jpg"
+                              src={
+                                ex.profile_image
+                                  ? ex.profile_image
+                                  : "https://www.leadershipmartialartsct.com/wp-content/uploads/2017/04/default-image-620x600.jpg"
+                              }
                               alt=""
                             ></img>
-                          )}
+                          }
                           <p>{ex.title}</p>
                         </div>
                       </div>

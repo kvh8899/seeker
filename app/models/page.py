@@ -13,7 +13,7 @@ class Page(db.Model):
     theme = db.Column(db.String)
     created_at = db.Column(db.DateTime(timezone=True),default=datetime.now())
 
-    owner = db.relationship("User",back_populates="page",cascade="all, delete")
+    owner = db.relationship("User",back_populates="page")
     posts = db.relationship("Post",back_populates="page",cascade="all, delete")
     def to_dict(self):
         return{
