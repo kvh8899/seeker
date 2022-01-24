@@ -54,11 +54,13 @@ function Page() {
         <div
           className="banner"
           style={
-            currentPage.theme && {
-              backgroundImage: `url(${currentPage.theme})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }
+            currentPage.theme
+              ? {
+                  backgroundImage: `url(${currentPage.theme})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "0px -100px",
+                }
+              : {}
           }
         >
           <div>
@@ -88,6 +90,7 @@ function Page() {
           <div className="postContent">
             <FooForm />
             <Posts />
+            <span id="spacer"></span>
           </div>
           <div className="sideBar">
             <ComData />

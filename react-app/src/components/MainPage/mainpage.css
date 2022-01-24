@@ -28,4 +28,5 @@
 .sideBar {
   margin-left: 30px;
   width: 475px;
+  border: 1px solid black;
 }

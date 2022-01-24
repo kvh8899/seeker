@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { toggleEditPage } from "../../store/toggles";
+import { toggleEditPage, toggleLogin } from "../../store/toggles";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import "./comdata.css";
@@ -45,7 +45,11 @@ function ComData() {
         <div className="crd">
           <button
             onClick={(e) => {
-              hist.push("/posts/submit");
+              if (session) {
+                hist.push("/posts/submit");
+              } else {
+                dispatch(toggleLogin());
+              }
             }}
           >
             Create Post

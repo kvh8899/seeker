@@ -16,6 +16,7 @@ function Posts() {
         return (
           <div
             key={e.id}
+            className="mainPosts"
             onClick={() => {
               dispatch(togglePostPage());
               dispatch(getCurrentPost(e.id))

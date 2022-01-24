@@ -10,16 +10,15 @@ body {
 nav {
   background-color: white;
 }
-
 .unselectable {
   user-select: none;
 }
 body {
   font-family: sans-serif;
   position: fixed;
-  background-color:lightgray;
+  background-color: lightgray;
   width: 100%;
-  height:100%;
+  height: 100%;
 }
 button {
   cursor: pointer;
@@ -29,17 +28,17 @@ button:hover {
   opacity: 0.8;
   transition: 0.5s ease;
 }
-#root{
-    position:fixed;
-    width:100%;
-    height:100%;
+#root {
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
-img{
+img {
   object-fit: cover;
 }
-.delete{
-  background-color:rgb(231, 81, 35);
-  color:white;
+.delete {
+  background-color: rgb(231, 81, 35);
+  color: white;
 }
 
 button.cancel {
@@ -59,6 +58,10 @@ button.submit {
   padding: 8px 25px;
   margin-left: 5px;
 }
-input{
-  font-size:15px;
+input {
+  font-size: 15px;
+}
+
+span {
+  display: block;
 }

@@ -7,14 +7,15 @@
   display: flex;
   width: 100%;
   min-height: 150px;
-  max-height:400px;
-  overflow:hidden;
+  max-height: 400px;
+  overflow: hidden;
   margin-bottom: 20px;
   background-color: white;
   border: 1px solid rgb(187, 187, 187);
+  word-break:break-word;
   border-radius: 5px;
 }
-.postContent > div:hover {
+.mainPosts:hover {
   cursor: pointer;
 }
 .ipContent {
@@ -50,8 +51,8 @@
   font-weight: bold;
   margin: 10px 0px;
 }
-.pageMeta:hover{
-    text-decoration:underline;
+.pageMeta:hover {
+  text-decoration: underline;
 }
 .posterMeta {
   display: flex;
@@ -83,10 +84,9 @@
 
 .mainData > p {
   max-height: 200px;
-  overflow: hidden;
   max-width: 580px;
-  font-size:15px;
-  font-weight:350;
+  font-size: 15px;
+  font-weight: 350;
 }
 .commentData {
   position: absolute;
