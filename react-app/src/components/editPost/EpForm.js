@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getCurrentPost } from "../../store/currentPost";
 import { deleteOnePost } from "../../store/posts";
+import { editCurrentPost } from "../../store/currentPost";
+import { togglePostPage } from "../../store/toggles";
 
 function EpForm() {
   const currentPost = useSelector((state) => state.currentPost);
@@ -21,7 +23,7 @@ function EpForm() {
       setContentImage(post.contentImage ? post.contentImage : "");
     }
   }
-  
+
   useEffect(() => {
     loadData();
   }, [id]);
@@ -29,12 +31,14 @@ function EpForm() {
   return (
     <div className="createPForm" style={{ minHeight: "600px" }}>
       <form
-        id="postcreate"
+        id="editPostForm"
         onSubmit={async (e) => {
           e.preventDefault();
           const post = { heading, content, contentImage };
+          await dispatch(editCurrentPost(post, currentPost.id));
+          dispatch(togglePostPage());
+          hist.push(`/`);
         }}
-        style={{}}
       >
         <input
           placeholder="Title"
@@ -75,12 +79,12 @@ function EpForm() {
             <button
               className="cancel"
               onClick={(e) => {
-                //dispatch(toggleEditPage());
+                hist.push("/");
               }}
             >
               Cancel
             </button>
-            <button className="submit" form="editPageForm">
+            <button className="submit" form="editPostForm">
               Finish
             </button>
           </div>

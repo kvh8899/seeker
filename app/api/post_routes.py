@@ -65,7 +65,12 @@ def edit_post(postId):
         post.contentImage = form.contentImage.data
         post.content = form.content.data
         db.session.commit()
-        return post.to_dict()
+        t_post = post.to_dict()
+        t_post['page'] = post.page.to_dict()
+        t_post['owner'] = post.owner.to_dict()
+        t_post['likers'] = len(post.likers)
+        t_post['comments'] = len(post.comments)
+        return {'post':t_post}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 # delete a post
