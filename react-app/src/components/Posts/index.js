@@ -2,32 +2,39 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { togglePostPage } from "../../store/toggles";
 import { getCurrentPost } from "../../store/currentPost";
+import { getAllPosts } from "../../store/posts";
 import { useEffect, useState, useRef } from "react";
-import { like, deleteLike, addLike } from "../utils";
+import { like, deleteLike, addLike, getLikes } from "../utils";
 import ReactMarkdown from "react-markdown";
 import "./posts.css";
 
 function Posts() {
   const postList = useSelector((state) => state.postList);
+  const currentPost = useSelector((state) => state.currentPost);
   const [likes, setLikes] = useState([]);
+  const [numLikes, setNumLikes] = useState([]);
   const likeNum = useRef([]);
   const dispatch = useDispatch();
   const hist = useHistory();
 
   async function loadData() {
     let y = [];
+    let u = []
     for (let i = 0; i < postList.length; i++) {
       const x = await like(postList[i].id);
+      const f = await getLikes(postList[i].id);
       y.push(x);
+      u.push(f);
     }
     setLikes(y);
+    setNumLikes(u)
   }
 
   useEffect(() => {
     //isLike function should grab liked posts from database
     likeNum.current = likeNum.current.slice(0, postList.length);
     loadData();
-  }, [postList]);
+  }, [postList, currentPost]);
 
   return (
     <>
@@ -77,7 +84,7 @@ function Posts() {
                     <i className="far fa-thumbs-up"></i>
                   )}
                 </div>
-                <p ref={(e) => (likeNum.current[i] = e)}>{e.likers?.length}</p>
+                <p ref={(e) => (likeNum.current[i] = e)}>{numLikes[i]}</p>
                 {/* <i class="fas fa-thumbs-up"></i>*/}
               </div>
             </div>

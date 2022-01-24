@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.models import db, Like
+from app.models import db, Like,Post
 from flask_login import current_user, login_required
 
 like_routes = Blueprint("likes",__name__)
@@ -19,4 +19,9 @@ def delete_like(postId):
     db.session.delete(like)
     db.session.commit()
     return {'delete':'success'}
+
+@like_routes.route("/<int:postId>")
+def get_likes(postId):
+    likes = Like.query.filter(postId == Like.post_id).all()
+    return {'likes':len(likes)}
     

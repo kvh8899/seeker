@@ -48,3 +48,14 @@ export async function deleteLike(postId) {
     return null;
   }
 }
+
+export async function getLikes(postId) {
+  const res = await fetch(`/api/likes/${postId}`);
+
+  if (res.ok) {
+    const { likes } = await res.json();
+    return likes;
+  } else {
+    return 0;
+  }
+}
