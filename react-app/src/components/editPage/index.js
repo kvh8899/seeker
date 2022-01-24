@@ -4,15 +4,15 @@ import { editCurrentPage } from "../../store/currentPage";
 import { deletePage } from "../../store/pages";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import "./editpage.css"
+import "./editpage.css";
 function EditPage() {
   const dispatch = useDispatch();
   const hist = useHistory();
-  const [profile_image, setProfile_image] = useState("");
-  const [theme, setTheme] = useState("");
-  const [description, setDescription] = useState("");
   const currentPage = useSelector((state) => state.currentPage);
-  
+  const [profile_image, setProfile_image] = useState(currentPage.profile_image);
+  const [theme, setTheme] = useState(currentPage.theme);
+  const [description, setDescription] = useState(currentPage.description);
+
   return (
     <div className="editPage">
       <button
@@ -65,7 +65,7 @@ function EditPage() {
             className="delete"
             onClick={async (e) => {
               dispatch(toggleEditPage());
-              await dispatch(deletePage(currentPage.id))
+              await dispatch(deletePage(currentPage.id));
               hist.push("/");
             }}
           >

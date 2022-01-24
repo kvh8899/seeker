@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from app.models import db, Page, Post,Page_Follow
-from app.forms import PageForm,EditPageForm,Create_post
+from app.forms import PageForm,EditPageForm,Post_form
 from flask_login import current_user, login_user, logout_user, login_required
 
 pages_routes = Blueprint('pages',__name__)
@@ -85,17 +85,20 @@ def edit_page(id):
 
 @pages_routes.route("/<int:id>/delete",methods=["DELETE"])
 def delete_page(id):
-    page =  Page.query.filter(id == Page.id).first()
-    db.session.delete(page)
-    db.session.commit()
-    return {'delete':'success'}
+    try:
+        page =  Page.query.filter(id == Page.id).first()
+        db.session.delete(page)
+        db.session.commit()
+        return {'delete':'success'}
+    except:
+        return {'delete':'failure'}
     
 # add a post to a page
 # /api/pages/:id/posts
 
 @pages_routes.route("/<int:pageId>/posts",methods=["POST"])
 def create_post(pageId):
-    form = Create_post()
+    form = Post_form()
     form['csrf_token'].data = request.cookies['csrf_token']
     if(form.validate_on_submit()):
         post = Post(heading=form.heading.data,contentImage=form.contentImage.data,

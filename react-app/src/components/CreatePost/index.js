@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchUserList } from "../../store/pages";
 import { useState } from "react";
+import { subString } from "../utils";
 import CpForm from "./CpForm";
 import TopBar from "../Nav";
 import {
@@ -22,13 +23,6 @@ function CreatePost() {
 
   async function loadData() {
     await dispatch(fetchUserList(session.id));
-  }
-
-  function subString(str) {
-    if (!currPage) return;
-    str = str.toLowerCase();
-    let curr = currPage.toLowerCase();
-    return str.indexOf(curr) > -1 ? true : false;
   }
 
   useEffect(() => {
@@ -79,7 +73,7 @@ function CreatePost() {
               {tpSelect && (
                 <div className="pageList">
                   {userPages.map((ex) => {
-                    if (currPage && !subString(ex.title)) return "";
+                    if (currPage && !subString(ex.title,currPage)) return "";
                     return (
                       <div
                         className="comContainer ccOff"

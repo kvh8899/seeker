@@ -76,3 +76,7 @@
     margin-right:75px;
     justify-content:flex-end;
 }
+
+.cPostForm h2{
+    margin-top:0px;
+}

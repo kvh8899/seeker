@@ -2,6 +2,8 @@ import { togglePostPage } from "../../store/toggles";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import PageData from "./PageData";
+
 function PostContent() {
   const dispatch = useDispatch();
   const hist = useHistory();
@@ -20,7 +22,11 @@ function PostContent() {
           <div className="postHeadings">
             <div className="postBel">
               <img
-                src={currentPost.page?.profile_image ? currentPost.page?.profile_image:"https://www.leadershipmartialartsct.com/wp-content/uploads/2017/04/default-image-620x600.jpg"}
+                src={
+                  currentPost.page?.profile_image
+                    ? currentPost.page?.profile_image
+                    : "https://www.leadershipmartialartsct.com/wp-content/uploads/2017/04/default-image-620x600.jpg"
+                }
                 id={currentPost.page?.id}
                 alt=""
                 onClick={(e) => {
@@ -62,7 +68,9 @@ function PostContent() {
           </div>
         </div>
       </div>
-      <div className="sideBar"></div>
+      <div className="sideBar">
+        <PageData />
+      </div>
     </div>
   );
 }

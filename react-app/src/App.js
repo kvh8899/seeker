@@ -6,6 +6,7 @@ import { authenticate } from "./store/session";
 import MainPage from "./components/MainPage";
 import Page from "./components/Page";
 import CreatePost from "./components/CreatePost";
+import EditPost from "./components/editPost";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -36,6 +37,9 @@ function App() {
         </Route>
         <Route path="/posts/submit" exact={true}>
           <CreatePost />
+        </Route>
+        <Route path="/posts/:id/edit" exact={true}>
+          <EditPost />
         </Route>
       </Switch>
     </BrowserRouter>

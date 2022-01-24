@@ -1,9 +1,9 @@
 .wrapper {
   position: sticky;
-  top:0;
+  top: 0;
   width: 100%;
-  z-index:2;
-  border-bottom:1px solid rgb(231, 231, 231);
+  z-index: 2;
+  border-bottom: 1px solid rgb(231, 231, 231);
 }
 .mainNav {
   display: flex;
@@ -11,7 +11,7 @@
   justify-content: space-between;
   margin: 0px;
   padding: 0px;
-  border-bottom:rgb(122, 122, 122);
+  border-bottom: rgb(122, 122, 122);
 }
 
 .logo {
@@ -59,6 +59,10 @@
   align-items: center;
   margin-right: 20px;
 }
+.rightnav:hover {
+  cursor: pointer;
+}
+
 .rightnav li {
   margin-left: 10px;
 }
@@ -234,17 +238,17 @@ div.comBar input {
   width: 100%;
   display: flex;
   align-items: center;
-  text-overflow:ellipsis;
-  overflow:hidden;
-  white-space:nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .tof > img {
   border-radius: 100%;
   object-fit: cover;
   width: 20px;
   height: 20px;
-  margin-right:5px;
+  margin-right: 5px;
 }
-.tof > i{
-  margin-right:5px;
+.tof > i {
+  margin-right: 5px;
 }
