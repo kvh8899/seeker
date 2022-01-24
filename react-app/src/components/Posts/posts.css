@@ -90,14 +90,14 @@
 }
 .commentData {
   position: absolute;
-  bottom: 1px;
+  bottom: 0px;
   width: 100%;
   height: 100px;
   background: linear-gradient(
     to top,
     rgba(255, 255, 255, 1) 0%,
     rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 1) 35%,
+    rgba(255, 255, 255, 1) 40%,
     rgba(255, 255, 255, 0) 100%,
     rgba(255, 255, 255, 0) 100%
   );

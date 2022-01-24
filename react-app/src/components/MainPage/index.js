@@ -43,6 +43,7 @@ function MainPage() {
         <div className="postContent">
           <FooForm />
           <Posts />
+          <span id="spacer"></span>
         </div>
         <div className="sideBar"></div>
       </div>

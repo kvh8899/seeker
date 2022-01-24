@@ -14,7 +14,6 @@ function CpForm({ currPage, currId, setErrors }) {
         id="postcreate"
         onSubmit={async (e) => {
           e.preventDefault();
-          console.log(currPage)
           if (!currPage) {
             setErrors(["Please Select a Community"]);
             return;
