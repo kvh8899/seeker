@@ -83,6 +83,14 @@ def delete_post(postId):
         db.session.commit()
         return {'delete':'success'}
 
+# get likes of a post that a user likes
+@post_routes.route("/<int:postId>/likes")
+def post_user_likes(postId):
+    like = Like.query.filter(postId == Like.post_id and current_user.id == Like.user_id).first()
 
+    if(like):
+        return {'like':True}
+    else:
+        return {'like':False}
 
 

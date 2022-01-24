@@ -3,22 +3,30 @@ import { useHistory } from "react-router-dom";
 import { togglePostPage } from "../../store/toggles";
 import { getCurrentPost } from "../../store/currentPost";
 import { useEffect, useState, useRef } from "react";
-import { isLike } from "../utils";
+import { like, deleteLike, addLike } from "../utils";
 import ReactMarkdown from "react-markdown";
 import "./posts.css";
 
 function Posts() {
-  const session = useSelector((state) => state.session.user);
   const postList = useSelector((state) => state.postList);
-  const [likeHover, setLikeHover] = useState([]);
+  const [likes, setLikes] = useState([]);
   const likeNum = useRef([]);
   const dispatch = useDispatch();
   const hist = useHistory();
+
+  async function loadData() {
+    let y = [];
+    for (let i = 0; i < postList.length; i++) {
+      const x = await like(postList[i].id);
+      y.push(x);
+    }
+    setLikes(y);
+  }
+
   useEffect(() => {
-    setLikeHover(
-      session ? postList.map((e) => isLike(e?.likers, session.id)) : []
-    );
+    //isLike function should grab liked posts from database
     likeNum.current = likeNum.current.slice(0, postList.length);
+    loadData();
   }, [postList]);
 
   return (
@@ -37,17 +45,24 @@ function Posts() {
             <div className="ipContent">
               <div className="lSidebar">
                 <div
-                  onClick={(ex) => {
+                  onClick={async (ex) => {
                     ex.stopPropagation();
-                    setLikeHover(
-                      likeHover.map((e, lH) => {
+                    if (likes[i]) {
+                      await deleteLike(e.id);
+                    } else {
+                      await addLike(e.id);
+                    }
+                    setLikes(
+                      likes.map((e, lH) => {
                         if (i === lH) {
                           if (e) {
                             likeNum.current[i].innerText =
                               parseInt(likeNum.current[i].innerText) - 1;
-                          }else{
+                            //delete like
+                          } else {
                             likeNum.current[i].innerText =
-                              parseInt(likeNum.current[i].innerText) + 1;  
+                              parseInt(likeNum.current[i].innerText) + 1;
+                            //create like
                           }
                           return !e;
                         }
@@ -56,7 +71,7 @@ function Posts() {
                     );
                   }}
                 >
-                  {likeHover[i] ? (
+                  {likes[i] ? (
                     <i className="fas fa-thumbs-up"></i>
                   ) : (
                     <i className="far fa-thumbs-up"></i>

@@ -16,10 +16,35 @@ export function subString(str, currPage) {
   return str.indexOf(curr) > -1 ? true : false;
 }
 
-export function isLike(likers, userId) {
-  if (!likers) return false;
-  for (let i = 0; i < likers.length; i++) {
-    if (likers[i].id === userId) return true;
+export async function like(postId) {
+  const res = await fetch(`/api/posts/${postId}/likes`);
+
+  if (res.ok) {
+    const { like } = await res.json();
+    return like;
+  } else {
+    return false;
   }
-  return false;
+}
+
+export async function addLike(postId) {
+  const res = await fetch(`/api/likes/${postId}`, { method: "POST" });
+
+  if (res.ok) {
+    const like = await res.json();
+    return like;
+  } else {
+    return null;
+  }
+}
+
+export async function deleteLike(postId) {
+  const res = await fetch(`/api/likes/${postId}/delete`, { method: "DELETE" });
+
+  if (res.ok) {
+    const isSuccess = await res.json();
+    return isSuccess;
+  } else {
+    return null;
+  }
 }
