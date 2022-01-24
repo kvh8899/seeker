@@ -3,6 +3,14 @@ const ALLPOSTS = "set/ALLPOSTS";
 const FOLLOWPOSTS = "set/FOLLOWPOSTS";
 const PAGEPOSTS = "set/PAGEPOSTS";
 const ADDPOST = "set/ADDPOST";
+const DELETEPOST = "set/DELETEPOST";
+
+const deletePost = (postId) => {
+  return {
+    type: DELETEPOST,
+    postId,
+  };
+};
 
 const addPost = (post) => {
   return { type: ADDPOST, post };
@@ -78,6 +86,20 @@ export const addOnePost = (id, post) => async (dispatch) => {
     return null;
   }
 };
+
+export const deleteOnePost = (id) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${id}/delete`, { method: "DELETE" });
+
+  if (res.ok) {
+    const isSuccess = await res.json();
+    dispatch(deletePost(id));
+    return isSuccess;
+  } else {
+    const isFailure = await res.json();
+    return isFailure;
+  }
+};
+
 function postList(state = [], action) {
   switch (action.type) {
     case ALLPOSTS:
@@ -88,6 +110,8 @@ function postList(state = [], action) {
       return action.pagePosts;
     case ADDPOST:
       return [...state, action.post];
+    case DELETEPOST:
+      return state.filter((e) => e.id === action.postId);
     default:
       return state;
   }

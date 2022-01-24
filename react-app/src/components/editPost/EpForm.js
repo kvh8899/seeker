@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getCurrentPost } from "../../store/currentPost";
+import { deleteOnePost } from "../../store/posts";
 
 function EpForm() {
+  const currentPost = useSelector((state) => state.currentPost);
   const [heading, setHeading] = useState("");
   const [content, setContent] = useState("");
   const [contentImage, setContentImage] = useState("");
@@ -13,17 +15,19 @@ function EpForm() {
 
   async function loadData() {
     const post = await dispatch(getCurrentPost(id));
-    setHeading(post.heading);
-    setContent(post.content);
-    setContentImage(post.contentImage ? post.contentImage : "");
+    if (post) {
+      setHeading(post.heading);
+      setContent(post.content);
+      setContentImage(post.contentImage ? post.contentImage : "");
+    }
   }
-
+  
   useEffect(() => {
     loadData();
   }, [id]);
 
   return (
-    <div className="createPForm" style={{minHeight:"600px"}}>
+    <div className="createPForm" style={{ minHeight: "600px" }}>
       <form
         id="postcreate"
         onSubmit={async (e) => {
@@ -55,12 +59,13 @@ function EpForm() {
         ></textarea>
       </form>
       <div>
-      <div className="epfbuttons" style={{left:"0" , bottom:"-50px"}}>
+        <div className="epfbuttons" style={{ left: "0", bottom: "-50px" }}>
           <button
             className="delete"
             onClick={async (e) => {
               //dispatch(toggleEditPage());
-              //await dispatch(deletePage(currentPage.id));
+              await dispatch(deleteOnePost(currentPost.id));
+              alert("Post Deleted");
               hist.push("/");
             }}
           >
