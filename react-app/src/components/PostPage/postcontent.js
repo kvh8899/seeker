@@ -5,7 +5,6 @@ import ReactMarkdown from "react-markdown";
 import PageData from "./PageData";
 import { like, deleteLike, addLike, getLikes } from "../utils";
 import { useEffect, useState, useRef } from "react";
-
 function PostContent() {
   const dispatch = useDispatch();
   const hist = useHistory();
@@ -32,6 +31,7 @@ function PostContent() {
             <div className="lSidebar">
               <div
                 onClick={async (e) => {
+                    
                   if (isLike) {
                     likeNum.current.innerText =
                       parseInt(likeNum.current.innerText) - 1;
