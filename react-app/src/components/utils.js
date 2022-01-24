@@ -9,9 +9,17 @@ export function cap(str) {
   return <>{str ? str[0].toUpperCase() + str.slice(1) : ""}</>;
 }
 
-export function subString(str,currPage) {
-    if (!currPage) return;
-    str = str.toLowerCase();
-    let curr = currPage.toLowerCase();
-    return str.indexOf(curr) > -1 ? true : false;
+export function subString(str, currPage) {
+  if (!currPage) return;
+  str = str.toLowerCase();
+  let curr = currPage.toLowerCase();
+  return str.indexOf(curr) > -1 ? true : false;
+}
+
+export function isLike(likers, userId) {
+  if (!likers) return false;
+  for (let i = 0; i < likers.length; i++) {
+    if (likers[i].id === userId) return true;
   }
+  return false;
+}
