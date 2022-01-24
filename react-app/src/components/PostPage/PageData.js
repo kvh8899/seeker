@@ -1,9 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { cap, extractDate } from "../utils";
+import { useHistory } from "react-router-dom";
+import { togglePostPage } from "../../store/toggles";
 function PageData() {
   const currentPost = useSelector((state) => state.currentPost);
   const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+  const hist = useHistory();
   return (
     <div className="comSideBar">
       <div className="aboutHeader">
@@ -31,7 +34,8 @@ function PageData() {
           {session?.id === currentPost.owner_id && (
             <button
               onClick={(e) => {
-                //dispatch(toggleEditPage());
+                dispatch(togglePostPage());
+                hist.push(`/posts/${currentPost.id}/edit`);
               }}
             >
               Edit Post

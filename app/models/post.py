@@ -22,5 +22,6 @@ class Post(db.Model):
             'page_id':self.page_id,
             'created_at':self.created_at,
             'owner_id':self.owner_id,
+            'contentImage':self.contentImage,
             'heading':self.heading
         }
