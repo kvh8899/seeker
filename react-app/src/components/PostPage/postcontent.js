@@ -12,7 +12,6 @@ function PostContent() {
   const postLikes = useSelector((state) => state.postLikes);
   const session = useSelector((state) => state.session.user);
   const [numLikes, setNumLikes] = useState(0);
-  const likeNum = useRef(null);
   async function loadData() {
     const res = await fetch(`/api/likes/${currentPost.id}`);
 
@@ -59,7 +58,7 @@ function PostContent() {
                 )}
               </div>
 
-              <p id={`like${currentPost.id}`} ref={likeNum}>
+              <p id={`like${currentPost.id}`}>
                 {numLikes}
               </p>
               {/* <i class="fas fa-thumbs-up"></i>*/}
