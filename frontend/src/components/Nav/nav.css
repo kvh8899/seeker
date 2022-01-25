@@ -253,3 +253,16 @@ div.comBar input {
 .tof > i {
   margin-right: 5px;
 }
+
+.quickLinks{
+  font-size:20px;
+}
+.quickLinks > li{
+  margin:0px 10px;
+}
+#divider{
+  display:block;
+  border: 1px solid rgb(197, 197, 197);
+  height:30px;
+  width:0px;
+}

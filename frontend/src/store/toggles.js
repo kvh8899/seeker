@@ -81,6 +81,8 @@ export function postPageShow(state = false, action) {
       return !state;
     case SETPOSTOFF:
       return false;
+    case TPSELECTOFF:
+      return false;
     default:
       return state;
   }

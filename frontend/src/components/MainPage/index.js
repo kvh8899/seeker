@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { getAllPosts, getFollowPosts } from "../../store/posts";
 import FooForm from "../FooForm";
 import TopBar from "../Nav";
-
+import SideBar from "./sidebar";
 function MainPage() {
   const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ function MainPage() {
           <Posts />
           <span id="spacer"></span>
         </div>
-        <div className="sideBar"></div>
+        <SideBar />
       </div>
     </div>
   );
