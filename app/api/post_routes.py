@@ -2,12 +2,13 @@ from flask import Blueprint, request
 from app.models import db,Post,Page,Page_Follow,Like,Comment
 from flask_login import current_user, login_required
 from app.forms import Post_form
+from sqlalchemy import desc, asc
 post_routes = Blueprint('posts',__name__)
 
 #get trending posts /api/posts/
 @post_routes.route("/")
 def trending():
-    posts = Post.query.limit(10).all()
+    posts = Post.query.order_by(desc(Post.id)).limit(10).all()
     posts_t = []
     for i in posts:
         post = i.to_dict()
@@ -25,7 +26,7 @@ def trending():
 @post_routes.route("/following")
 @login_required
 def following():
-    posts = Post.query.join(Page).join(Page_Follow).filter(Page_Follow.user_id == current_user.id)
+    posts = Post.query.join(Page).join(Page_Follow).filter(Page_Follow.user_id == current_user.id).order_by(desc(Post.id)).all()
     posts_t = []
     for i in posts:
         post = i.to_dict()

@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from app.models import db, Page, Post,Page_Follow
 from app.forms import PageForm,EditPageForm,Post_form
 from flask_login import current_user, login_user, logout_user, login_required
-
+from sqlalchemy import desc
 pages_routes = Blueprint('pages',__name__)
 
 # get a page by id
@@ -31,7 +31,7 @@ def all_posts():
 
 @pages_routes.route('/<int:pageId>/posts')
 def page_posts(pageId):
-    posts = Post.query.filter(pageId == Post.page_id).all()
+    posts = Post.query.filter(pageId == Post.page_id).order_by(desc(Post.id)).all()
     posts_t = []
     for i in posts:
         post = i.to_dict()
