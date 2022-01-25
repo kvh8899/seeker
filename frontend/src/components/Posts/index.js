@@ -65,7 +65,7 @@ function Posts() {
                   )}
                 </div>
                 <p id={`like${e.id}`}>
-                  {e.likers.length}
+                  {e.likers?.length}
                 </p>
               </div>
             </div>
