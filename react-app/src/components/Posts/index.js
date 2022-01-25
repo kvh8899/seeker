@@ -13,7 +13,6 @@ function Posts() {
   const currentPost = useSelector((state) => state.currentPost);
   const postLikes = useSelector((state) => state.postLikes);
   const session = useSelector((state) => state.session.user);
-  const likeNum = useRef([]);
   const dispatch = useDispatch();
   const hist = useHistory();
 
@@ -23,8 +22,6 @@ function Posts() {
     }
   }
   useEffect(() => {
-    //isLike function should grab liked posts from database
-    likeNum.current = likeNum.current.slice(0, postList.length);
     loadData();
   }, [postList, currentPost, session]);
 
@@ -42,7 +39,6 @@ function Posts() {
               dispatch(getCurrentPost(e.id));
             }}
           >
-            
             <div className="ipContent">
               <div className="lSidebar">
                 <div
@@ -68,7 +64,7 @@ function Posts() {
                     <i className="far fa-thumbs-up"></i>
                   )}
                 </div>
-                <p id={`like${e.id}`} ref={(e) => (likeNum.current[i] = e)}>
+                <p id={`like${e.id}`}>
                   {e.likers.length}
                 </p>
               </div>
