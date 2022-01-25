@@ -40,7 +40,6 @@ function Page() {
   return (
     <>
       {editPageShow && <EditPage />}
-      {postPageShow && <PostPage />}
       <div className="mainContent mainContentScroll">
         <TopBar
           icon={
