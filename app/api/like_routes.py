@@ -15,7 +15,7 @@ def create_like(postId):
 @like_routes.route("/<int:postId>/delete",methods=["DELETE"])
 @login_required
 def delete_like(postId):
-    like = Like.query.filter(postId == Like.post_id and Like.user_id == current_user.id).first()
+    like = Like.query.filter((postId == Like.post_id),(Like.user_id == current_user.id)).first()
     db.session.delete(like)
     db.session.commit()
     return {'delete':'success'}

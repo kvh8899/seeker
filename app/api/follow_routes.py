@@ -7,8 +7,9 @@ follow_routes = Blueprint("follows",__name__)
 # check follower
 @follow_routes.route("/<int:pageId>")
 @login_required
-def check_subscrib(pageId,userId):
-    follow = Page_Follow.query.filter(pageId == Page_Follow.page_id and current_user.id == Page.user_id).first()
+def check_subscrib(pageId):
+    follow = Page_Follow.query.filter((pageId == Page_Follow.page_id),(current_user.id == Page_Follow.user_id)).first()
+    print(follow,"🔥")
     if(follow):
         return {'follow':True}
     else:

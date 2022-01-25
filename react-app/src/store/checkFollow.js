@@ -6,7 +6,11 @@ const checkUserFollow = (follow) => {
     follow,
   };
 };
-export const checkFollow = (pageId) => async (dispatch) => {
+export const checkFollow = (pageId, session) => async (dispatch) => {
+  if (!session) {
+    dispatch(checkUserFollow(false));
+    return;
+  }
   const res = await fetch(`/api/follows/${pageId}`);
 
   if (res.ok) {
