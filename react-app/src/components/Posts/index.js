@@ -2,44 +2,35 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { togglePostPage, toggleLogin } from "../../store/toggles";
 import { getCurrentPost } from "../../store/currentPost";
-import { useEffect, useState, useRef } from "react";
-import { like, deleteLike, addLike, getLikes } from "../utils";
+import { useEffect, useRef } from "react";
+import { getPostLikes, addPostLikes, delPostLikes } from "../../store/likes";
+
 import ReactMarkdown from "react-markdown";
 import "./posts.css";
 
 function Posts() {
   const postList = useSelector((state) => state.postList);
   const currentPost = useSelector((state) => state.currentPost);
+  const postLikes = useSelector((state) => state.postLikes);
   const session = useSelector((state) => state.session.user);
-  const [likes, setLikes] = useState([]);
-  const [numLikes, setNumLikes] = useState([]);
   const likeNum = useRef([]);
   const dispatch = useDispatch();
   const hist = useHistory();
 
   async function loadData() {
-    let y = [];
-    let u = [];
     for (let i = 0; i < postList.length; i++) {
-      if (session) {
-        const x = await like(postList[i].id);
-        y.push(x);
-      }
-      const f = await getLikes(postList[i].id);
-      u.push(f);
+      await dispatch(getPostLikes(postList));
     }
-    setLikes(y);
-    setNumLikes(u);
   }
-
   useEffect(() => {
     //isLike function should grab liked posts from database
     likeNum.current = likeNum.current.slice(0, postList.length);
     loadData();
-  }, [postList, currentPost]);
+  }, [postList, currentPost, session]);
 
   return (
     <>
+    
       {postList.length ? "" : "Be the first to make a post!"}
       {postList.map((e, i) => {
         return (
@@ -51,6 +42,7 @@ function Posts() {
               dispatch(getCurrentPost(e.id));
             }}
           >
+            
             <div className="ipContent">
               <div className="lSidebar">
                 <div
@@ -60,38 +52,25 @@ function Posts() {
                       dispatch(toggleLogin());
                       return;
                     }
-                    if (likes[i]) {
-                      await deleteLike(e.id);
+                    let ref = document.querySelector(`#like${e.id}`);
+                    if (!(postLikes.indexOf(e.id) > -1)) {
+                      await dispatch(addPostLikes(e.id));
+                      ref.innerText = parseInt(ref.innerText) + 1;
                     } else {
-                      await addLike(e.id);
+                      await dispatch(delPostLikes(e.id));
+                      ref.innerText = parseInt(ref.innerText) - 1;
                     }
-                    setLikes(
-                      likes.map((e, lH) => {
-                        if (i === lH) {
-                          if (e) {
-                            likeNum.current[i].innerText =
-                              parseInt(likeNum.current[i].innerText) - 1;
-                            //delete like
-                          } else {
-                            likeNum.current[i].innerText =
-                              parseInt(likeNum.current[i].innerText) + 1;
-                            //create like
-                          }
-                          return !e;
-                        }
-                        return e;
-                      })
-                    );
                   }}
                 >
-                  {likes[i] ? (
+                  {postLikes.indexOf(e.id) > -1 ? (
                     <i className="fas fa-thumbs-up"></i>
                   ) : (
                     <i className="far fa-thumbs-up"></i>
                   )}
                 </div>
-                <p ref={(e) => (likeNum.current[i] = e)}>{numLikes[i]}</p>
-                {/* <i class="fas fa-thumbs-up"></i>*/}
+                <p id={`like${e.id}`} ref={(e) => (likeNum.current[i] = e)}>
+                  {e.likers.length}
+                </p>
               </div>
             </div>
             <div className="postHeadings">

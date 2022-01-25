@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { useEffect } from "react";
 import { getCurrentPage } from "../../store/currentPage";
+import { checkFollow } from "../../store/checkFollow";
 import PostPage from "../PostPage";
 import EditPage from "../editPage";
 import ComData from "../comData";
@@ -15,6 +16,8 @@ function Page() {
   const currentPage = useSelector((state) => state.currentPage);
   const editPageShow = useSelector((state) => state.editPageShow);
   const postPageShow = useSelector((state) => state.postPageShow);
+  const isFollowing = useSelector((state) => state.isFollowing);
+  const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -22,6 +25,7 @@ function Page() {
     if (id) {
       await dispatch(getPagePosts(id));
       await dispatch(getCurrentPage(id));
+      await dispatch(checkFollow(id,session));
     }
   }
 
@@ -31,12 +35,11 @@ function Page() {
 
   useEffect(() => {
     loadPage();
-  }, [id]);
+  }, [id, session]);
 
   return (
     <>
       {editPageShow && <EditPage />}
-      {postPageShow && <PostPage />}
       <div className="mainContent mainContentScroll">
         <TopBar
           icon={
@@ -79,7 +82,20 @@ function Page() {
                   <p>{currentPage.title}</p>
                 </div>
                 <div className="bannerf">
-                  <button>Joined</button>
+                  {isFollowing ? (
+                    <button
+                      id="joined"
+                      style={{
+                        backgroundColor: "rgb(25, 159, 221)",
+                        color: "white",
+                        border: "none",
+                      }}
+                    >
+                      Joined
+                    </button>
+                  ) : (
+                    <button id="join">Join</button>
+                  )}
                 </div>
               </div>
               <div></div>

@@ -5,14 +5,15 @@ import pageList from "./pages";
 import postList from "./posts";
 import currentPage from "./currentPage";
 import currentPost from "./currentPost";
-
+import isFollowing from "./checkFollow";
+import postLikes from "./likes";
 import {
   createPageShow,
   editPageShow,
   loginShow,
   signupShow,
   postPageShow,
-  pageSelect
+  pageSelect,
 } from "./toggles";
 
 const rootReducer = combineReducers({
@@ -26,7 +27,9 @@ const rootReducer = combineReducers({
   editPageShow,
   postPageShow,
   pageSelect,
-  currentPost
+  currentPost,
+  isFollowing,
+  postLikes,
 });
 
 let enhancer;
