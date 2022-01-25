@@ -2,7 +2,6 @@
   display: flex;
   position: relative;
   align-items: flex-end;
-  z-index: -1;
   width: 100%;
   height: 370px;
   background-color: rgb(25, 159, 221);

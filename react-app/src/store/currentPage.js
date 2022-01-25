@@ -1,7 +1,7 @@
 //action types
 const GET = "current/GET";
 const EDIT = "current/EDIT";
-const DELETE = "current/DELETE";
+
 const getPage = (page) => {
   return {
     type: GET,
@@ -13,12 +13,6 @@ const editPage = (page) => {
   return {
     type: EDIT,
     page,
-  };
-};
-
-const deletePage = () => {
-  return {
-    type: DELETE,
   };
 };
 
@@ -56,8 +50,6 @@ function currentPage(state = {}, action) {
       return action.page;
     case EDIT:
       return action.page;
-    case DELETE:
-      return {};
     default:
       return state;
   }

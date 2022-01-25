@@ -4,18 +4,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { useEffect } from "react";
 import { getCurrentPage } from "../../store/currentPage";
-import { checkFollow } from "../../store/checkFollow";
-import PostPage from "../PostPage";
+import { checkFollow, Follow, UnFollow } from "../../store/checkFollow";
 import EditPage from "../editPage";
 import ComData from "../comData";
 import FooForm from "../FooForm";
 import TopBar from "../Nav/index";
+import { fetchUserList } from "../../store/pages";
+import { toggleLogin } from "../../store/toggles";
 import "./page.css";
 
 function Page() {
   const currentPage = useSelector((state) => state.currentPage);
   const editPageShow = useSelector((state) => state.editPageShow);
-  const postPageShow = useSelector((state) => state.postPageShow);
   const isFollowing = useSelector((state) => state.isFollowing);
   const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ function Page() {
     if (id) {
       await dispatch(getPagePosts(id));
       await dispatch(getCurrentPage(id));
-      await dispatch(checkFollow(id,session));
+      await dispatch(checkFollow(id, session));
     }
   }
 
@@ -90,11 +90,45 @@ function Page() {
                         color: "white",
                         border: "none",
                       }}
+                      onClick={async (e) => {
+                        await dispatch(UnFollow(currentPage.id));
+                        await dispatch(fetchUserList(session.id));
+                      }}
+                      onMouseOver={(e) => {
+                        e.target.innerText = "Unsubscribe";
+                        e.target.style.backgroundColor = "#CC5500";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.innerText = "Joined";
+                        e.target.style.backgroundColor = "rgb(25, 159, 221)";
+                      }}
                     >
                       Joined
                     </button>
                   ) : (
-                    <button id="join">Join</button>
+                    <button
+                      id="join"
+                      onClick={async (e) => {
+                        if (session) {
+                          await dispatch(Follow(currentPage.id));
+                          await dispatch(fetchUserList(session.id));
+                        } else {
+                          dispatch(toggleLogin());
+                        }
+                      }}
+                      onMouseOver={(e) => {
+                        e.target.style.backgroundColor = "rgb(25, 159, 221)";
+                        e.target.style.border = "none";
+                        e.target.style.color = "white";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.backgroundColor = "transparent";
+                        e.target.style.border = "1px solid black";
+                        e.target.style.color = "black";
+                      }}
+                    >
+                      Join
+                    </button>
                   )}
                 </div>
               </div>

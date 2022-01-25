@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import PageData from "./PageData";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { addPostLikes, delPostLikes } from "../../store/likes";
 function PostContent() {
   const dispatch = useDispatch();
@@ -58,9 +58,7 @@ function PostContent() {
                 )}
               </div>
 
-              <p id={`like${currentPost.id}`}>
-                {numLikes}
-              </p>
+              <p id={`like${currentPost.id}`}>{numLikes}</p>
               {/* <i class="fas fa-thumbs-up"></i>*/}
             </div>
           </div>

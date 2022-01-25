@@ -23,9 +23,9 @@ def user(id):
 
 @user_routes.route('/<int:id>/pages')
 def user_pages(id):
-    pages = Page.query.join(User).filter(id == User.id).all()
+    user = User.query.filter(id == User.id).first()
     userPages = []
-    for i in pages:
+    for i in user.followed_pages:
         userPages.append(i.to_dict())
     return {'userPages':userPages}
 
