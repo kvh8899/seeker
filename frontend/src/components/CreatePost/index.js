@@ -79,7 +79,10 @@ function CreatePost() {
                         className="comContainer ccOff"
                         id={ex.id}
                         key={ex.id}
-                        onClick={(e) => {
+                        onMouseDown={(e) => {
+                          e.stopPropagation();
+                        }}
+                        onMouseUp={(e) => {
                           dispatch(togglePageSelect());
                           setCurrPage(ex.title);
                           setCurrId(ex.id);
