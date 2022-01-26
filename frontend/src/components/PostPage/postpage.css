@@ -74,7 +74,6 @@
   max-height: none;
   display: flex;
   min-height: 150px;
-  margin-bottom: 20px;
   background-color: white;
   word-break: break-word;
   border-radius: 5px;
@@ -82,4 +81,39 @@
 
 #spacer {
   height: 100px;
+}
+
+.pcBackground {
+  background-color: white;
+}
+
+.displayNun {
+  display: none;
+}
+
+.reply {
+  display: flex;
+  width: 100%;
+}
+.repButton {
+  display: flex;
+  position: relative;
+  height: 30px;
+  background-color: lightgray;
+  top: -10px;
+  width: 546.5px;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  justify-content: flex-end;
+}
+.repButton button {
+  border: none;
+  background-color: transparent;
+}
+
+.repsub {
+  color: rgb(50, 168, 241);
 }

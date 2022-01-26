@@ -8,6 +8,29 @@ const getAll = (comments) => {
   };
 };
 
+const addOne = (comment) => {
+  return {
+    type: ADD,
+    comment,
+  };
+};
+
+export const addOneComment = (postId, comment) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${postId}/comments`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(comment),
+  });
+
+  if (res.ok) {
+    const comment = await res.json();
+    dispatch(addOne(comment));
+    return comment;
+  } else {
+    return null;
+  }
+};
+
 export const getAllComments = (postId) => async (dispatch) => {
   const res = await fetch(`/api/posts/${postId}/comments`);
 
@@ -24,6 +47,8 @@ function postComments(state = [], action) {
   switch (action.type) {
     case GET:
       return action.comments;
+    case ADD:
+      return [...state, action.comment];
     default:
       return state;
   }
