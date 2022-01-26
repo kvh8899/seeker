@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { togglePostPage, toggleLogin } from "../../store/toggles";
 import { getCurrentPost } from "../../store/currentPost";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { getPostLikes, addPostLikes, delPostLikes } from "../../store/likes";
 
 import ReactMarkdown from "react-markdown";
@@ -17,9 +17,7 @@ function Posts() {
   const hist = useHistory();
 
   async function loadData() {
-    for (let i = 0; i < postList.length; i++) {
-      await dispatch(getPostLikes(postList));
-    }
+    if (session) await dispatch(getPostLikes(postList));
   }
   useEffect(() => {
     loadData();
@@ -27,7 +25,6 @@ function Posts() {
 
   return (
     <>
-    
       {postList.length ? "" : "Be the first to make a post!"}
       {postList.map((e, i) => {
         return (
@@ -64,9 +61,7 @@ function Posts() {
                     <i className="far fa-thumbs-up"></i>
                   )}
                 </div>
-                <p id={`like${e.id}`}>
-                  {e.likers?.length}
-                </p>
+                <p id={`like${e.id}`}>{e.likers?.length}</p>
               </div>
             </div>
             <div className="postHeadings">

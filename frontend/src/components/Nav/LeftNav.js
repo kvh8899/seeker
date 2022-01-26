@@ -13,7 +13,6 @@ function LeftNav({ icon, name, setName, setIcons }) {
   const hist = useHistory();
   const [showDiv, setShowDiv] = useState(false);
   const userPages = useSelector((state) => state.pageList);
-
   useEffect(() => {
     function close(e) {
       setShowDiv(false);
@@ -28,19 +27,21 @@ function LeftNav({ icon, name, setName, setIcons }) {
   return (
     <div className="leftnav">
       <li>
-        <NavLink
-          to="/"
-          exact={true}
+        <div
           className="logo"
           onClick={async (e) => {
             dispatch(postPageOff());
-            await dispatch(getFollowPosts());
+            if (session) {
+              await dispatch(getFollowPosts());
+            }
             setName("Home");
             setIcons(<i className="fas fa-home"></i>);
+            hist.push("/");
           }}
+          style={{ cursor: "pointer" }}
         >
           <img src="/Guardian.png" alt=""></img>Seeker
-        </NavLink>
+        </div>
       </li>
       {session && (
         <div

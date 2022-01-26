@@ -6,13 +6,8 @@
   width: 100%;
   height: 100%;
 }
-.mainContentScroll {
-  overflow: scroll;
-}
 
-.mainContentHide {
-  overflow: hidden;
-}
+
 
 .midContent {
   position: relative;

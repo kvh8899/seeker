@@ -5,8 +5,8 @@ import { useEffect } from "react";
 import { getAllPosts, getFollowPosts } from "../../store/posts";
 import FooForm from "../FooForm";
 import TopBar from "../Nav";
-import SideBar from "./sidebar";
-function MainPage() {
+import SideBar from "./sidebar"
+function MainPage({icon,name}) {
   const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   async function loadAll() {
@@ -27,7 +27,7 @@ function MainPage() {
 
   return (
     <div className="mainContent mainContentScroll">
-      <TopBar icon={<i className="fas fa-home"></i>} name={"Home"} />
+      <TopBar icon={icon} name={name} />
       <div className="midContent">
         <div className="postContent">
           <FooForm />

@@ -243,14 +243,11 @@ div.comBar input {
   overflow: hidden;
   white-space: nowrap;
 }
-.tof > img {
+#navTabIcon > img {
   border-radius: 100%;
   object-fit: cover;
   width: 20px;
   height: 20px;
-  margin-right: 5px;
-}
-.tof > i {
   margin-right: 5px;
 }
 

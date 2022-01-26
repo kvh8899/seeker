@@ -86,6 +86,7 @@ def delete_post(postId):
 
 # get likes of a post that a user likes
 @post_routes.route("/<int:postId>/likes")
+@login_required
 def post_user_likes(postId):
     like = Like.query.filter((postId == Like.post_id),(current_user.id == Like.user_id)).first()
 

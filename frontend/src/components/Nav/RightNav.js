@@ -22,7 +22,7 @@ function RightNav({ showProfDiv, setShowProfDiv, setIcons, setName }) {
               setName("All");
             }}
           >
-            <NavLink to="/" style={{ color: "black" }}>
+            <NavLink to="/all" style={{ color: "black" }}>
               <i className="fas fa-signal"></i>
             </NavLink>
           </li>

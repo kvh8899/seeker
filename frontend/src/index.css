@@ -1,4 +1,3 @@
-
 a {
   text-decoration: none;
 }
@@ -10,6 +9,9 @@ nav {
 }
 .unselectable {
   user-select: none;
+}
+.mainContentScroll {
+  overflow: scroll;
 }
 body {
   font-family: sans-serif;
