@@ -65,7 +65,10 @@ function LeftNav({ icon, name, setName, setIcons }) {
             }}
           >
             <div className="tof">
-              {icon} {name}
+              <div id="navTabIcon">{icon}</div>
+              <p id="navTab" style={{ margin: "0px 10px" }}>
+                {name}
+              </p>
             </div>
             <div>
               <i className="fas fa-chevron-down"></i>

@@ -1,16 +1,14 @@
 import { useSelector } from "react-redux";
 import Joined from "./joined";
 import Unjoined from "./unjoined";
-function JoinButton() {
+function JoinButton({cp,sessionId}) {
   const isFollowing = useSelector((state) => state.isFollowing);
-  const currentPage = useSelector((state) => state.currentPage);
-  const session = useSelector((state) => state.session.user);
   return (
     <>
       {isFollowing ? (
-        <Joined cp={currentPage.id} sessionId={session.id} />
+        <Joined cp={cp} sessionId={sessionId} />
       ) : (
-        <Unjoined cp={currentPage.id} sessionId={session.id} />
+        <Unjoined cp={cp} sessionId={sessionId} />
       )}
     </>
   );

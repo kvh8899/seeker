@@ -16,7 +16,6 @@ import "./page.css";
 function Page() {
   const currentPage = useSelector((state) => state.currentPage);
   const editPageShow = useSelector((state) => state.editPageShow);
-
   const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -82,7 +81,7 @@ function Page() {
                   <p>{currentPage.title}</p>
                 </div>
                 <div className="bannerf">
-                  <JoinButton />
+                  <JoinButton cp={currentPage.id} sessionId={session?.id} />
                 </div>
               </div>
             </div>
