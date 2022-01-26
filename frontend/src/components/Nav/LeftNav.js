@@ -15,18 +15,16 @@ function LeftNav({ icon, name, setName, setIcons }) {
   const userPages = useSelector((state) => state.pageList);
 
   useEffect(() => {
-    //temporary fix to divs not closing, must use redux instead
     function close(e) {
       setShowDiv(false);
       document.querySelector(".home")?.classList.remove("border");
     }
-
     document.body.addEventListener("click", close);
-
     return () => {
       document.body.removeEventListener("click", close);
     };
   }, []);
+
   return (
     <div className="leftnav">
       <li>
@@ -39,7 +37,6 @@ function LeftNav({ icon, name, setName, setIcons }) {
             await dispatch(getFollowPosts());
             setName("Home");
             setIcons(<i className="fas fa-home"></i>);
-            //dispatch(toggleEditOff());
           }}
         >
           <img src="/Guardian.png" alt=""></img>Seeker
