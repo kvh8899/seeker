@@ -1,6 +1,5 @@
 import { getCurrentPage } from "../../store/currentPage";
 import { getPagePosts } from "../../store/posts";
-import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { useRef, useState, useEffect } from "react";
@@ -36,6 +35,7 @@ function LeftNav({ icon, name, setName, setIcons }) {
             }
             setName("Home");
             setIcons(<i className="fas fa-home"></i>);
+            document.body.classList.remove("mainContentScroll");
             hist.push("/");
           }}
           style={{ cursor: "pointer" }}

@@ -19,6 +19,7 @@ function RightNav({ showProfDiv, setShowProfDiv, setIcons, setName }) {
               dispatch(getAllPosts());
               dispatch(togglePageOff());
               setIcons(<i className="fas fa-signal"></i>);
+              document.body.classList.remove("mainContentScroll");
               setName("All");
             }}
           >
@@ -28,6 +29,7 @@ function RightNav({ showProfDiv, setShowProfDiv, setIcons, setName }) {
           </li>
           <li
             onClick={(e) => {
+              document.body.classList.remove("mainContentScroll");
               dispatch(togglePageOff());
             }}
           >
@@ -107,10 +109,15 @@ function RightNav({ showProfDiv, setShowProfDiv, setIcons, setName }) {
         }}
       >
         <div>
-          <img src="/Guardian.png" width="30px" alt=""></img>
+          <img
+            src="/Guardian.png"
+            width="30px"
+            alt=""
+            style={{ marginRight: "5px" }}
+          ></img>
+          <div>{session && session.username}</div>
           <i className="fas fa-chevron-down"></i>
         </div>
-        <div>{session && session.username}</div>
       </li>
     </div>
   );

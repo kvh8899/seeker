@@ -29,7 +29,7 @@
   margin-right: 10px;
 }
 .home {
-  top: 5px;
+  top: 6px;
   left: 215px;
   position: absolute;
   display: flex;
@@ -49,7 +49,7 @@
   justify-content: space-between;
 }
 .home > div > div {
-  margin: 10px;
+  margin: 9px;
 }
 .home:hover {
   border: 1px solid rgb(201, 193, 193);

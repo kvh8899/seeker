@@ -36,6 +36,7 @@ function EpForm() {
           e.preventDefault();
           const post = { heading, content, contentImage };
           await dispatch(editCurrentPost(post, currentPost.id));
+          document.body.classList.add("mainContentScroll");
           dispatch(togglePostPage());
           hist.push(`/`);
         }}
@@ -46,6 +47,7 @@ function EpForm() {
           onChange={(e) => {
             setHeading(e.target.value);
           }}
+          required
         ></input>
         <input
           placeholder="Image (optional)"

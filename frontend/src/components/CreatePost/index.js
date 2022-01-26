@@ -30,15 +30,15 @@ function CreatePost() {
     function el(e) {
       dispatch(togglePageOff());
     }
-    document.body.addEventListener("click", el);
+    document.body.addEventListener("mousedown", el);
     return () => {
-      document.body.removeEventListener("click", el);
+      document.body.removeEventListener("mousedown", el);
     };
   }, []);
 
   return (
     <div className="mainContent mainContentScroll">
-      <TopBar icon={<i className="fas fa-plus"></i>} name={"Create Post"}/>
+      <TopBar icon={<i className="fas fa-plus"></i>} name={"Create Post"} />
       <div className="midContent">
         <div className="cPostForm">
           <h2>Create a Post</h2>
@@ -53,7 +53,7 @@ function CreatePost() {
               <input
                 placeholder="Choose a Community"
                 value={currPage}
-                onClick={(e) => {
+                onMouseDown={(e) => {
                   e.stopPropagation();
                   dispatch(togglePageOn());
                 }}
@@ -63,7 +63,7 @@ function CreatePost() {
               ></input>
               <div
                 className="dropDownButton"
-                onClick={(e) => {
+                onMouseDown={(e) => {
                   e.stopPropagation();
                   dispatch(togglePageSelect());
                 }}
@@ -73,7 +73,7 @@ function CreatePost() {
               {tpSelect && (
                 <div className="pageList">
                   {userPages.map((ex) => {
-                    if (currPage && !subString(ex.title,currPage)) return "";
+                    if (currPage && !subString(ex.title, currPage)) return "";
                     return (
                       <div
                         className="comContainer ccOff"
@@ -108,7 +108,9 @@ function CreatePost() {
               <div>
                 <p>Please Select a Community</p>
               </div>
-            ):""}
+            ) : (
+              ""
+            )}
           </div>
           <CpForm currPage={currPage} currId={currId} setErrors={setErrors} />
         </div>

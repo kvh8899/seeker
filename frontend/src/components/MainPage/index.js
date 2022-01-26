@@ -26,7 +26,7 @@ function MainPage({icon,name}) {
   }, [session]);
 
   return (
-    <div className="mainContent mainContentScroll">
+    <div className="mainContent">
       <TopBar icon={icon} name={name} />
       <div className="midContent">
         <div className="postContent">

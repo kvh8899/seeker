@@ -11,11 +11,11 @@ nav {
   user-select: none;
 }
 .mainContentScroll {
-  overflow: scroll;
+  overflow:hidden;
 }
+
 body {
   font-family: sans-serif;
-  position: fixed;
   background-color: lightgray;
   width: 100%;
   height: 100%;
@@ -29,7 +29,6 @@ button:hover {
   transition: 0.5s ease;
 }
 #root {
-  position: fixed;
   width: 100%;
   height: 100%;
 }
