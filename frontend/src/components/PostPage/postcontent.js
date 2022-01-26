@@ -52,9 +52,20 @@ function PostContent() {
                 }}
               >
                 {postLikes.indexOf(currentPost.id) > -1 ? (
-                  <i className="fas fa-thumbs-up"></i>
+                  <i
+                    className="fas fa-thumbs-up"
+                    style={{ color: "#ff7400" }}
+                  ></i>
                 ) : (
-                  <i className="far fa-thumbs-up"></i>
+                  <i
+                    className="far fa-thumbs-up"
+                    onMouseOver={(e) => {
+                      e.target.style.color = "#ff7400";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.color = "black";
+                    }}
+                  ></i>
                 )}
               </div>
 
@@ -75,6 +86,7 @@ function PostContent() {
                 onClick={(e) => {
                   e.stopPropagation();
                   dispatch(togglePostPage());
+                  document.body.classList.remove("mainContentScroll");
                   hist.push(`/pages/${e.target.id}`);
                 }}
               ></img>
@@ -84,6 +96,7 @@ function PostContent() {
                 onClick={(e) => {
                   e.stopPropagation();
                   dispatch(togglePostPage());
+                  document.body.classList.remove("mainContentScroll");
                   hist.push(`/pages/${e.target.id}`);
                 }}
               >

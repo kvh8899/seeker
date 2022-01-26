@@ -1,6 +1,5 @@
 import { getCurrentPage } from "../../store/currentPage";
 import { getPagePosts } from "../../store/posts";
-import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { useRef, useState, useEffect } from "react";
@@ -13,37 +12,36 @@ function LeftNav({ icon, name, setName, setIcons }) {
   const hist = useHistory();
   const [showDiv, setShowDiv] = useState(false);
   const userPages = useSelector((state) => state.pageList);
-
   useEffect(() => {
-    //temporary fix to divs not closing, must use redux instead
     function close(e) {
       setShowDiv(false);
       document.querySelector(".home")?.classList.remove("border");
     }
-
     document.body.addEventListener("click", close);
-
     return () => {
       document.body.removeEventListener("click", close);
     };
   }, []);
+
   return (
     <div className="leftnav">
       <li>
-        <NavLink
-          to="/"
-          exact={true}
+        <div
           className="logo"
           onClick={async (e) => {
             dispatch(postPageOff());
-            await dispatch(getFollowPosts());
+            if (session) {
+              await dispatch(getFollowPosts());
+            }
             setName("Home");
             setIcons(<i className="fas fa-home"></i>);
-            //dispatch(toggleEditOff());
+            document.body.classList.remove("mainContentScroll");
+            hist.push("/");
           }}
+          style={{ cursor: "pointer" }}
         >
           <img src="/Guardian.png" alt=""></img>Seeker
-        </NavLink>
+        </div>
       </li>
       {session && (
         <div

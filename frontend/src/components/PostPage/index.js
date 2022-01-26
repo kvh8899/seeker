@@ -14,6 +14,7 @@ function PostPage() {
         onClick={async(e) => {
           dispatch(togglePostPage());
           await dispatch(getCurrentPost(null));
+          document.body.classList.remove("mainContentScroll")
         }}
       >
         <div

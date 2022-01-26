@@ -1,17 +1,20 @@
 import Communities from "./communities";
 import CurrentSelect from "./currentSelect";
 import styled from "styled-components";
+
+const Sidebar = styled.div`
+  margin-left: 30px;
+  width: 475px;
+`;
+
 function SideBar() {
-  const SideBar = styled.div`
-    margin-left: 30px;
-    width: 475px;
-    height:100%;
-  `;
   return (
-    <SideBar>
-      <Communities />
-      <CurrentSelect />
-    </SideBar>
+    <>
+      <Sidebar>
+        <Communities />
+        <CurrentSelect />
+      </Sidebar>
+    </>
   );
 }
 

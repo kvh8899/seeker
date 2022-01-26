@@ -27,10 +27,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact={true}>
-          <MainPage />
-        </Route>
-        <Route path="/sign-up" exact={true}>
-          <SignUpForm />
+          <MainPage icon={<i className="fas fa-home"></i>} name="Home" />
         </Route>
         <Route path="/pages/:id" exact={true}>
           <Page />
@@ -40,6 +37,9 @@ function App() {
         </Route>
         <Route path="/posts/:id/edit" exact={true}>
           <EditPost />
+        </Route>
+        <Route path="/all" exact={true}>
+          <MainPage icon={<i className="fas fa-signal"></i>} name="All" />
         </Route>
       </Switch>
     </BrowserRouter>
