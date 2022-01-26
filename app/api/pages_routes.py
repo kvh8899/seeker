@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from app.models import db, Page, Post,Page_Follow
 from app.forms import PageForm,EditPageForm,Post_form
 from flask_login import current_user, login_user, logout_user, login_required
-from sqlalchemy import desc
+from sqlalchemy import desc, func
 pages_routes = Blueprint('pages',__name__)
 
 # get a page by id
@@ -27,6 +27,12 @@ def all_posts():
         page_t.append(i.to_dict())
     return page_t
 
+# get trending pages by follows
+@pages_routes.route("/trending")
+def tre_posts():
+    pages = db.session.query(Page,func.count(Page_Follow.user_id).label('total')).join(Page_Follow).group_by(Page).order_by(desc('total')).limit(5).all();
+    arr = [ i[0].to_dict() for i in pages ]
+    return {'pages':arr}
 #get posts of a page /api/posts/:pageId
 
 @pages_routes.route('/<int:pageId>/posts')

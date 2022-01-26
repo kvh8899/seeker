@@ -64,7 +64,7 @@ function RightNav({ showProfDiv, setShowProfDiv, setIcons, setName }) {
               style={{ color: "black" }}
               href="https://angel.co/u/kyle-huang-7"
             >
-              <i class="fab fa-angellist"></i>
+              <i className="fab fa-angellist"></i>
             </a>
           </li>
         </div>
