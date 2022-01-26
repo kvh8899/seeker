@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { useRef, useState, useEffect } from "react";
 import { postPageOff, toggleCreatePage } from "../../store/toggles";
-
-function LeftNav({ icon, name }) {
+import { getFollowPosts } from "../../store/posts";
+function LeftNav({ icon, name, setName, setIcons }) {
   const dispatch = useDispatch();
   const session = useSelector((state) => state.session.user);
   const wrapper = useRef(null);
@@ -34,8 +34,11 @@ function LeftNav({ icon, name }) {
           to="/"
           exact={true}
           className="logo"
-          onClick={(e) => {
+          onClick={async (e) => {
             dispatch(postPageOff());
+            await dispatch(getFollowPosts());
+            setName("Home");
+            setIcons(<i className="fas fa-home"></i>);
             //dispatch(toggleEditOff());
           }}
         >
@@ -62,7 +65,10 @@ function LeftNav({ icon, name }) {
             }}
           >
             <div className="tof">
-              {icon} {name}
+              <div id="navTabIcon">{icon}</div>
+              <p id="navTab" style={{ margin: "0px 10px" }}>
+                {name}
+              </p>
             </div>
             <div>
               <i className="fas fa-chevron-down"></i>

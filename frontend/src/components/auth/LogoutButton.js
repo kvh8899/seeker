@@ -1,12 +1,14 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../store/session';
-
-const LogoutButton = ({showDiv,setShowDiv}) => {
-  const dispatch = useDispatch()
+import React from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/session";
+import { useHistory } from "react-router";
+const LogoutButton = ({ setShowDiv }) => {
+  const dispatch = useDispatch();
+  const hist = useHistory();
   const onLogout = async (e) => {
-    setShowDiv(false)
+    setShowDiv(false);
     await dispatch(logout());
+    hist.push("/");
   };
 
   return <button onClick={onLogout}>Logout</button>;

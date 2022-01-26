@@ -9,6 +9,8 @@ import { useState } from "react";
 function Nav({ name, icon }) {
   const session = useSelector((state) => state.session.user);
   const [showDiv, setShowDiv] = useState(false);
+  const [names, setName] = useState(name);
+  const [icons, setIcons] = useState(icon);
   const [showProfDiv, setShowProfDiv] = useState(false);
   const dispatch = useDispatch();
 
@@ -23,10 +25,12 @@ function Nav({ name, icon }) {
       setShowProfDiv(false);
     }
     document.body.addEventListener("click", close);
+    setName(name);
+    setIcons(icon);
     return () => {
       document.body.removeEventListener("click", close);
     };
-  }, []);
+  }, [name, icon]);
 
   useEffect(() => {
     if (session) loadData();
@@ -42,8 +46,18 @@ function Nav({ name, icon }) {
     >
       <nav>
         <ul className="mainNav">
-          <LeftNav icon={icon} name={name} />
-          <RightNav showProfDiv={showProfDiv} setShowProfDiv={setShowProfDiv} />
+          <LeftNav
+            icon={icons}
+            name={names}
+            setName={setName}
+            setIcons={setIcons}
+          />
+          <RightNav
+            showProfDiv={showProfDiv}
+            setShowProfDiv={setShowProfDiv}
+            setName={setName}
+            setIcons={setIcons}
+          />
           {showProfDiv && (
             <div
               className="profileDrop"
