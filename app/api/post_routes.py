@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from app.models import db,Post,Page,Page_Follow,Like,Comment
 from flask_login import current_user, login_required
-from app.forms import Post_form
+from app.forms import Post_form, Comment_Form
 from sqlalchemy import desc, asc
 post_routes = Blueprint('posts',__name__)
 
@@ -96,3 +96,24 @@ def post_user_likes(postId):
         return {'like': 0}
 
 
+# get comments for a post
+# /api/posts/:postId/comments
+
+@post_routes.route('/<int:postId>/comments')
+def post_comments(postId):
+    comments = Comment.query.filter(postId == Comment.post_id).all()
+
+    return {'comments':[i.to_dict() for i in comments]}
+
+@post_routes.route('/<int:postId>/comments',methods="POST")
+@login_required
+def create_comment(postId):
+    form = Comment_Form()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if(form.validate_on_submit()):
+        comment = Comment(content=form.content.data,owner_id=current_user.id,post_id=postId)
+        db.session.add(comment)
+        db.session.commit()
+        return {'comment':comment.to_dict()}
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
