@@ -4,7 +4,7 @@ import { togglePostPage, toggleLogin } from "../../store/toggles";
 import { getCurrentPost } from "../../store/currentPost";
 import { useEffect } from "react";
 import { getPostLikes, addPostLikes, delPostLikes } from "../../store/likes";
-
+import { getAllComments } from "../../store/comments";
 import ReactMarkdown from "react-markdown";
 import "./posts.css";
 
@@ -34,6 +34,7 @@ function Posts() {
             onClick={() => {
               dispatch(togglePostPage());
               dispatch(getCurrentPost(e.id));
+              dispatch(getAllComments(e.id));
               document.body.classList.add("mainContentScroll");
             }}
           >
@@ -60,7 +61,6 @@ function Posts() {
                     <i
                       className="fas fa-thumbs-up"
                       style={{ color: "#ff7400" }}
-          
                     ></i>
                   ) : (
                     <i

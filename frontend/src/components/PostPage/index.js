@@ -3,7 +3,6 @@ import { togglePostPage } from "../../store/toggles";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentPost } from "../../store/currentPost";
 import PostContent from "./postcontent";
-
 function PostPage() {
   const dispatch = useDispatch();
   const currentPost = useSelector((state) => state.currentPost);
@@ -11,10 +10,10 @@ function PostPage() {
     <>
       <div
         className="postPageb"
-        onClick={async(e) => {
+        onClick={async (e) => {
           dispatch(togglePostPage());
           await dispatch(getCurrentPost(null));
-          document.body.classList.remove("mainContentScroll")
+          document.body.classList.remove("mainContentScroll");
         }}
       >
         <div

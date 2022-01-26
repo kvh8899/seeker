@@ -102,10 +102,15 @@ def post_user_likes(postId):
 @post_routes.route('/<int:postId>/comments')
 def post_comments(postId):
     comments = Comment.query.filter(postId == Comment.post_id).all()
+    arr = []
 
-    return {'comments':[i.to_dict() for i in comments]}
+    for i in comments:
+        comment = i.to_dict()
+        comment['owner'] = i.owner.to_dict();
+        arr.append(comment)
+    return {'comments':arr}
 
-@post_routes.route('/<int:postId>/comments',methods="POST")
+@post_routes.route('/<int:postId>/comments',methods=["POST"])
 @login_required
 def create_comment(postId):
     form = Comment_Form()

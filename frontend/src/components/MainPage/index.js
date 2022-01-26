@@ -18,7 +18,7 @@ function MainPage({icon,name}) {
   }
 
   useEffect(() => {
-    if (!session) {
+    if (!session || name === "All") {
       loadAll();
     } else {
       loadFollowed();
