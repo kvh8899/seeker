@@ -3,6 +3,14 @@ import { replyTo } from "../../store/comments";
 import { useSelector, useDispatch } from "react-redux";
 import { useRef, useEffect, useState } from "react";
 import { toggleLogin } from "../../store/toggles";
+import { setMap } from "../../store/commentsMap";
+import {
+  findReply,
+  getChildren,
+  hide,
+  reRenderThread,
+  hideMany,
+} from "../utils";
 const ProfImage = styled.img`
   height: 30px;
   width: 30px;
@@ -19,7 +27,6 @@ const Text = styled.div`
   display: flex;
   margin-top: 6px;
   margin-left: 13px;
-  min-height: 50px;
   word-break: break-all;
 `;
 const UserData = styled.div`
@@ -28,10 +35,13 @@ const UserData = styled.div`
 
 function CommentContainer({ level, e, path }) {
   const currentPost = useSelector((state) => state.currentPost);
+  const postComments = useSelector((state) => state.postComments);
+  const map = useSelector((state) => state.commentsMap);
   const session = useSelector((state) => state.session.user);
   const [reply, setReply] = useState("");
   const dispatch = useDispatch();
   const rep = useRef([]);
+
   function levels() {
     let arr = [];
     for (let x = 0; x < level; x++) {
@@ -40,6 +50,34 @@ function CommentContainer({ level, e, path }) {
           className="tab greyTab"
           key={Math.random()}
           id={`tab${path[level - x - 1]}`}
+          onClick={(ex) => {
+            //find children of id at path[level - x - 1]
+            let child = findReply(postComments, parseInt(path[level - x - 1]));
+            let children = getChildren(child);
+            //set that id in map to false
+
+            dispatch(setMap(`com${path[level - x - 1]}`));
+            //hide all of the children (lol)
+            children.forEach((exex) => {
+              document.querySelectorAll(`#com${exex}`).forEach((e) => {
+                e.classList.add("noThread");
+              });
+            });
+            children.forEach((exex) => {
+              document.querySelectorAll(`#tab${exex}`).forEach((e) => {
+                e.classList.add("noThread");
+                e.classList.remove("orangeTab");
+                e.classList.add("greyTab");
+              });
+            });
+            document
+              .querySelector(`.comTop${path[level - x - 1]}`)
+              .classList.remove("noThread");
+            document
+              .querySelector(`#bcom${path[level - x - 1]}`)
+              .classList.remove("noThread");
+            document.querySelector(`#com${e.id}`).classList.add("noThread");
+          }}
         ></div>
       );
     }
@@ -63,16 +101,21 @@ function CommentContainer({ level, e, path }) {
       e.addEventListener("mouseover", tabHover);
       e.addEventListener("mouseleave", tabLeave);
     });
+
     return () => {
       allTab.forEach((e) => {
         e.removeEventListener("mouseover", tabHover);
         e.removeEventListener("mouseleave", tabLeave);
       });
     };
-  });
+  }, [levels]);
 
+  useEffect(() => {
+    hideMany(e, map);
+  }, [postComments]);
+  
   return (
-    <div key={e.id} id={`com${e.id}`}>
+    <div key={e.id} id={`com${e.id}`} className={`comTop${e.id}`}>
       <div>
         <CContent>
           {levels()}
@@ -84,17 +127,40 @@ function CommentContainer({ level, e, path }) {
                 marginTop: "20px",
               }}
             >
+              <button
+                className="noThread"
+                id={`bcom${e.id}`}
+                onClick={(ex) => {
+                  //find children of current tree and toggle class noThread of
+                  // all childrens unless it is false in map, then stop
+                  //set e.id in map to true
+                  reRenderThread(e, map);
+                  document
+                    .querySelector(`#bcom${e.id}`)
+                    .classList.add("noThread");
+                }}
+              >
+                <i className="fas fa-expand-alt"></i>
+              </button>
               <ProfImage src={"/Guardian.png"} alt=""></ProfImage>
               <div>{e.owner?.username}</div>
             </div>
             <Text>
-              <div className="thread greyTab" id={`tab${e.id}`}></div>
               <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
+                className="thread greyTab"
+                id={`tab${e.id}`}
+                onClick={(ex) => {
+                  hide(e);
+                  dispatch(setMap(`com${e.id}`));
+                  document
+                    .querySelector(`.comTop${e.id}`)
+                    .classList.remove("noThread");
+                  document
+                    .querySelector(`#bcom${e.id}`)
+                    .classList.remove("noThread");
                 }}
-              >
+              ></div>
+              <div className="ccContent" id={`com${e.id}`}>
                 <p style={{ margin: "0px" }}>{e.content}</p>
                 <button
                   style={{
@@ -137,7 +203,20 @@ function CommentContainer({ level, e, path }) {
                 minHeight: "50px",
               }}
             >
-              <div className="tab" id={`tab${e.id}`}></div>
+              <div
+                className="tab"
+                id={`tab${e.id}`}
+                onClick={(ex) => {
+                  dispatch(setMap(`com${e.id}`));
+                  hide(e);
+                  document
+                    .querySelector(`.comTop${e.id}`)
+                    .classList.remove("noThread");
+                  document
+                    .querySelector(`#bcom${e.id}`)
+                    .classList.remove("noThread");
+                }}
+              ></div>
               <form
                 style={{ position: "relative" }}
                 onSubmit={(event) => {

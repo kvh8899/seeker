@@ -8,7 +8,7 @@ def insert_into_tree(insert_item,items):
                 if(insert_item.parent_id == curr['id']):
                     comment = insert_item.to_dict()
                     comment['owner'] = insert_item.owner.to_dict()
-                    curr['replies'].append(comment)
+                    curr['replies'].insert(0,comment)
                     break;
                 for i in curr['replies']:
                     queue.append(i)

@@ -5,6 +5,7 @@ import { useHistory } from "react-router";
 import { useRef, useState, useEffect } from "react";
 import { postPageOff, toggleCreatePage } from "../../store/toggles";
 import { getFollowPosts } from "../../store/posts";
+import guardianImg from "../../images/Guardian.png";
 function LeftNav({ icon, name, setName, setIcons }) {
   const dispatch = useDispatch();
   const session = useSelector((state) => state.session.user);
@@ -40,7 +41,7 @@ function LeftNav({ icon, name, setName, setIcons }) {
           }}
           style={{ cursor: "pointer" }}
         >
-          <img src="/Guardian.png" alt=""></img>Seeker
+          <img src={guardianImg} alt=""></img>Seeker
         </div>
       </li>
       {session && (

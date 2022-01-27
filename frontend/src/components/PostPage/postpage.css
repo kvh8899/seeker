@@ -137,3 +137,12 @@
   margin-right: 20px;
   cursor: pointer;
 }
+
+.noThread {
+  display: none;
+}
+
+.ccContent {
+  display: "flex";
+  flex-direction: "column";
+}

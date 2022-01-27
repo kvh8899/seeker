@@ -23,7 +23,7 @@ const rep = (reply) => {
   };
 };
 
-export const replyTo = (commentId,reply) => async (dispatch) => {
+export const replyTo = (commentId, reply) => async (dispatch) => {
   const res = await fetch(`/api/comments/${commentId}/reply`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -66,12 +66,34 @@ export const getAllComments = (postId) => async (dispatch) => {
   }
 };
 
+const bfs = (tree, comment) => {
+  let queue = [tree];
+  while (queue.length > 0) {
+    let curr = queue.shift();
+    if (curr.id === comment.parent_id) curr.replies.unshift(comment);
+    for (let i = 0; i < curr.replies.length; i++) {
+      queue.push(curr.replies[i]);
+    }
+  }
+  return tree;
+};
+
+const addToTree = (state, comment) => {
+  let arr = [];
+  state.forEach((e) => {
+    arr.push(bfs(e, comment));
+  });
+  return arr;
+};
+
 function postComments(state = [], action) {
   switch (action.type) {
     case GET:
       return action.comments;
     case ADD:
       return [...state, action.comment];
+    case ADDREP:
+      return addToTree(state, action.reply);
     default:
       return state;
   }
