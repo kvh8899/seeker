@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import CommentContainer from "./commentContainer";
+import { traversal, getPath } from "../utils";
 const CContainer = styled.div`
   width: 100%;
   border-radius: 3px 3px 0px 0px;
@@ -17,15 +18,7 @@ const InnerCContainer = styled.div`
 
 function Comment() {
   const postComments = useSelector((state) => state.postComments);
-  function getPath(object) {
-    let path = [];
-    while (object.parent) {
-      path.push(`${object.parent.id}`);
-      object = object.parent;
-    }
-    return path;
-  }
-  function dfs() {
+  function render_Comments(postComments) {
     let arr = [];
     postComments?.forEach((e, i) => {
       let data = traversal(0, e, []);
@@ -42,19 +35,9 @@ function Comment() {
     });
     return arr;
   }
-  function traversal(value = 0, comment, arr = []) {
-    arr.push([value, comment]);
-    if (!comment.replies.length) return arr;
-
-    for (let i = 0; i < comment.replies.length; i++) {
-      comment.replies[i].parent = comment;
-      arr = traversal(value + 1, comment.replies[i], arr);
-    }
-    return arr;
-  }
   return (
     <CContainer>
-      <InnerCContainer>{dfs()}</InnerCContainer>
+      <InnerCContainer>{render_Comments(postComments)}</InnerCContainer>
     </CContainer>
   );
 }
