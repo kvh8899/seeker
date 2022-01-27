@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { replyTo } from "../../store/comments";
 import { useSelector, useDispatch } from "react-redux";
 import { useRef, useEffect, useState } from "react";
+import { toggleLogin } from "../../store/toggles";
 const ProfImage = styled.img`
   height: 30px;
   width: 30px;
@@ -17,7 +18,9 @@ const CContent = styled.div`
 const Text = styled.div`
   display: flex;
   margin-top: 6px;
+  margin-left: 13px;
   min-height: 50px;
+  word-break: break-all;
 `;
 const UserData = styled.div`
   width: 100%;
@@ -25,6 +28,7 @@ const UserData = styled.div`
 
 function CommentContainer({ level, e, path }) {
   const currentPost = useSelector((state) => state.currentPost);
+  const session = useSelector((state) => state.session.user);
   const [reply, setReply] = useState("");
   const dispatch = useDispatch();
   const rep = useRef([]);
@@ -34,7 +38,7 @@ function CommentContainer({ level, e, path }) {
       arr.push(
         <div
           className="tab greyTab"
-          key={x}
+          key={Math.random()}
           id={`tab${path[level - x - 1]}`}
         ></div>
       );
@@ -49,11 +53,11 @@ function CommentContainer({ level, e, path }) {
         e.classList.remove("greyTab");
       });
     }
-    function tabLeave(){
-        allTab.forEach((e) => {
-            e.classList.remove("orangeTab");
-            e.classList.add("greyTab");
-          });  
+    function tabLeave() {
+      allTab.forEach((e) => {
+        e.classList.remove("orangeTab");
+        e.classList.add("greyTab");
+      });
     }
     allTab.forEach((e) => {
       e.addEventListener("mouseover", tabHover);
@@ -62,12 +66,13 @@ function CommentContainer({ level, e, path }) {
     return () => {
       allTab.forEach((e) => {
         e.removeEventListener("mouseover", tabHover);
+        e.removeEventListener("mouseleave", tabLeave);
       });
     };
   });
 
   return (
-    <div key={e.id}>
+    <div key={e.id} id={`com${e.id}`}>
       <div>
         <CContent>
           {levels()}
@@ -80,7 +85,7 @@ function CommentContainer({ level, e, path }) {
               }}
             >
               <ProfImage src={"/Guardian.png"} alt=""></ProfImage>
-              <div>{e?.owner?.username}</div>
+              <div>{e.owner?.username}</div>
             </div>
             <Text>
               <div className="thread greyTab" id={`tab${e.id}`}></div>
@@ -90,7 +95,7 @@ function CommentContainer({ level, e, path }) {
                   flexDirection: "column",
                 }}
               >
-                {e?.content}
+                <p style={{ margin: "0px" }}>{e.content}</p>
                 <button
                   style={{
                     alignSelf: "flex-start",
@@ -103,6 +108,10 @@ function CommentContainer({ level, e, path }) {
                     fontWeight: "bold",
                   }}
                   onClick={(e) => {
+                    if (!session) {
+                      dispatch(toggleLogin());
+                      return;
+                    }
                     rep.current.classList.toggle("displayNun");
                     rep.current.classList.toggle("reply");
                   }}
@@ -113,7 +122,7 @@ function CommentContainer({ level, e, path }) {
             </Text>
           </UserData>
         </CContent>
-        <div id={"repinput" + e?.id} className="displayNun" ref={rep}>
+        <div id={"repinput" + e.id} className="displayNun" ref={rep}>
           {levels()}
           <UserData>
             <div
@@ -125,7 +134,6 @@ function CommentContainer({ level, e, path }) {
             <div
               style={{
                 display: "flex",
-                marginLeft: "13px",
                 minHeight: "50px",
               }}
             >

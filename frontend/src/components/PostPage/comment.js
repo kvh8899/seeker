@@ -29,12 +29,10 @@ function Comment() {
     let arr = [];
     postComments?.forEach((e, i) => {
       let data = traversal(0, e, []);
-      if (i === 0) console.log(data);
       data.forEach((e) => {
         let path = getPath(e[1]);
         arr.push(
           <CommentContainer
-            key={e.id}
             e={e[1]}
             level={e[0]}
             path={path}

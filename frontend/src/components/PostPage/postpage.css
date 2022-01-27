@@ -122,16 +122,18 @@
   margin-right: 20px;
   margin-left: 13px;
   border: 1px solid lightgray;
+  cursor: pointer;
 }
-.orangeTab{
+.orangeTab {
   border: 1px solid rgb(226, 143, 19);
 }
 
-.greyTab{
+.greyTab {
   border: 1px solid lightgray;
 }
 
-.thread{ 
+.thread {
   width: 0px;
   margin-right: 20px;
+  cursor: pointer;
 }
