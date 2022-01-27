@@ -1,5 +1,6 @@
 const GET = "comments/GET";
 const ADD = "comments/ADD";
+const ADDREP = "comments/ADDREPLY";
 
 const getAll = (comments) => {
   return {
@@ -13,6 +14,28 @@ const addOne = (comment) => {
     type: ADD,
     comment,
   };
+};
+
+const rep = (reply) => {
+  return {
+    type: ADDREP,
+    reply,
+  };
+};
+
+export const replyTo = (commentId,reply) => async (dispatch) => {
+  const res = await fetch(`/api/comments/${commentId}/reply`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(reply),
+  });
+  if (res.ok) {
+    const reply = await res.json();
+    dispatch(rep(reply));
+    return reply;
+  } else {
+    return null;
+  }
 };
 
 export const addOneComment = (postId, comment) => async (dispatch) => {

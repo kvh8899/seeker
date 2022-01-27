@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addOneComment } from "../../store/comments";

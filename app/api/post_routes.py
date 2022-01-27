@@ -101,12 +101,11 @@ def post_user_likes(postId):
 
 @post_routes.route('/<int:postId>/comments')
 def post_comments(postId):
-    comments = Comment.query.filter(postId == Comment.post_id).all()
+    comments = Comment.query.filter((postId == Comment.post_id),(Comment.parent_id == None)).all()
     arr = []
-
     for i in comments:
-        comment = i.to_dict()
-        comment['owner'] = i.owner.to_dict();
+        comment = i.handle_replies()
+        comment['owner'] = i.owner.to_dict()
         arr.append(comment)
     return {'comments':arr}
 

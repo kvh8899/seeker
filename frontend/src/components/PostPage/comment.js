@@ -1,6 +1,10 @@
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useRef, useEffect, useState } from "react";
+import { replyTo } from "../../store/comments";
+import currentPage from "../../store/currentPage";
+import currentPost from "../../store/currentPost";
+
 const CContainer = styled.div`
   width: 100%;
   border-radius: 3px 3px 0px 0px;
@@ -48,6 +52,9 @@ const UserData = styled.div`
 `;
 function Comment() {
   const comments = useSelector((state) => state.postComments);
+  const currentPost = useSelector((state) => state.currentPost);
+  const [reply, setReply] = useState("");
+  const dispatch = useDispatch();
   const rep = useRef([]);
   useEffect(() => {
     rep.current = rep.current.slice(0, comments.length);
@@ -122,11 +129,25 @@ function Comment() {
                     <Thread></Thread>
                     <form
                       style={{ position: "relative", height: "132px" }}
-                      onSubmit={(e) => {
-                        e.preventDefault();
+                      onSubmit={(event) => {
+                        event.preventDefault();
+                        dispatch(
+                          replyTo(e.id, {
+                            content: reply,
+                            post_id: currentPost.id,
+                          })
+                        );
+                        rep.current[i].classList.toggle("displayNun");
+                        rep.current[i].classList.toggle("reply");
+                        setReply("");
                       }}
                     >
-                      <textarea></textarea>
+                      <textarea
+                        value={reply}
+                        onChange={(e) => {
+                          setReply(e.target.value);
+                        }}
+                      ></textarea>
                       <div className="repButton">
                         <button
                           className="repcanc"
