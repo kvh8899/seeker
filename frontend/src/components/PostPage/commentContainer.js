@@ -14,21 +14,9 @@ const CContent = styled.div`
   width: 100%;
 `;
 
-const Thread = styled.div`
-  border: 1px solid lightgray;
-  width: 0px;
-  margin-right: 20px;
-`;
-const NestedThread = styled.div`
-  border: 1px solid lightgray;
-  width: 0px;
-  margin-right: 20px;
-  margin-left: 13px;
-`;
 const Text = styled.div`
   display: flex;
   margin-top: 6px;
-  margin-left: 13px;
   min-height: 50px;
 `;
 const UserData = styled.div`
@@ -77,7 +65,7 @@ function CommentContainer({ level, e, path }) {
       });
     };
   });
-  
+
   return (
     <div key={e.id}>
       <div>
