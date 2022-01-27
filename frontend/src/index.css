@@ -11,7 +11,7 @@ nav {
   user-select: none;
 }
 .mainContentScroll {
-  overflow:hidden;
+  overflow: hidden;
 }
 
 body {
@@ -63,4 +63,9 @@ input {
 
 span {
   display: block;
+}
+textarea {
+  outline: none;
+  padding:0px;
+  margin:0px;
 }

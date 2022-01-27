@@ -5,12 +5,16 @@ import ReactMarkdown from "react-markdown";
 import PageData from "./PageData";
 import { useEffect, useState } from "react";
 import { addPostLikes, delPostLikes } from "../../store/likes";
+import Comment from "./comment";
+import CommentForm from "./commentForm";
+
 function PostContent() {
   const dispatch = useDispatch();
   const hist = useHistory();
   const currentPost = useSelector((state) => state.currentPost);
   const postLikes = useSelector((state) => state.postLikes);
   const session = useSelector((state) => state.session.user);
+  const postComments = useSelector((state) => state.postComments);
   const [numLikes, setNumLikes] = useState(0);
   async function loadData() {
     const res = await fetch(`/api/likes/${currentPost.id}`);
@@ -27,7 +31,7 @@ function PostContent() {
 
   return (
     <div className="spostContent">
-      <div className="postContent">
+      <div className="postContent pcBackground">
         <div id="pcdiv">
           <div id="pcdiv" className="ipContent">
             <div className="lSidebar">
@@ -115,7 +119,7 @@ function PostContent() {
                 <div className="cDiv">
                   <div>
                     <i className="far fa-comment-alt"></i>
-                    <p>{currentPost.comments}</p>
+                    <p>{postComments.length}</p>
                     <p>Comments</p>
                   </div>
                 </div>
@@ -123,6 +127,8 @@ function PostContent() {
             </div>
           </div>
         </div>
+        <Comment />
+        <CommentForm />
       </div>
       <div className="sideBar">
         <PageData />

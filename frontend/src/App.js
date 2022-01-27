@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import SignUpForm from "./components/auth/SignUpForm";
 import { authenticate } from "./store/session";
 import MainPage from "./components/MainPage";
 import Page from "./components/Page";

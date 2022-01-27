@@ -8,7 +8,7 @@ import currentPost from "./currentPost";
 import isFollowing from "./checkFollow";
 import postLikes from "./likes";
 import sideBarPages from "./trpages";
-
+import postComments from "./comments";
 import {
   createPageShow,
   editPageShow,
@@ -33,6 +33,7 @@ const rootReducer = combineReducers({
   isFollowing,
   postLikes,
   sideBarPages,
+  postComments,
 });
 
 let enhancer;

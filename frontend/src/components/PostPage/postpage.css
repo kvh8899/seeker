@@ -6,7 +6,7 @@
   top: 50px;
   overflow: scroll;
   display: flex;
-  align-items:flex-start;
+  align-items: flex-start;
   justify-content: center;
   z-index: 1;
 }
@@ -37,8 +37,8 @@
 .mainPostContainer {
   position: relative;
   width: 1150px;
-  display:flex;
-  min-height:100%;
+  display: flex;
+  min-height: 100%;
 }
 
 .mainPostContent {
@@ -47,7 +47,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height:100%;
+  min-height: 100%;
 }
 .space1 {
   width: 1150px;
@@ -71,9 +71,69 @@
 #pcdiv {
   border: none;
   background-color: white;
-  max-height:none;
+  max-height: none;
+  display: flex;
+  min-height: 150px;
+  background-color: white;
+  word-break: break-word;
+  border-radius: 5px;
 }
 
-#spacer{
-    height:100px;
+#spacer {
+  height: 100px;
+}
+
+.pcBackground {
+  background-color: white;
+}
+
+.displayNun {
+  display: none;
+}
+
+.reply {
+  display: flex;
+  width: 100%;
+}
+.repButton {
+  display: flex;
+  position: relative;
+  height: 30px;
+  background-color: lightgray;
+  top: -10px;
+  width: 100%;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  justify-content: flex-end;
+}
+.repButton button {
+  border: none;
+  background-color: transparent;
+}
+
+.repsub {
+  color: rgb(50, 168, 241);
+}
+.tab {
+  width: 0px;
+  margin-right: 20px;
+  margin-left: 13px;
+  border: 1px solid lightgray;
+  cursor: pointer;
+}
+.orangeTab {
+  border: 1px solid rgb(226, 143, 19);
+}
+
+.greyTab {
+  border: 1px solid lightgray;
+}
+
+.thread {
+  width: 0px;
+  margin-right: 20px;
+  cursor: pointer;
 }

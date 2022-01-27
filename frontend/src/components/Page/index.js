@@ -39,7 +39,7 @@ function Page() {
   return (
     <>
       {editPageShow && <EditPage />}
-      <div className="mainContent mainContentScroll">
+      <div className="mainContent">
         <TopBar
           icon={
             <img

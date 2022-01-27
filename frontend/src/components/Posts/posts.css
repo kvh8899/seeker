@@ -2,8 +2,9 @@
   position: relative;
   z-index: 1;
   width: 100%;
+  
 }
-.postContent > div {
+.mainPosts {
   display: flex;
   width: 100%;
   min-height: 150px;
@@ -12,7 +13,7 @@
   margin-bottom: 20px;
   background-color: white;
   border: 1px solid rgb(187, 187, 187);
-  word-break:break-word;
+  word-break: break-word;
   border-radius: 5px;
 }
 .mainPosts:hover {

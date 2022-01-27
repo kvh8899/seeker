@@ -15,3 +15,23 @@ export function subString(str, currPage) {
   let curr = currPage.toLowerCase();
   return str.indexOf(curr) > -1 ? true : false;
 }
+
+export function traversal(value = 0, comment, arr = []) {
+  arr.push([value, comment]);
+  if (!comment.replies.length) return arr;
+
+  for (let i = 0; i < comment.replies.length; i++) {
+    comment.replies[i].parent = comment;
+    arr = traversal(value + 1, comment.replies[i], arr);
+  }
+  return arr;
+}
+
+export function getPath(object) {
+  let path = [];
+  while (object.parent) {
+    path.push(`${object.parent.id}`);
+    object = object.parent;
+  }
+  return path;
+}
