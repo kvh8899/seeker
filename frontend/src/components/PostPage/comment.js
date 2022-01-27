@@ -45,12 +45,12 @@ function Comment() {
   function traversal(value = 0, comment, arr = []) {
     arr.push([value, comment]);
     if (!comment.replies.length) return arr;
-    let x;
+
     for (let i = 0; i < comment.replies.length; i++) {
       comment.replies[i].parent = comment;
-      x = traversal(value + 1, comment.replies[i], arr);
+      arr = traversal(value + 1, comment.replies[i], arr);
     }
-    return x;
+    return arr;
   }
   return (
     <CContainer>
