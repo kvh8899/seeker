@@ -101,7 +101,7 @@
   height: 30px;
   background-color: lightgray;
   top: -10px;
-  width: 546.5px;
+  width: 100%;
   border-bottom: 1px solid black;
   border-left: 1px solid black;
   border-right: 1px solid black;
@@ -116,4 +116,22 @@
 
 .repsub {
   color: rgb(50, 168, 241);
+}
+.tab {
+  width: 0px;
+  margin-right: 20px;
+  margin-left: 13px;
+  border: 1px solid lightgray;
+}
+.orangeTab{
+  border: 1px solid rgb(226, 143, 19);
+}
+
+.greyTab{
+  border: 1px solid lightgray;
+}
+
+.thread{ 
+  width: 0px;
+  margin-right: 20px;
 }

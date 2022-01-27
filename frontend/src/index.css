@@ -66,4 +66,6 @@ span {
 }
 textarea {
   outline: none;
+  padding:0px;
+  margin:0px;
 }

@@ -6,7 +6,9 @@ def insert_into_tree(insert_item,items):
             while(len(queue) > 0):
                 curr = queue.pop(0)
                 if(insert_item.parent_id == curr['id']):
-                    curr['replies'].append(insert_item.to_dict())
+                    comment = insert_item.to_dict()
+                    comment['owner'] = insert_item.owner.to_dict()
+                    curr['replies'].append(comment)
                     break;
                 for i in curr['replies']:
                     queue.append(i)
