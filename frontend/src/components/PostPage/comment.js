@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import CommentContainer from "./commentContainer";
 import { traversal, getPath } from "../utils";
-import { addMap, setMap } from "../../store/commentsMap";
+import { addMap } from "../../store/commentsMap";
 const CContainer = styled.div`
   width: 100%;
   border-radius: 3px 3px 0px 0px;
@@ -22,12 +22,10 @@ function Comment() {
   const dispatch = useDispatch();
   function render_Comments(postComments) {
     let arr = [];
-    let map = {};
     postComments?.forEach((e, i) => {
       let data = traversal(0, e, []);
       data.forEach((e) => {
         let path = getPath(e[1]);
-        map[`com${e[1].id}`] = e[2];
         dispatch(addMap(`com${e[1].id}`, e[2]));
         arr.push(
           <CommentContainer

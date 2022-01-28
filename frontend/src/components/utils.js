@@ -127,3 +127,4 @@ export function hideMany(comment, map, value = 0) {
     hide(comment.replies[i], map, value);
   }
 }
+
