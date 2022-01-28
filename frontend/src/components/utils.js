@@ -93,6 +93,7 @@ export function reRenderThread(comment, map, value = 0) {
     });
   } else {
     document.querySelector(`#com${comment.id}`).classList.remove("noThread");
+    document.querySelector(`#bcom${comment.id}`).classList.remove("noThread");
     return;
   }
   if (!comment.replies.length) return;
@@ -116,6 +117,7 @@ export function hideMany(comment, map, value = 0) {
     });
     document.querySelector(`.comTop${comment.id}`).classList.remove("noThread");
     document.querySelector(`#bcom${comment.id}`).classList.remove("noThread");
+    
   }
 
   document.querySelectorAll(`#tab${comment.id}`).forEach((e) => {
@@ -127,4 +129,3 @@ export function hideMany(comment, map, value = 0) {
     hide(comment.replies[i], map, value);
   }
 }
-

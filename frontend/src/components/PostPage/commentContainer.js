@@ -127,7 +127,7 @@ function CommentContainer({ level, e, path }) {
   }, [levels]);
 
   useEffect(() => {
-    hideMany(e, map);
+    if (level === 0) hideMany(e, map);
   }, [postComments]);
 
   return (

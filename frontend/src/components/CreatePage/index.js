@@ -88,7 +88,9 @@ function CreatePage() {
               <input
                 value={category}
                 onChange={(e) => {
-                  setCategory(e.target.value);
+                  if (e.target.value.length < 26) {
+                    setCategory(e.target.value);
+                  }
                 }}
                 className={errors?.find((e) => e === "category") ? "red" : ""}
                 required
@@ -109,7 +111,9 @@ function CreatePage() {
               <input
                 value={followers_type}
                 onChange={(e) => {
-                  setFollowers_type(e.target.value);
+                  if (e.target.value.length < 26) {
+                    setFollowers_type(e.target.value);
+                  }
                 }}
                 className={
                   errors?.find((e) => e === "followers_type") ? "red" : ""

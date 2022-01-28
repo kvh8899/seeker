@@ -60,6 +60,7 @@ function CreatePost() {
                 onChange={(e) => {
                   setCurrPage(e.target.value);
                 }}
+                
               ></input>
               <div
                 className="dropDownButton"
@@ -107,7 +108,7 @@ function CreatePost() {
                 </div>
               )}
             </div>
-            {errors.length ? (
+            {errors.find((e) => e === "comSelect") ? (
               <div>
                 <p>Please Select a Community</p>
               </div>
@@ -115,7 +116,12 @@ function CreatePost() {
               ""
             )}
           </div>
-          <CpForm currPage={currPage} currId={currId} setErrors={setErrors} />
+          <CpForm
+            currPage={currPage}
+            currId={currId}
+            errors={errors}
+            setErrors={setErrors}
+          />
         </div>
         <div className="sideBar"></div>
       </div>
