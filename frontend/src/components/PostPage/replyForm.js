@@ -11,7 +11,7 @@ function ReplyForm({ e, levels, rep }) {
   const dispatch = useDispatch();
   const [reply, setReply] = useState("");
   const currentPost = useSelector((state) => state.currentPost);
-  
+
   return (
     <div id={"repinput" + e.id} className="displayNun" ref={rep}>
       {levels()}
@@ -79,7 +79,11 @@ function ReplyForm({ e, levels, rep }) {
               >
                 Cancel
               </button>
-              <button type="submit" className="repsub">
+              <button
+                type="submit"
+                className="repsub"
+                disabled={reply.search(/[\w\d!@#$%^&*()]/) > -1 ? false : true}
+              >
                 Submit
               </button>
             </div>
