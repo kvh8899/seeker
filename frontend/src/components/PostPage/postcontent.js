@@ -119,7 +119,7 @@ function PostContent() {
                 <div className="cDiv">
                   <div>
                     <i className="far fa-comment-alt"></i>
-                    <p>{postComments.length}</p>
+                    <p>{currentPost.comments}</p>
                     <p>Comments</p>
                   </div>
                 </div>

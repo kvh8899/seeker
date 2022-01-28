@@ -10,7 +10,7 @@ function CreatePage() {
   const [category, setCategory] = useState("");
   const [followers_type, setFollowers_type] = useState("");
   const hist = useHistory();
-  
+  const [errors, setErrors] = useState({});
   function toggle(e) {
     dispatch(toggleCreatePage());
   }
@@ -46,19 +46,27 @@ function CreatePage() {
                 const page = await dispatch(
                   createPage({ title, category, followers_type })
                 );
-                toggle(e);
-                hist.push(`/pages/${page.id}`);
+                if (page.errors) {
+                  setErrors(page.errors);
+                } else {
+                  toggle(e);
+                  hist.push(`/pages/${page.id}`);
+                }
               }}
             >
               <label>Name</label>
               <p>Community names including capitalization cannot be changed.</p>
+              <p style={{ margin: "5px 0px" }}>Limit: {title.length}/50</p>
               <input
                 value={title}
                 onChange={(e) => {
-                  setTitle(e.target.value);
+                  if (e.target.value.length < 51) {
+                    setTitle(e.target.value);
+                  }
                 }}
                 required
               ></input>
+
               <div className="cpLabel">
                 <label>Category</label>
               </div>

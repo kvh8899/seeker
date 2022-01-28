@@ -44,8 +44,11 @@ export const createPage = (data) => async (dispatch) => {
     let { page } = await res.json();
     dispatch(addPage(page));
     return page;
+  } else if (res.status < 500) {
+    const errors = await res.json();
+    return errors;
   } else {
-    return null;
+    return "There was an error";
   }
 };
 
@@ -61,7 +64,6 @@ export const deletePage = (id) => async (dispatch) => {
   } else {
     return null;
   }
-
 };
 
 function pageList(state = [], action) {
@@ -71,7 +73,7 @@ function pageList(state = [], action) {
     case ADDPAGE:
       return [...state, action.newPage];
     case DELETEPAGE:
-      return state.filter((e) => e.id !== action.id)
+      return state.filter((e) => e.id !== action.id);
     default:
       return state;
   }
