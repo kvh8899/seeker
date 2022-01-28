@@ -14,7 +14,6 @@ function PostContent() {
   const currentPost = useSelector((state) => state.currentPost);
   const postLikes = useSelector((state) => state.postLikes);
   const session = useSelector((state) => state.session.user);
-  const postComments = useSelector((state) => state.postComments);
   const [numLikes, setNumLikes] = useState(0);
   async function loadData() {
     const res = await fetch(`/api/likes/${currentPost.id}`);

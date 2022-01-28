@@ -102,30 +102,3 @@ export function reRenderThread(comment, map, value = 0) {
     reRenderThread(comment.replies[i], map, value + 1);
   }
 }
-
-export function hideMany(comment, map, value = 0) {
-  if (map[`com${comment.id}`]) {
-    return;
-  }
-  if (value !== 0) {
-    document.querySelectorAll(`#com${comment.id}`).forEach((e) => {
-      e.classList.add("noThread");
-    });
-  } else {
-    document.querySelectorAll(`#com${comment.id}`).forEach((e) => {
-      e.classList.add("noThread");
-    });
-    document.querySelector(`.comTop${comment.id}`).classList.remove("noThread");
-    document.querySelector(`#bcom${comment.id}`).classList.remove("noThread");
-    
-  }
-
-  document.querySelectorAll(`#tab${comment.id}`).forEach((e) => {
-    e.classList.add("noThread");
-  });
-  if (!comment.replies.length) return;
-
-  for (let i = 0; i < comment.replies.length; i++) {
-    hide(comment.replies[i], map, value);
-  }
-}

@@ -2,7 +2,6 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  
 }
 .mainPosts {
   display: flex;
@@ -96,11 +95,11 @@
   height: 100px;
   background: linear-gradient(
     to top,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 1) 40%,
-    rgba(255, 255, 255, 0.4) 100%,
-    rgba(255, 255, 255, 0.5) 100%
+    rgba(255, 255, 255, 1) 15%,
+    rgba(255, 255, 255, 1) 25%,
+    rgba(255, 255, 255, 1) 35%,
+    rgba(255, 255, 255, 0.9) 45%,
+    rgba(255, 255, 255, 0.05) 100%
   );
   margin: 0px;
   left: -1px;

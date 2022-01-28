@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { toggleLogin } from "../../store/toggles";
 import { setMap } from "../../store/commentsMap";
 import ReplyForm from "./replyForm";
@@ -9,7 +9,6 @@ import {
   getChildren,
   hide,
   reRenderThread,
-  hideMany,
 } from "../utils";
 const ProfImage = styled.img`
   position: relative;
@@ -125,10 +124,6 @@ function CommentContainer({ level, e, path }) {
       });
     };
   }, [levels]);
-
-  useEffect(() => {
-    if (level === 0) hideMany(e, map);
-  }, [postComments]);
 
   return (
     <div key={e.id} id={`com${e.id}`} className={`comTop${e.id}`}>

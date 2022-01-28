@@ -29,6 +29,7 @@ function PostPage() {
               <button
                 onClick={(e) => {
                   dispatch(togglePostPage());
+                  document.body.classList.remove("mainContentScroll");
                 }}
               >
                 <i className="fas fa-times"></i> Close

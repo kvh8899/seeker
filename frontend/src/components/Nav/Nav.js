@@ -1,11 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUserList } from "../../store/pages";
-import LogoutButton from "../auth/LogoutButton";
-import { useEffect } from "react";
 import LeftNav from "./LeftNav";
 import RightNav from "./RightNav";
 import "./nav.css";
-import { useState } from "react";
+import { useState,useEffect,useRef } from "react";
 function Nav({ name, icon }) {
   const session = useSelector((state) => state.session.user);
   const [showDiv, setShowDiv] = useState(false);
@@ -13,7 +11,6 @@ function Nav({ name, icon }) {
   const [icons, setIcons] = useState(icon);
   const [showProfDiv, setShowProfDiv] = useState(false);
   const dispatch = useDispatch();
-
   async function loadData() {
     await dispatch(fetchUserList(session.id));
   }
@@ -57,19 +54,9 @@ function Nav({ name, icon }) {
             setShowProfDiv={setShowProfDiv}
             setName={setName}
             setIcons={setIcons}
+            showDiv={showDiv}
+            setShowDiv={setShowDiv}
           />
-          {showProfDiv && (
-            <div
-              className="profileDrop"
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            >
-              {session && (
-                <LogoutButton showDiv={showDiv} setShowDiv={setShowDiv} />
-              )}
-            </div>
-          )}
         </ul>
       </nav>
     </div>

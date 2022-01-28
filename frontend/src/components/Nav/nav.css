@@ -151,13 +151,15 @@ div.comBar input {
 
 .profileDrop {
   position: fixed;
-  top: 40px;
-  right: 0px;
-  width: 200px;
+  top: 39px;
+  width: 210px;
+  right: 10px;
   height: 400px;
   background-color: white;
   border-bottom-left-radius: 5px;
   border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
 }
 
 .login {
@@ -185,13 +187,21 @@ div.comBar input {
 }
 .profile {
   display: flex;
+  position: relative;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid lightgray;
+  border: 1px solid transparent;
   padding: 3px;
   padding-left: 5px;
   padding-right: 5px;
   border-radius: 5px;
+  width: 200px;
+}
+.profile:hover {
+  border: 1px solid lightgray;
+}
+.profileStick {
+  border: 1px solid lightgray;
 }
 .profile i {
   margin-left: 10px;
@@ -251,15 +261,15 @@ div.comBar input {
   margin-right: 5px;
 }
 
-.quickLinks{
-  font-size:20px;
+.quickLinks {
+  font-size: 20px;
 }
-.quickLinks > li{
-  margin:0px 10px;
+.quickLinks > li {
+  margin: 0px 10px;
 }
-#divider{
-  display:block;
+#divider {
+  display: block;
   border: 1px solid rgb(197, 197, 197);
-  height:30px;
-  width:0px;
+  height: 30px;
+  width: 0px;
 }
