@@ -81,9 +81,11 @@ export const addOnePost = (id, post) => async (dispatch) => {
   if (res.ok) {
     const post = await res.json();
     dispatch(addPost(post));
-    return post;
+  } else if (res.status < 500) {
+    const { errors } = await res.json();
+    return errors;
   } else {
-    return null;
+    return "An error has occured";
   }
 };
 

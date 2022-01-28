@@ -109,13 +109,17 @@
   border-bottom-left-radius: 5px;
   justify-content: flex-end;
 }
-.repButton button {
+.repButton button:not(.repsub) {
   border: none;
   background-color: transparent;
 }
 
 .repsub {
-  color: rgb(50, 168, 241);
+  color: white;
+  border-radius: 25px;
+  border: none;
+  margin: 5px;
+  background-color: rgb(50, 168, 241);
 }
 .tab {
   width: 0px;
@@ -154,4 +158,15 @@
   font-size: 20px;
   margin-right: 5px;
   transition: 0.5s;
+}
+
+.comSubmit {
+  border-radius: 25px;
+  background-color: #ec7321;
+  border: none;
+  padding: 5px 15px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 9px;
+  margin-right: 20px;
 }

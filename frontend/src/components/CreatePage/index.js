@@ -10,7 +10,7 @@ function CreatePage() {
   const [category, setCategory] = useState("");
   const [followers_type, setFollowers_type] = useState("");
   const hist = useHistory();
-  
+  const [errors, setErrors] = useState([]);
   function toggle(e) {
     dispatch(toggleCreatePage());
   }
@@ -46,37 +46,78 @@ function CreatePage() {
                 const page = await dispatch(
                   createPage({ title, category, followers_type })
                 );
-                toggle(e);
-                hist.push(`/pages/${page.id}`);
+                if (page.errors) {
+                  setErrors(page.errors);
+                } else {
+                  toggle(e);
+                  hist.push(`/pages/${page.id}`);
+                }
               }}
             >
-              <label>Name</label>
+              <div style={{ display: "flex" }}>
+                <label>Name</label>
+                <div style={{ marginLeft: "5px", color: "red" }}>
+                  {errors?.find((e) => e === "title") ? " cannot be empty" : ""}
+                </div>
+              </div>
+
               <p>Community names including capitalization cannot be changed.</p>
+              <p style={{ margin: "5px 0px" }}>Limit: {title.length}/50</p>
               <input
                 value={title}
                 onChange={(e) => {
-                  setTitle(e.target.value);
+                  if (e.target.value.length < 51) {
+                    setTitle(e.target.value);
+                  }
                 }}
+                className={errors?.find((e) => e === "title") ? "red" : ""}
                 required
               ></input>
+
               <div className="cpLabel">
-                <label>Category</label>
+                <div style={{ display: "flex" }}>
+                  <label>Category</label>
+                  <div style={{ marginLeft: "5px", color: "red" }}>
+                    {errors?.find((e) => e === "category")
+                      ? " cannot be empty"
+                      : ""}
+                  </div>
+                </div>
               </div>
+              <p style={{ margin: "5px 0px" }}>Limit: {category.length}/25</p>
               <input
                 value={category}
                 onChange={(e) => {
-                  setCategory(e.target.value);
+                  if (e.target.value.length < 26) {
+                    setCategory(e.target.value);
+                  }
                 }}
+                className={errors?.find((e) => e === "category") ? "red" : ""}
                 required
               ></input>
               <div className="cpLabel">
-                <label>Choose a name for members of this group</label>
+                <div style={{ display: "flex" }}>
+                  <label>Name for Members of Group</label>
+                  <div style={{ marginLeft: "5px", color: "red" }}>
+                    {errors?.find((e) => e === "followers_type")
+                      ? " cannot be empty"
+                      : ""}
+                  </div>
+                </div>
               </div>
+              <p style={{ margin: "5px 0px" }}>
+                Limit: {followers_type.length}/25
+              </p>
               <input
                 value={followers_type}
                 onChange={(e) => {
-                  setFollowers_type(e.target.value);
+                  if (e.target.value.length < 26) {
+                    setFollowers_type(e.target.value);
+                  }
                 }}
+                className={
+                  errors?.find((e) => e === "followers_type") ? "red" : ""
+                }
                 required
               ></input>
             </form>

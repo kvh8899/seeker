@@ -66,6 +66,11 @@ span {
 }
 textarea {
   outline: none;
-  padding:0px;
-  margin:0px;
+  padding: 0px;
+  margin: 0px;
+}
+
+button[disabled="disabled"],
+button:disabled {
+  opacity: 0.5;
 }

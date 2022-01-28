@@ -56,17 +56,8 @@ function CommentForm() {
         ></input>
 
         <button
-          style={{
-            borderRadius: "25px",
-            backgroundColor: "#ff9230",
-            border: "none",
-            padding: "5px 15px",
-            color: "white",
-            fontWeight: "bold",
-            marginBottom: "9px",
-            marginRight: "20px",
-          }}
-          disabled={comment.length ? false : true}
+          className="comSubmit"
+          disabled={comment.search(/[\w\d!@#$%^&*()]/) > -1 ? false : true}
         >
           Comment
         </button>
