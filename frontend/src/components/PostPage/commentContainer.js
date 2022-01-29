@@ -4,12 +4,7 @@ import { useRef, useEffect } from "react";
 import { toggleLogin } from "../../store/toggles";
 import { setMap } from "../../store/commentsMap";
 import ReplyForm from "./replyForm";
-import {
-  findReply,
-  getChildren,
-  hide,
-  reRenderThread,
-} from "../utils";
+import { findReply, getChildren, hide, reRenderThread } from "../utils";
 const ProfImage = styled.img`
   position: relative;
   height: 30px;
@@ -68,14 +63,24 @@ function CommentContainer({ level, e, path }) {
           key={Math.random()}
           id={`tab${path[level - x - 1]}`}
           onClick={(ex) => {
-            //find children of id at path[level - x - 1]
             let child = findReply(postComments, parseInt(path[level - x - 1]));
             let children = getChildren(child);
-            //set that id in map to false
+
+            /*
+
+            1. find children of id at path[level - x - 1]
+            2. set that id in map to false
+            3. hide all of the children (lol)
+            
+            map keeps track of which threads were closed and which were open,
+            so threads that were closed will remain closed when opening an 
+            ancestor thread
+
+            */
 
             dispatch(setMap(`com${path[level - x - 1]}`));
-            //hide all of the children (lol)
             children.forEach((exex) => {
+              //unsure if userefs should be used here
               document.querySelectorAll(`#com${exex}`).forEach((e) => {
                 e.classList.add("noThread");
               });
@@ -136,9 +141,12 @@ function CommentContainer({ level, e, path }) {
                 className="noThread closeButton"
                 id={`bcom${e.id}`}
                 onClick={(ex) => {
-                  //find children of current tree and toggle class noThread of
-                  // all childrens unless it is false in map, then stop
-                  //set e.id in map to true
+                  /*
+                  1. find children of current tree and toggle class noThread of
+                  2. all childrens unless it is false in map, then do not display
+                  comment
+                  3. set e.id in map to true
+                  */
                   reRenderThread(e, map);
                   document
                     .querySelector(`#bcom${e.id}`)

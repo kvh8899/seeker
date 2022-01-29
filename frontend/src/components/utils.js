@@ -16,8 +16,15 @@ export function subString(str, currPage) {
   return str.indexOf(curr) > -1 ? true : false;
 }
 
+/*
+input: comment object
+returns: a arr of comments to be rendered
+in order of the DFS performed containing
+value: level of the comment in the tree
+comment: the comment obj
+*/
 export function traversal(value = 0, comment, arr = []) {
-  arr.push([value, comment, comment.replies.length > 5 ? false : true]);
+  arr.push([value, comment, true]);
   if (!comment.replies.length) return arr;
 
   for (let i = 0; i < comment.replies.length; i++) {
@@ -36,6 +43,11 @@ export function getPath(object) {
   return path;
 }
 
+/*
+comments: arr of comments
+id: integer of comment trying to find
+returns a comment that has the input id
+*/
 export function findReply(comments, id) {
   for (let i = 0; i < comments.length; i++) {
     let queue = [comments[i]];

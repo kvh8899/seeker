@@ -22,7 +22,7 @@ function Comment() {
   const dispatch = useDispatch();
   function render_Comments(postComments) {
     let arr = [];
-    postComments?.forEach((e, i) => {
+    postComments?.forEach((e) => {
       let data = traversal(0, e, []);
       data.forEach((e) => {
         let path = getPath(e[1]);
