@@ -4,7 +4,8 @@ import { useRef, useEffect } from "react";
 import { toggleLogin } from "../../store/toggles";
 import { setMap } from "../../store/commentsMap";
 import ReplyForm from "./replyForm";
-import { findReply, getChildren, hide, reRenderThread } from "../utils";
+import { toggleClasses, hide, reRenderThread } from "../utils";
+import { addMap } from "../../store/commentsMap";
 const ProfImage = styled.img`
   position: relative;
   height: 30px;
@@ -47,7 +48,7 @@ const ProfileContainer = styled.div`
   margin-top: 20px;
 `;
 
-function CommentContainer({ level, e, path }) {
+function CommentContainer({ level, e, path, isOpen }) {
   const postComments = useSelector((state) => state.postComments);
   const map = useSelector((state) => state.commentsMap);
   const session = useSelector((state) => state.session.user);
@@ -63,40 +64,8 @@ function CommentContainer({ level, e, path }) {
           key={Math.random()}
           id={`tab${path[level - x - 1]}`}
           onClick={(ex) => {
-            let child = findReply(postComments, parseInt(path[level - x - 1]));
-            let children = getChildren(child);
-
-            /*
-
-            1. find children of id at path[level - x - 1]
-            2. set that id in map to false
-            3. hide all of the children (lol)
-            
-            map keeps track of which threads were closed and which were open,
-            so threads that were closed will remain closed when opening an 
-            ancestor thread
-
-            */
-
             dispatch(setMap(`com${path[level - x - 1]}`));
-            children.forEach((exex) => {
-              //unsure if userefs should be used here
-              document.querySelectorAll(`#com${exex}`).forEach((e) => {
-                e.classList.add("noThread");
-              });
-              document.querySelectorAll(`#tab${exex}`).forEach((e) => {
-                e.classList.add("noThread");
-                e.classList.remove("orangeTab");
-                e.classList.add("greyTab");
-              });
-            });
-            document
-              .querySelector(`.comTop${path[level - x - 1]}`)
-              .classList.remove("noThread");
-            document
-              .querySelector(`#bcom${path[level - x - 1]}`)
-              .classList.remove("noThread");
-            document.querySelector(`#com${e.id}`).classList.add("noThread");
+            toggleClasses(postComments, path[level - x - 1], e);
           }}
         ></div>
       );
@@ -130,8 +99,12 @@ function CommentContainer({ level, e, path }) {
     };
   }, [levels]);
 
+  useEffect(() => {
+    dispatch(addMap(`com${e.id}`, isOpen));
+  }, [isOpen]);
+
   return (
-    <div key={e.id} id={`com${e.id}`} className={`comTop${e.id}`}>
+    <div id={`com${e.id}`} className={`comTop${e.id}`}>
       <div>
         <CContent>
           {levels()}
@@ -141,12 +114,6 @@ function CommentContainer({ level, e, path }) {
                 className="noThread closeButton"
                 id={`bcom${e.id}`}
                 onClick={(ex) => {
-                  /*
-                  1. find children of current tree and toggle class noThread of
-                  2. all childrens unless it is false in map, then do not display
-                  comment
-                  3. set e.id in map to true
-                  */
                   reRenderThread(e, map);
                   document
                     .querySelector(`#bcom${e.id}`)

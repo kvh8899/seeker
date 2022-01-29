@@ -9,6 +9,9 @@ export function cap(str) {
   return <>{str ? str[0].toUpperCase() + str.slice(1) : ""}</>;
 }
 
+/*
+  for filtering communities by title
+*/
 export function subString(str, currPage) {
   if (!currPage) return;
   str = str.toLowerCase();
@@ -17,11 +20,11 @@ export function subString(str, currPage) {
 }
 
 /*
-input: comment object
-returns: a arr of comments to be rendered
-in order of the DFS performed containing
-value: level of the comment in the tree
-comment: the comment obj
+  input: comment object
+  returns: a arr of comments to be rendered
+  in order of the DFS performed containing
+  value: level of the comment in the tree
+  comment: the comment obj
 */
 export function traversal(value = 0, comment, arr = []) {
   arr.push([value, comment, true]);
@@ -44,9 +47,9 @@ export function getPath(object) {
 }
 
 /*
-comments: arr of comments
-id: integer of comment trying to find
-returns a comment that has the input id
+  comments: arr of comments
+  id: integer of comment trying to find
+  returns a comment that has the input id
 */
 export function findReply(comments, id) {
   for (let i = 0; i < comments.length; i++) {
@@ -65,9 +68,11 @@ export function findReply(comments, id) {
   return {};
 }
 
-//comment: comment obj
-// children: children array
-//returns an array of ints (id's of children)
+/*
+  comment: comment obj
+  children: children array
+  returns an array of ints (id's of children)
+*/
 export function getChildren(comment, children = [], parentId) {
   children.push(comment.id);
   if (!comment.replies.length) return children;
@@ -91,6 +96,12 @@ export function hide(comment) {
   }
 }
 
+ /*
+    1. find children of current tree and toggle class noThread of
+    2. all childrens unless it is false in map, then do not display
+    comment
+    3. set e.id in map to true
+ */
 export function reRenderThread(comment, map, value = 0) {
   if (value === 0) {
     map[`com${comment.id}`] = true;
@@ -113,4 +124,37 @@ export function reRenderThread(comment, map, value = 0) {
   for (let i = 0; i < comment.replies.length; i++) {
     reRenderThread(comment.replies[i], map, value + 1);
   }
+}
+
+/*
+
+  1. find children of id at path[level - x - 1]
+  2. set that id in map to false
+  3. hide all of the children (lol)
+
+  map keeps track of which threads were closed and which were open,
+  so threads that were closed will remain closed when opening an 
+  ancestor thread
+
+  postComments:Comments adjacency list
+  path: id of ancestor
+  e: current comment data
+*/
+export function toggleClasses(postComments, path, e) {
+  let child = findReply(postComments, parseInt(path));
+  let children = getChildren(child);
+  children.forEach((exex) => {
+    //unsure if userefs should be used here
+    document.querySelectorAll(`#com${exex}`).forEach((e) => {
+      e.classList.add("noThread");
+    });
+    document.querySelectorAll(`#tab${exex}`).forEach((e) => {
+      e.classList.add("noThread");
+      e.classList.add("greyTab");
+      e.classList.remove("orangeTab");
+    });
+  });
+  document.querySelector(`.comTop${path}`).classList.remove("noThread");
+  document.querySelector(`#bcom${path}`).classList.remove("noThread");
+  document.querySelector(`#com${e.id}`).classList.add("noThread");
 }

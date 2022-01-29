@@ -42,14 +42,14 @@
   background-color: white;
   border: 1px solid transparent;
 }
-.home > div {
+.home .homeChild {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .home > div > div {
-  margin: 9px;
+  margin: 8px;
 }
 .home:hover {
   border: 1px solid rgb(201, 193, 193);
@@ -67,10 +67,12 @@
 .rightnav li {
   margin-left: 10px;
 }
-.rightnav > li > div {
+.profileMeta {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-right: 10px;
+  width: 100%;
 }
 .leftnav {
   position: relative;
@@ -84,7 +86,7 @@
   top: 7px;
 }
 
-div.comBar {
+.comBar {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -155,6 +157,7 @@ div.comBar input {
   width: 210px;
   right: 10px;
   height: 400px;
+  margin-right: 10px;
   background-color: white;
   border-bottom-left-radius: 5px;
   border-left: 1px solid lightgray;

@@ -20,7 +20,6 @@ function CreatePost() {
   const [currPage, setCurrPage] = useState("");
   const [currId, setCurrId] = useState(null);
   const [errors, setErrors] = useState([]);
-
   async function loadData() {
     await dispatch(fetchUserList(session.id));
   }
@@ -60,7 +59,6 @@ function CreatePost() {
                 onChange={(e) => {
                   setCurrPage(e.target.value);
                 }}
-                
               ></input>
               <div
                 className="dropDownButton"

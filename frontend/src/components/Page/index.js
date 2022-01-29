@@ -95,6 +95,7 @@ function Page() {
           </div>
           <div className="sideBar">
             <ComData />
+            <span className="spacer" style={{ height: "200px" }}></span>
           </div>
         </div>
       </div>

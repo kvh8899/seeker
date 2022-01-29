@@ -18,7 +18,7 @@ def validation_errors_to_error_messages(validation_errors):
 #get trending posts /api/posts/
 @post_routes.route("/")
 def trending():
-    posts = Post.query.order_by(desc(Post.id)).limit(10).all()
+    posts = Post.query.limit(10).all()
     posts_t = []
     for i in posts:
         post = i.to_dict()

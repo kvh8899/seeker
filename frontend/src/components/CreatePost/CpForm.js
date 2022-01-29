@@ -8,6 +8,7 @@ function CpForm({ currPage, currId, setErrors, errors }) {
   const [contentImage, setContentImage] = useState("");
   const dispatch = useDispatch();
   const hist = useHistory();
+
   return (
     <div className="createPForm">
       <form
@@ -22,8 +23,6 @@ function CpForm({ currPage, currId, setErrors, errors }) {
           const post = { heading, content, contentImage };
           const serverErrors = await dispatch(addOnePost(currId, post));
           if (serverErrors) {
-            //console.log(serverErrors);
-            console.log(errors);
             setErrors([...serverErrors]);
           } else {
             hist.push(`/pages/${currId}`);
