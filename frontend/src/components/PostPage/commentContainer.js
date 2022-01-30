@@ -6,6 +6,7 @@ import { setMap } from "../../store/commentsMap";
 import ReplyForm from "./replyForm";
 import { toggleClasses, hide, reRenderThread } from "../utils";
 import { addMap } from "../../store/commentsMap";
+import guardian from "../../images/Guardian.png";
 const ProfImage = styled.img`
   position: relative;
   height: 30px;
@@ -122,7 +123,7 @@ function CommentContainer({ level, e, path, isOpen }) {
               >
                 <i className="fas fa-expand-alt"></i>
               </button>
-              <ProfImage src={"/Guardian.png"} alt=""></ProfImage>
+              <ProfImage src={guardian} alt=""></ProfImage>
               <div>{e.owner?.username}</div>
             </ProfileContainer>
             <Text>

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toggleLogin } from "../../store/toggles";
 import "./fooform.css";
+import guardian from "../../images/Guardian.png";
 function FooForm() {
   const session = useSelector((state) => state.session.user);
   const hist = useHistory();
@@ -15,11 +16,7 @@ function FooForm() {
         }}
       >
         <img
-          src={
-            session?.profile_image
-              ? session?.profile_image
-              : "https://www.leadershipmartialartsct.com/wp-content/uploads/2017/04/default-image-620x600.jpg"
-          }
+          src={ guardian }
           alt=""
         ></img>
         <input

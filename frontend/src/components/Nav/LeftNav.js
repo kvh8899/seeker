@@ -49,7 +49,7 @@ function LeftNav({ icon, name, setName, setIcons, homeBar }) {
                 homeBar.current.classList.toggle("displayNun");
                 homeBar.current.classList.toggle("comBar");
               }
-              wrapper.current.classList.add("border");
+              wrapper.current.classList.toggle("border");
             }}
           >
             <div className="tof">

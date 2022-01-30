@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllPosts } from "../../store/posts";
 import LogoutButton from "../auth/LogoutButton";
 import { NavLink } from "react-router-dom";
+import guardian from "../../images/Guardian.png";
 function RightNav({
   setIcons,
   setName,
@@ -53,11 +54,6 @@ function RightNav({
             </li>
           </>
         )}
-        <li style={{ fontSize: "16px", fontWeight: "bold" }}>
-          <NavLink to="/about" style={{ color: "black" }}>
-            About
-          </NavLink>
-        </li>
         <li>
           <a
             style={{ color: "black" }}
@@ -119,7 +115,7 @@ function RightNav({
           <div className="profileMeta">
             <div style={{ display: "flex", alignItems: "center" }}>
               <img
-                src="/Guardian.png"
+                src={guardian}
                 width="30px"
                 alt=""
                 style={{ marginRight: "5px" }}
