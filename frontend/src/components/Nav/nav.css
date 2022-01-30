@@ -60,7 +60,7 @@
   align-items: center;
   margin-right: 20px;
 }
-.rightnav:hover {
+.profileMeta:hover {
   cursor: pointer;
 }
 
@@ -252,16 +252,20 @@ div.comBar input {
   width: 100%;
   display: flex;
   align-items: center;
-  text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
+#navTabIcon {
+  display: flex;
+  align-items: center;
+}
+
 #navTabIcon > img {
   border-radius: 100%;
   object-fit: cover;
   width: 20px;
   height: 20px;
-  margin-right: 5px;
 }
 
 .quickLinks {

@@ -11,7 +11,17 @@ const LogoutButton = ({ setShowDiv }) => {
     hist.push("/");
   };
 
-  return <button onClick={onLogout}>Logout</button>;
+  return (
+    <button
+      onClick={onLogout}
+      style={{
+        border: "none",
+        backgroundColor: "transparent",
+      }}
+    >
+      <i className="fas fa-sign-out-alt"></i> Logout
+    </button>
+  );
 };
 
 export default LogoutButton;

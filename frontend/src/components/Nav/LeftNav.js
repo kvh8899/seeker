@@ -2,7 +2,7 @@ import { getCurrentPage } from "../../store/currentPage";
 import { getPagePosts } from "../../store/posts";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { postPageOff, toggleCreatePage } from "../../store/toggles";
 import { getFollowPosts } from "../../store/posts";
 import guardianImg from "../../images/Guardian.png";
@@ -87,7 +87,8 @@ function LeftNav({ icon, name, setName, setIcons, homeBar }) {
                       await dispatch(getPagePosts(ex.id));
                       await dispatch(getCurrentPage(ex.id));
                       dispatch(postPageOff());
-                      //dispatch(toggleEditPageOff());
+                      homeBar.current.classList.add("displayNun");
+                      homeBar.current.classList.remove("comBar");
                       wrapper.current.classList.remove("border");
                       hist.push(`/pages/${ex.id}`);
                     }}

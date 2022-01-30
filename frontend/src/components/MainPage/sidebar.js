@@ -7,12 +7,12 @@ const Sidebar = styled.div`
   width: 475px;
 `;
 
-function SideBar() {
+function SideBar({icon,name}) {
   return (
     <>
       <Sidebar>
         <Communities />
-        <CurrentSelect />
+        <CurrentSelect icon={icon} name={name}/>
       </Sidebar>
     </>
   );

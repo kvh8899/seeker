@@ -136,9 +136,9 @@ function RightNav({
             }}
             ref={profileDrop}
           >
-            {session && (
+            <div style={{ margin: "10px" }}>
               <LogoutButton showDiv={showDiv} setShowDiv={setShowDiv} />
-            )}
+            </div>
           </div>
         </li>
       )}
