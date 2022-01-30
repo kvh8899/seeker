@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import knight from "../../images/knight.gif";
 const CurrentDiv = styled.div`
-  height: 315px;
+  height: 275px;
   width: 100%;
   background-color: white;
   border-radius: 3px;
@@ -16,7 +16,7 @@ const CurrentDiv = styled.div`
 `;
 const Banner = styled.div`
   width: 100%;
-  height: 75px;
+  height: 40px;
   background-image: url("https://images.fineartamerica.com/images-medium-large-5/abstract-art-blue-red-white-by-kredart-serg-wiaderny.jpg");
   background-size: cover;
   background-position: top -20px;
