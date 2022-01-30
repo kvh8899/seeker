@@ -2,6 +2,8 @@
 
 https://gseeker-app.herokuapp.com/
 
+![mainpage](https://github.com/kvh8899/breaddit/blob/main/frontend/src/images/mainpage.png)
+
 ## How to run this project
 
 1. Clone this repository (only this branch)
