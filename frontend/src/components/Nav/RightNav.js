@@ -3,32 +3,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllPosts } from "../../store/posts";
 import LogoutButton from "../auth/LogoutButton";
 import { NavLink } from "react-router-dom";
-import { useEffect, useRef } from "react";
 function RightNav({
-  showProfDiv,
-  setShowProfDiv,
   setIcons,
   setName,
   showDiv,
   setShowDiv,
+  profileDrop,
+  profile,
 }) {
   const loginShow = useSelector((state) => state.loginShow);
   const session = useSelector((state) => state.session.user);
   const signupShow = useSelector((state) => state.signupShow);
-  const profile = useRef(null);
+
   const dispatch = useDispatch();
-  useEffect(() => {
-    //temporary fix to divs not closing, must use redux instead
-    function close(e) {
-      setShowDiv(false);
-      setShowProfDiv(false);
-      if (session) profile.current?.classList.toggle("profileStick");
-    }
-    document.body.addEventListener("click", close);
-    return () => {
-      document.body.removeEventListener("click", close);
-    };
-  }, []);
+
   return (
     <div className="rightnav">
       <div
@@ -122,37 +110,36 @@ function RightNav({
           className="profile"
           onClick={(e) => {
             e.stopPropagation();
-            if (!showProfDiv) {
-              setShowProfDiv(true);
-            } else {
-              setShowProfDiv(false);
-            }
             profile.current.classList.toggle("profileStick");
+            profileDrop.current.classList.toggle("displayNun");
+            profileDrop.current.classList.toggle("profileDrop");
           }}
           ref={profile}
         >
-          <div>
-            <img
-              src="/Guardian.png"
-              width="30px"
-              alt=""
-              style={{ marginRight: "5px" }}
-            ></img>
-            <div>{session && session.username}</div>
+          <div className="profileMeta">
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <img
+                src="/Guardian.png"
+                width="30px"
+                alt=""
+                style={{ marginRight: "5px" }}
+              ></img>
+              <div>{session && session.username}</div>
+            </div>
             <i className="fas fa-chevron-down"></i>
           </div>
-          {showProfDiv && (
-            <div
-              className="profileDrop"
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            >
-              {session && (
-                <LogoutButton showDiv={showDiv} setShowDiv={setShowDiv} />
-              )}
+
+          <div
+            className="displayNun"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            ref={profileDrop}
+          >
+            <div style={{ margin: "10px" }}>
+              <LogoutButton showDiv={showDiv} setShowDiv={setShowDiv} />
             </div>
-          )}
+          </div>
         </li>
       )}
     </div>

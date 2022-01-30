@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import CommentContainer from "./commentContainer";
 import { traversal, getPath } from "../utils";
-import { addMap } from "../../store/commentsMap";
 const CContainer = styled.div`
   width: 100%;
   border-radius: 3px 3px 0px 0px;
@@ -19,19 +18,19 @@ const InnerCContainer = styled.div`
 
 function Comment() {
   const postComments = useSelector((state) => state.postComments);
-  const dispatch = useDispatch();
   function render_Comments(postComments) {
     let arr = [];
     postComments?.forEach((e) => {
       let data = traversal(0, e, []);
       data.forEach((e) => {
         let path = getPath(e[1]);
-        dispatch(addMap(`com${e[1].id}`, e[2]));
         arr.push(
           <CommentContainer
             e={e[1]}
             level={e[0]}
             path={path}
+            isOpen={e[2]}
+            key={Math.random()}
           ></CommentContainer>
         );
       });

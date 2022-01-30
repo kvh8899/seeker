@@ -34,7 +34,7 @@ function MainPage({icon,name}) {
           <Posts />
           <span id="spacer"></span>
         </div>
-        <SideBar />
+        <SideBar icon={icon} name={name}/>
       </div>
     </div>
   );

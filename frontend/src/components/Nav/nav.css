@@ -42,14 +42,14 @@
   background-color: white;
   border: 1px solid transparent;
 }
-.home > div {
+.home .homeChild {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .home > div > div {
-  margin: 9px;
+  margin: 8px;
 }
 .home:hover {
   border: 1px solid rgb(201, 193, 193);
@@ -60,17 +60,19 @@
   align-items: center;
   margin-right: 20px;
 }
-.rightnav:hover {
+.profileMeta:hover {
   cursor: pointer;
 }
 
 .rightnav li {
   margin-left: 10px;
 }
-.rightnav > li > div {
+.profileMeta {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-right: 10px;
+  width: 100%;
 }
 .leftnav {
   position: relative;
@@ -84,7 +86,7 @@
   top: 7px;
 }
 
-div.comBar {
+.comBar {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -155,6 +157,7 @@ div.comBar input {
   width: 210px;
   right: 10px;
   height: 400px;
+  margin-right: 10px;
   background-color: white;
   border-bottom-left-radius: 5px;
   border-left: 1px solid lightgray;
@@ -249,16 +252,20 @@ div.comBar input {
   width: 100%;
   display: flex;
   align-items: center;
-  text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
+#navTabIcon {
+  display: flex;
+  align-items: center;
+}
+
 #navTabIcon > img {
   border-radius: 100%;
   object-fit: cover;
   width: 20px;
   height: 20px;
-  margin-right: 5px;
 }
 
 .quickLinks {

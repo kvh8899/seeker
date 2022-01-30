@@ -30,14 +30,20 @@ function PageData() {
           <p>{currentPost.page?.description}</p>
         </div>
         <div className="crd">
-          <button onClick={(e) => {
-            document.body.classList.remove("mainContentScroll")
-          }}>Create Post</button>
+          <button
+            onClick={(e) => {
+              document.body.classList.remove("mainContentScroll");
+              dispatch(togglePostPage());
+              hist.push(`/posts/submit`);
+            }}
+          >
+            Create Post
+          </button>
           {session?.id === currentPost.owner_id && (
             <button
               onClick={(e) => {
                 dispatch(togglePostPage());
-                document.body.classList.remove("mainContentScroll")
+                document.body.classList.remove("mainContentScroll");
                 hist.push(`/posts/${currentPost.id}/edit`);
               }}
             >

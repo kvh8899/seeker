@@ -11,6 +11,7 @@ import {
   togglePageOff,
   togglePageOn,
 } from "../../store/toggles";
+import { Redirect } from "react-router";
 
 function CreatePost() {
   const session = useSelector((state) => state.session.user);
@@ -20,9 +21,8 @@ function CreatePost() {
   const [currPage, setCurrPage] = useState("");
   const [currId, setCurrId] = useState(null);
   const [errors, setErrors] = useState([]);
-
   async function loadData() {
-    await dispatch(fetchUserList(session.id));
+    if (session) await dispatch(fetchUserList(session.id));
   }
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function CreatePost() {
       document.body.removeEventListener("mousedown", el);
     };
   }, []);
-
+  if (!session) return <Redirect to="/" />;
   return (
     <div className="mainContent mainContentScroll">
       <TopBar icon={<i className="fas fa-plus"></i>} name={"Create Post"} />
@@ -60,7 +60,6 @@ function CreatePost() {
                 onChange={(e) => {
                   setCurrPage(e.target.value);
                 }}
-                
               ></input>
               <div
                 className="dropDownButton"

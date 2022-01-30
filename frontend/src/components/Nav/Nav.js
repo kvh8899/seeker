@@ -3,14 +3,17 @@ import { fetchUserList } from "../../store/pages";
 import LeftNav from "./LeftNav";
 import RightNav from "./RightNav";
 import "./nav.css";
-import { useState,useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 function Nav({ name, icon }) {
   const session = useSelector((state) => state.session.user);
   const [showDiv, setShowDiv] = useState(false);
   const [names, setName] = useState(name);
   const [icons, setIcons] = useState(icon);
-  const [showProfDiv, setShowProfDiv] = useState(false);
+  const profileDrop = useRef(null);
+  const profile = useRef(null);
+  const homeBar = useRef(null);
   const dispatch = useDispatch();
+
   async function loadData() {
     await dispatch(fetchUserList(session.id));
   }
@@ -18,8 +21,18 @@ function Nav({ name, icon }) {
   useEffect(() => {
     //temporary fix to divs not closing, must use redux instead
     function close(e) {
-      setShowDiv(false);
-      setShowProfDiv(false);
+      if (homeBar.current) {
+        homeBar.current.classList.add("displayNun");
+        homeBar.current.classList.remove("comBar");
+      }
+      document.querySelector(".home")?.classList.remove("border");
+      if (profileDrop.current) {
+        profileDrop.current.classList.add("displayNun");
+        profileDrop.current.classList.remove("profileDrop");
+      }
+      if (profile.current) {
+        profile.current.classList.remove("profileStick");
+      }
     }
     document.body.addEventListener("click", close);
     setName(name);
@@ -38,7 +51,6 @@ function Nav({ name, icon }) {
       className="wrapper unselectable"
       onClick={(e) => {
         setShowDiv(false);
-        setShowProfDiv(false);
       }}
     >
       <nav>
@@ -48,14 +60,15 @@ function Nav({ name, icon }) {
             name={names}
             setName={setName}
             setIcons={setIcons}
+            homeBar={homeBar}
           />
           <RightNav
-            showProfDiv={showProfDiv}
-            setShowProfDiv={setShowProfDiv}
             setName={setName}
             setIcons={setIcons}
             showDiv={showDiv}
             setShowDiv={setShowDiv}
+            profileDrop={profileDrop}
+            profile={profile}
           />
         </ul>
       </nav>

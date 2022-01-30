@@ -14,7 +14,7 @@ class Post(db.Model):
     owner = db.relationship("User",back_populates="posts")
     page = db.relationship("Page",back_populates="posts")
     comments = db.relationship("Comment",back_populates="post",cascade="all, delete")
-
+    
     def to_dict(self):
         return{
             'id':self.id,

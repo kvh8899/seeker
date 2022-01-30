@@ -15,7 +15,7 @@ const ComList = styled.div`
 const Banner = styled.div`
   width: 100%;
   height: 75px;
-  background-image: url("https://media.istockphoto.com/photos/man-standing-on-roof-and-look-to-abstract-modern-scifi-colorful-city-picture-id1199433380?k=20&m=1199433380&s=612x612&w=0&h=IqO4LxylFOz5IfZxOdf-66GcM9rP7mph0KhgesmWgaE=");
+  background-image: url("https://images.fineartamerica.com/images-medium-large-5/abstract-art-blue-red-white-by-kredart-serg-wiaderny.jpg");
   background-size: cover;
   background-position: top -20px;
   border-radius: 3px 3px 0px 0px;
@@ -50,7 +50,7 @@ const TreTitle = styled.a`
   white-space: nowrap;
   overflow: hidden;
 `;
-const BannerTitle = styled.p`
+export const BannerTitle = styled.p`
   color: white;
   width: 100%;
   padding-left: 20px;
@@ -58,9 +58,9 @@ const BannerTitle = styled.p`
   padding-bottom: 5px;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.2) 20%,
+    rgba(0, 0, 0, 0) 20%,
     rgba(0, 0, 0, 0.4) 40%,
-    rgba(0, 0, 0, 0.7) 70%,
+    rgba(0, 0, 0, 0.5) 70%,
     rgba(0, 0, 0, 0.8) 100%,
     rgba(0, 0, 0, 1) 100%
   );

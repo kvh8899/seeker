@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from app.models import db,Post,Page,Page_Follow,Like,Comment
 from flask_login import current_user, login_required
 from app.forms import Post_form, Comment_Form
-from sqlalchemy import desc, asc
+from sqlalchemy import desc, asc,func
 post_routes = Blueprint('posts',__name__)
 
 def validation_errors_to_error_messages(validation_errors):
@@ -18,17 +18,18 @@ def validation_errors_to_error_messages(validation_errors):
 #get trending posts /api/posts/
 @post_routes.route("/")
 def trending():
-    posts = Post.query.order_by(desc(Post.id)).limit(10).all()
+    posts = db.session.query(Post,func.count(Like.id).label("total")).join(Like).group_by(Post).order_by(desc('total')).limit(10).all()
+    print(posts)
     posts_t = []
     for i in posts:
-        post = i.to_dict()
+        post = i[0].to_dict()
         likers = []
-        for x in i.likers:
+        for x in i[0].likers:
             likers.append(x.to_dict())
         post['likers'] = likers
-        post['page'] = i.page.to_dict()
-        post['owner'] = i.owner.to_dict()
-        post['comments'] = len(i.comments)
+        post['page'] = i[0].page.to_dict()
+        post['owner'] = i[0].owner.to_dict()
+        post['comments'] = len(i[0].comments)
         posts_t.append(post)
     return {'posts_t':posts_t}
 
