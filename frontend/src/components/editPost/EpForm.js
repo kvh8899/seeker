@@ -14,7 +14,7 @@ function EpForm() {
   const dispatch = useDispatch();
   const hist = useHistory();
   const { id } = useParams();
-
+  const [errors, setErrors] = useState([]);
   async function loadData() {
     const post = await dispatch(getCurrentPost(id));
     if (post) {
@@ -35,10 +35,15 @@ function EpForm() {
         onSubmit={async (e) => {
           e.preventDefault();
           const post = { heading, content, contentImage };
-          await dispatch(editCurrentPost(post, currentPost.id));
-          document.body.classList.add("mainContentScroll");
-          dispatch(togglePostPage());
-          hist.push(`/`);
+          const errors = await dispatch(editCurrentPost(post, currentPost.id));
+          console.log(errors);
+          if (!errors.length) {
+            document.body.classList.add("mainContentScroll");
+            dispatch(togglePostPage());
+            hist.push(`/`);
+          } else {
+            setErrors(errors);
+          }
         }}
       >
         <input
@@ -64,6 +69,19 @@ function EpForm() {
           }}
         ></textarea>
       </form>
+      <div
+        style={{
+          dispay: "flex",
+          flexDirection: "column",
+          position: "relative",
+          top: "50px",
+          color: "red",
+        }}
+      >
+        {errors.map((e, i) => {
+          return <p key={i}>{e} must not be empty</p>;
+        })}
+      </div>
       <div>
         <div className="epfbuttons" style={{ left: "0", bottom: "-50px" }}>
           <button

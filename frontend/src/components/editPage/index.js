@@ -12,7 +12,7 @@ function EditPage() {
   const [profile_image, setProfile_image] = useState(currentPage.profile_image);
   const [theme, setTheme] = useState(currentPage.theme);
   const [description, setDescription] = useState(currentPage.description);
-
+  const [errors, setErrors] = useState([]);
   return (
     <div className="editPage">
       <button
@@ -28,14 +28,18 @@ function EditPage() {
           id="editPageForm"
           onSubmit={async (e) => {
             e.preventDefault();
-            await dispatch(
+            const errors = await dispatch(
               editCurrentPage(currentPage.id, {
                 profile_image,
                 theme,
                 description,
               })
             );
-            dispatch(toggleEditPage());
+            if (!errors.length) {
+              dispatch(toggleEditPage());
+            } else {
+              setErrors(errors);
+            }
           }}
         >
           <label>Profile Image</label>
@@ -52,7 +56,15 @@ function EditPage() {
               setTheme(e.target.value);
             }}
           ></input>
-          <label>Description</label>
+          <div style={{ display: "flex" }}>
+            <label>Description</label>
+            {errors.length ? (
+              <p style={{ margin: "0px 5px", color: "red" }}>cannot be empty</p>
+            ) : (
+              ""
+            )}
+          </div>
+
           <textarea
             value={description}
             onChange={(e) => {

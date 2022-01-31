@@ -26,8 +26,9 @@ export const editCurrentPost = (post, id) => async (dispatch) => {
     const { post } = await res.json();
     dispatch(editPost(post));
     return post;
-  } else {
-    return null;
+  } else if(res.status < 500){
+    const {errors} = await res.json()
+    return errors;
   }
 };
 

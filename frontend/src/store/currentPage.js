@@ -39,8 +39,9 @@ export const editCurrentPage = (id, data) => async (dispatch) => {
     const page = await res.json();
     dispatch(editPage(page));
     return page;
-  } else {
-    return null;
+  } else if (res.status < 500) {
+    const { errors } = await res.json();
+    return errors;
   }
 };
 
