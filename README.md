@@ -1,6 +1,45 @@
-# Link to Project
+# Seeker
+This app is a forum for videogame guides where users can create communities based on their favorite games and
+help others by creating guides.
+
+## Project is currently hosted at:
 
 https://gseeker-app.herokuapp.com/
+
+Technologies Used:
+- Flask/sqlAlchemy
+- PostGres
+- React
+- Redux
+
+Features:
+ - Communities
+ - Posts
+ - Comments with threading
+ - Join and unjoin communities
+ - Like posts
+
+I made this website in one and a half weeks so heres a few features that I want to implement in the future.
+
+- Search bar for better discovery of communities
+- user profile customization
+- image uploading with drag and drop to upload
+- websockets for live updates
+- editing and deleting comments
+- infinite scroll
+
+Main Page:
+![mainpage](https://github.com/kvh8899/breaddit/blob/main/frontend/src/images/mainpage.png)
+
+Community Page:
+![comPage](https://github.com/kvh8899/breaddit/blob/main/frontend/src/images/page.png)
+
+Post Page:
+![postPage](https://github.com/kvh8899/breaddit/blob/main/frontend/src/images/postpage.png)
+
+Comments:
+![comments](https://github.com/kvh8899/breaddit/blob/main/frontend/src/images/comments.png)
+
 
 ## How to run this project
 
