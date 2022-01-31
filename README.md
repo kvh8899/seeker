@@ -1,4 +1,8 @@
-# Project is currently hosted at:
+# Seeker
+This app is a forum for videogame guides where users can create communities based on their favorite games and
+help others by creating guides.
+
+## Project is currently hosted at:
 
 https://gseeker-app.herokuapp.com/
 
