@@ -26,6 +26,7 @@ I made this website in one and a half weeks so heres a few features that I want 
 - image uploading with drag and drop to upload
 - websockets for live updates
 - editing and deleting comments
+- infinite scroll
 
 Main Page:
 ![mainpage](https://github.com/kvh8899/breaddit/blob/main/frontend/src/images/mainpage.png)
