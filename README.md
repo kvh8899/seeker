@@ -19,7 +19,7 @@ Features:
  - Join and unjoin communities
  - Like posts
 
-I made this website in 1 and a half weeks so heres a few features that I want to implement in the future.
+I made this website in one and a half weeks so heres a few features that I want to implement in the future.
 
 - Search bar for better discovery of communities
 - user profile customization
