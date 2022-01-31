@@ -109,10 +109,11 @@
   width: 100%;
 }
 .cDiv > div {
-  width: 100px;
+  width: 110px;
   height: 35px;
   display: flex;
   align-items: center;
+  justify-content: center;
   color: gray;
   margin: 0px 15px;
 }
