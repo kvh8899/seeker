@@ -1,6 +1,13 @@
-# Link to Project
+# Project is currently hosted at:
 
 https://gseeker-app.herokuapp.com/
+
+Technologies Used:
+- Flask/sqlAlchemy
+- PostGres
+- React
+- Redux
+
 Features:
  - Communities
  - Posts
@@ -8,15 +15,26 @@ Features:
  - Join and unjoin communities
  - Like posts
 
-I made this in 1 and a half weeks so heres a few features that I want to implement in the future.
+I made this website in 1 and a half weeks so heres a few features that I want to implement in the future.
 
 - Search bar for better discovery of communities
 - user profile customization
 - image uploading with drag and drop to upload
 - websockets for live updates
+- editing and deleting comments
 
 Main Page:
 ![mainpage](https://github.com/kvh8899/breaddit/blob/main/frontend/src/images/mainpage.png)
+
+Community Page:
+![comPage](https://github.com/kvh8899/breaddit/blob/main/frontend/src/images/page.png)
+
+Post Page:
+![postPage](https://github.com/kvh8899/breaddit/blob/main/frontend/src/images/postpage.png)
+
+Comments:
+![comments](https://github.com/kvh8899/breaddit/blob/main/frontend/src/images/comments.png)
+
 
 ## How to run this project
 
