@@ -48,6 +48,7 @@ const SignUpForm = () => {
     } else {
       setErrors(["Passwords do not Match"]);
     }
+    console.log(errors);
   };
 
   const updateUsername = (e) => {
@@ -73,6 +74,7 @@ const SignUpForm = () => {
           character, and have at least 1 digit.
         </p>
       )}
+      {errors[0] === "Passwords do not Match" && "Password does not match"}
       <div>
         <input
           type="text"
