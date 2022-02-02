@@ -174,3 +174,23 @@
   margin-bottom: 9px;
   margin-right: 20px;
 }
+.cDiv {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.cDiv > div {
+  width: 110px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  color: gray;
+}
+.editPost {
+  display: flex;
+  justify-content: center;
+}
+
+.editPost:hover {
+  cursor: pointer;
+}

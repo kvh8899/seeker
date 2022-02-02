@@ -121,6 +121,19 @@ function PostContent() {
                     <p>{currentPost.comments}</p>
                     <p>Comments</p>
                   </div>
+                  {session?.id === currentPost.owner_id && (
+                    <div
+                      onClick={(e) => {
+                        dispatch(togglePostPage());
+                        document.body.classList.remove("mainContentScroll");
+                        hist.push(`/posts/${currentPost.id}/edit`);
+                      }}
+                      className="editPost"
+                    >
+                      <i className="fas fa-edit"></i>
+                      <p>Edit Post</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

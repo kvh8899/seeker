@@ -117,8 +117,8 @@ def create_post(pageId):
     form = Post_form()
     form['csrf_token'].data = request.cookies['csrf_token']
     if(form.validate_on_submit()):
-        post = Post(heading=form.heading.data,contentImage=form.contentImage.data,
-        content=form.content.data,page_id=pageId,owner_id=current_user.id)
+        post = Post(heading=form.heading.data,content=form.content.data,
+        page_id=pageId,owner_id=current_user.id)
         db.session.add(post)
         db.session.commit()
         return post.to_dict()

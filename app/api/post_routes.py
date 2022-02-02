@@ -74,7 +74,6 @@ def edit_post(postId):
     if(form.validate_on_submit()):
         post = Post.query.filter(postId == Post.id).first()
         post.heading = form.heading.data
-        post.contentImage = form.contentImage.data
         post.content = form.content.data
         db.session.commit()
         t_post = post.to_dict()

@@ -28,23 +28,18 @@
   
   @keyframes fade {
     0% {
-      color: #0179d2;
       opacity: 1;
     }
     25% {
-      color: #0179d2;
       opacity: 0;
     }
     50% {
-      color: #0179d2;
       opacity: 0;
     }
     75% {
-      color: #0179d2;
       opacity: 1;
     }
     100% {
-      color: #0179d2;
       opacity: 1;
     }
   }

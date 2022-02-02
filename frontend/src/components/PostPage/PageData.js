@@ -39,17 +39,6 @@ function PageData() {
           >
             Create Post
           </button>
-          {session?.id === currentPost.owner_id && (
-            <button
-              onClick={(e) => {
-                dispatch(togglePostPage());
-                document.body.classList.remove("mainContentScroll");
-                hist.push(`/posts/${currentPost.id}/edit`);
-              }}
-            >
-              Edit Post
-            </button>
-          )}
         </div>
       </div>
     </div>
