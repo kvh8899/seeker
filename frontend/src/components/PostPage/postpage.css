@@ -194,3 +194,9 @@
 .editPost:hover {
   cursor: pointer;
 }
+
+#postPageJoin > button {
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+}

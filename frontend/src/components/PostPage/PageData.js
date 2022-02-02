@@ -2,9 +2,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { cap, extractDate } from "../utils";
 import { useHistory } from "react-router-dom";
 import { togglePostPage } from "../../store/toggles";
+import JoinButton from "../JoinButton";
 function PageData() {
   const currentPost = useSelector((state) => state.currentPost);
   const session = useSelector((state) => state.session.user);
+  const currentPage = useSelector((state) => state.currentPage);
   const dispatch = useDispatch();
   const hist = useHistory();
   return (
@@ -23,22 +25,14 @@ function PageData() {
         <span></span>
         <div className="bd">
           <p>
-            <i className="fas fa-birthday-cake"></i> Created{" "}
+            <i className="fas fa-birthday-cake"></i> Created
             {currentPost.page?.created_at &&
               extractDate(currentPost.page?.created_at)}
           </p>
           <p>{currentPost.page?.description}</p>
         </div>
-        <div className="crd">
-          <button
-            onClick={(e) => {
-              document.body.classList.remove("mainContentScroll");
-              dispatch(togglePostPage());
-              hist.push(`/posts/submit`);
-            }}
-          >
-            Create Post
-          </button>
+        <div id="postPageJoin" className="crd">
+          <JoinButton cp={currentPost.page?.id} sessionId={session.id} />
         </div>
       </div>
     </div>

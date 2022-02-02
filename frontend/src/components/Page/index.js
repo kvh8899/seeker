@@ -10,7 +10,6 @@ import EditPage from "../editPage";
 import ComData from "../comData";
 import FooForm from "../FooForm";
 import TopBar from "../Nav/index";
-
 import "./page.css";
 
 function Page() {
