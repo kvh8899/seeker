@@ -1,11 +1,16 @@
 //action types
 const GET = "current/GET";
 const EDIT = "current/EDIT";
-
+const CLEAR = "current/CLEAR";
 const getPage = (page) => {
   return {
     type: GET,
     page,
+  };
+};
+const clear = () => {
+  return {
+    type: CLEAR,
   };
 };
 
@@ -17,6 +22,10 @@ const editPage = (page) => {
 };
 
 export const getCurrentPage = (id) => async (dispatch) => {
+  if (!id) {
+    dispatch(clear());
+    return;
+  }
   const res = await fetch(`/api/pages/${id}`);
 
   if (res.ok) {
@@ -51,6 +60,8 @@ function currentPage(state = {}, action) {
       return action.page;
     case EDIT:
       return action.page;
+    case CLEAR:
+      return {};
     default:
       return state;
   }

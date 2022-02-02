@@ -25,7 +25,7 @@ function Posts() {
 
   return (
     <>
-      {postList.length ? "" : "Be the first to make a post!"}
+      {postList.length ? "" : "No Posts yet!"}
       {postList.map((e, i) => {
         return (
           <div
@@ -36,6 +36,14 @@ function Posts() {
               dispatch(getCurrentPost(e.id));
               dispatch(getAllComments(e.id));
               document.body.classList.add("mainContentScroll");
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.classList.add("borderOn");
+              e.currentTarget.classList.remove("mainPosts");
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.classList.remove("borderOn");
+              e.currentTarget.classList.add("mainPosts");
             }}
           >
             <div className="ipContent">

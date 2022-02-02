@@ -125,3 +125,17 @@
   font-weight: 800;
   margin-left: 4px;
 }
+
+.borderOn {
+  border: 1px solid gray;
+  display: flex;
+  width: 100%;
+  min-height: 150px;
+  max-height: 400px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background-color: white;
+  word-break: break-word;
+  border-radius: 5px;
+  cursor: pointer;
+}

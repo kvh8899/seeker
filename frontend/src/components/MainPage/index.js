@@ -1,23 +1,28 @@
 import "./mainpage.css";
 import { useSelector, useDispatch } from "react-redux";
 import Posts from "../Posts";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getAllPosts, getFollowPosts } from "../../store/posts";
 import FooForm from "../FooForm";
 import TopBar from "../Nav";
-import SideBar from "./sidebar"
-function MainPage({icon,name}) {
+import SideBar from "./sidebar";
+import Load from "../loadingAnimations/Load";
+function MainPage({ icon, name }) {
   const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
   async function loadAll() {
     await dispatch(getAllPosts());
+    setIsLoading(false);
   }
 
   async function loadFollowed() {
     await dispatch(getFollowPosts());
+    setIsLoading(false);
   }
 
   useEffect(() => {
+    setIsLoading(true);
     if (!session || name === "All") {
       loadAll();
     } else {
@@ -31,10 +36,11 @@ function MainPage({icon,name}) {
       <div className="midContent">
         <div className="postContent">
           <FooForm />
-          <Posts />
+          {!isLoading ? <Posts /> : <Load />}
           <span id="spacer"></span>
         </div>
-        <SideBar icon={icon} name={name}/>
+
+        <SideBar icon={icon} name={name} />
       </div>
     </div>
   );

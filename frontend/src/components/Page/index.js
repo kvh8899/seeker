@@ -34,6 +34,10 @@ function Page() {
 
   useEffect(() => {
     loadPage();
+    return async() => {
+      await dispatch(getPagePosts(id));
+      await dispatch(getCurrentPage(id));
+    }
   }, [id, session]);
 
   return (

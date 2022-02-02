@@ -1,0 +1,50 @@
+.loadingContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .loading {
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    border: 5px solid transparent;
+    animation: spin 1.5s infinite;
+    border-color: transparent #0179d2 transparent #fe4500;
+  }
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .loadingText {
+    position: absolute;
+    color: #0277d1;
+    animation: fade 1.5s infinite;
+  }
+  
+  @keyframes fade {
+    0% {
+      color: #0179d2;
+      opacity: 1;
+    }
+    25% {
+      color: #0179d2;
+      opacity: 0;
+    }
+    50% {
+      color: #0179d2;
+      opacity: 0;
+    }
+    75% {
+      color: #0179d2;
+      opacity: 1;
+    }
+    100% {
+      color: #0179d2;
+      opacity: 1;
+    }
+  }

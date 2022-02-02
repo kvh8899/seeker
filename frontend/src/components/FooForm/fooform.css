@@ -1,7 +1,6 @@
 /* createpost component */
 .createPost.createPost {
-  min-height: 70px;
-  height: 70px;
+  height: 60px;
   width: 100%;
   display: flex;
   background-color: white;
@@ -17,10 +16,18 @@
 .createPost > form > input {
   margin: 0px;
   padding: 10px 5px;
+  background-color: #f6f7f8;
 }
 .createPost img {
   height: 40px;
   width: 40px;
   border-radius: 100%;
-  margin: 0px 20px;
+  margin: 0px 7px;
+}
+
+.createPost > form > input:hover {
+  margin: 0px;
+  padding: 10px 5px;
+  background-color: white;
+  border: 1px solid blue;
 }

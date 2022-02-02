@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 function CpForm({ currPage, currId, setErrors, errors }) {
   const [heading, setHeading] = useState("");
   const [content, setContent] = useState("");
-  const [contentImage, setContentImage] = useState("");
   const dispatch = useDispatch();
   const hist = useHistory();
 
@@ -20,7 +19,7 @@ function CpForm({ currPage, currId, setErrors, errors }) {
             setErrors(["comSelect"]);
             return;
           }
-          const post = { heading, content, contentImage };
+          const post = { heading, content };
           const serverErrors = await dispatch(addOnePost(currId, post));
           if (serverErrors) {
             setErrors([...serverErrors]);
@@ -40,17 +39,6 @@ function CpForm({ currPage, currId, setErrors, errors }) {
           value={heading}
           onChange={(e) => {
             setHeading(e.target.value);
-          }}
-        ></input>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <label>Image (Optional)</label>
-          <p></p>
-        </div>
-
-        <input
-          value={contentImage}
-          onChange={(e) => {
-            setContentImage(e.target.value);
           }}
         ></input>
 

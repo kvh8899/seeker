@@ -10,7 +10,6 @@
   position: relative;
   width: 300px;
   display: flex;
-  border: 1px solid lightgray;
   justify-content: flex-start;
   z-index: 1;
 }
