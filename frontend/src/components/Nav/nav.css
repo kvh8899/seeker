@@ -238,6 +238,10 @@ div.comBar input {
 }
 .comName > p {
   margin: 10px 5px;
+  width: 185px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .communities button {
   border-radius: 100%;
@@ -252,9 +256,9 @@ div.comBar input {
   width: 100%;
   display: flex;
   align-items: center;
+  text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
 }
 #navTabIcon {
   display: flex;
@@ -279,4 +283,11 @@ div.comBar input {
   border: 1px solid rgb(197, 197, 197);
   height: 30px;
   width: 0px;
+}
+
+#navTab {
+  width: 185px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }

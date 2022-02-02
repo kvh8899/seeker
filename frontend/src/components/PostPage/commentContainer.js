@@ -102,7 +102,7 @@ function CommentContainer({ level, e, path, isOpen }) {
 
   useEffect(() => {
     dispatch(addMap(`com${e.id}`, isOpen));
-  }, [isOpen]);
+  }, []);
 
   return (
     <div id={`com${e.id}`} className={`comTop${e.id}`}>
