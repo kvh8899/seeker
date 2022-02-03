@@ -27,7 +27,7 @@ function EpForm() {
   }, [id]);
 
   return (
-    <div className="createPForm" style={{ minHeight: "600px" }}>
+    <div className="createPForm" style={{ minHeight: "450px" }}>
       <form
         id="editPostForm"
         onSubmit={async (e) => {
@@ -66,13 +66,18 @@ function EpForm() {
           dispay: "flex",
           flexDirection: "column",
           position: "relative",
-          top: "50px",
           color: "red",
         }}
       >
-        {errors.map((e, i) => {
-          return <p key={i}>{e} must not be empty</p>;
-        })}
+        <div>
+          {errors.map((e, i) => {
+            return (
+              <p key={i} style={{ margin: "5px 5px" }}>
+                {e} must not be empty
+              </p>
+            );
+          })}
+        </div>
       </div>
       <div>
         <div className="epfbuttons" style={{ left: "0", bottom: "-50px" }}>

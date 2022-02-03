@@ -65,7 +65,7 @@ p.fn {
   padding: 8px 15px;
   border-radius: 25px;
   background-color: rgb(28, 138, 228);
-  border: none;
+  border: 1px solid transparent;
   color: white;
   font-size: 16px;
   margin: 5px 0px;

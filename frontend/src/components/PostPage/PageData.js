@@ -25,8 +25,7 @@ function PageData() {
         <span></span>
         <div className="bd">
           <p>
-            <i className="fas fa-birthday-cake"></i> Created
-            {currentPost.page?.created_at &&
+            <i className="fas fa-birthday-cake"></i> Created {currentPost.page?.created_at &&
               extractDate(currentPost.page?.created_at)}
           </p>
           <p>{currentPost.page?.description}</p>
