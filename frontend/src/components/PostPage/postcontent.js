@@ -113,7 +113,7 @@ function PostContent() {
               </div>
             </div>
             <div className="pageMC">
-              <h4>{currentPost.heading}</h4>
+              <h2>{currentPost.heading}</h2>
               <ReactMarkdown>{currentPost.content}</ReactMarkdown>
               <div>
                 <div className="cDiv">

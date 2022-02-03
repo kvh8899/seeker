@@ -120,7 +120,7 @@ function Posts() {
                 </div>
               </div>
               <div className="mainData">
-                <h4>{e.heading}</h4>
+                <h3>{e.heading}</h3>
                 <ReactMarkdown>{e.content}</ReactMarkdown>
                 <div className="commentData">
                   <div className="cDiv">

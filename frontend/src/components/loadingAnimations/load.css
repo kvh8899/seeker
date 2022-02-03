@@ -1,45 +1,69 @@
 .loadingContainer {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading {
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  border: 5px solid transparent;
+  animation: spin 1.5s infinite;
+  border-color: transparent #0179d2 transparent #fe4500;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
   }
-  .loading {
-    height: 100px;
-    width: 100px;
-    border-radius: 100%;
-    border: 5px solid transparent;
-    animation: spin 1.5s infinite;
-    border-color: transparent #0179d2 transparent #fe4500;
+  to {
+    transform: rotate(360deg);
   }
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+}
+.loadingText {
+  position: absolute;
+  color: #0277d1;
+  animation: fade 1.5s infinite;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
   }
-  .loadingText {
-    position: absolute;
-    color: #0277d1;
-    animation: fade 1.5s infinite;
+  25% {
+    opacity: 0;
   }
-  
-  @keyframes fade {
-    0% {
-      opacity: 1;
-    }
-    25% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    75% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 1;
-    }
+  50% {
+    opacity: 0;
   }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#faker {
+  color: transparent;
+  background: #137abe;
+  animation: loading 2s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% {
+    background: #d8d8d8;
+  }
+  25% {
+    background: #bebebe;
+  }
+  50% {
+    background: #8d8d8d;
+  }
+  75% {
+    background: #a3a3a3;
+  }
+  100% {
+    background: #d8d8d8;
+  }
+}
