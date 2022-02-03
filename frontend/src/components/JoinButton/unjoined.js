@@ -18,7 +18,7 @@ function Unjoined({ cp, sessionId }) {
       }}
       onMouseOver={(e) => {
         e.target.style.backgroundColor = "rgb(25, 159, 221)";
-        e.target.style.border = "none";
+        e.target.style.border = "1px solid transparent";
         e.target.style.color = "white";
       }}
       onMouseLeave={(e) => {

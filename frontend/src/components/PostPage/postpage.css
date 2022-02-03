@@ -68,6 +68,10 @@
   margin-left: 5px;
   max-width: 635px;
 }
+.pageMC > h2 {
+  font-weight: 400;
+
+}
 .pageMC img,
 .mainData img {
   width: 100%;
@@ -173,4 +177,31 @@
   font-weight: bold;
   margin-bottom: 9px;
   margin-right: 20px;
+}
+.cDiv {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.cDiv > div {
+  width: 110px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+  color: gray;
+}
+.editPost {
+  display: flex;
+  justify-content: center;
+}
+
+.editPost:hover {
+  cursor: pointer;
+}
+
+#postPageJoin > button {
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
 }

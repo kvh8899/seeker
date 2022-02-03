@@ -59,6 +59,7 @@ function CreatePost() {
                 }}
                 onChange={(e) => {
                   setCurrPage(e.target.value);
+                  setCurrId(null);
                 }}
               ></input>
               <div
@@ -120,6 +121,8 @@ function CreatePost() {
             currId={currId}
             errors={errors}
             setErrors={setErrors}
+            setCurrId={setCurrId}
+            setCurrPage={setCurrPage}
           />
         </div>
         <div className="sideBar"></div>

@@ -30,6 +30,8 @@ def trending():
         post['page'] = i[0].page.to_dict()
         post['owner'] = i[0].owner.to_dict()
         post['comments'] = len(i[0].comments)
+        formatted_datetime = post['created_at'].isoformat()
+        post['created_at'] = formatted_datetime
         posts_t.append(post)
     return {'posts_t':posts_t}
 
@@ -48,6 +50,8 @@ def following():
         post['page'] = i.page.to_dict()
         post['owner'] = i.owner.to_dict()
         post['comments'] = len(i.comments)
+        formatted_datetime = post['created_at'].isoformat(timespec='seconds')
+        post['created_at'] = formatted_datetime
         posts_t.append(post)
     return {'posts_t':posts_t}
 
@@ -74,7 +78,6 @@ def edit_post(postId):
     if(form.validate_on_submit()):
         post = Post.query.filter(postId == Post.id).first()
         post.heading = form.heading.data
-        post.contentImage = form.contentImage.data
         post.content = form.content.data
         db.session.commit()
         t_post = post.to_dict()

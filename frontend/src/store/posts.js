@@ -102,6 +102,7 @@ export const deleteOnePost = (id) => async (dispatch) => {
   }
 };
 
+
 function postList(state = [], action) {
   switch (action.type) {
     case ALLPOSTS:

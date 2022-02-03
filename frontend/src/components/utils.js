@@ -4,7 +4,25 @@ export function extractDate(str) {
   const year = str.match(/ \d{4} /);
   return `${month.join().trim()} ${day.join().trim()}, ${year.join().trim()} `;
 }
-
+export function formatDate(str) {
+  let postedDate = new Date(str);
+  let now = Date.now();
+  let time = (now - postedDate) * 0.001;
+  let unit = " seconds";
+  if (time > 60) {
+    time = time / 60;
+    unit = " minutes";
+    if (time > 60) {
+      time = time / 60;
+      unit = " hours";
+      if (time > 24) {
+        time = time / 24;
+        unit = " days";
+      }
+    }
+  }
+  return Math.floor(time) + unit + " ago";
+}
 export function cap(str) {
   return <>{str ? str[0].toUpperCase() + str.slice(1) : ""}</>;
 }
@@ -96,7 +114,7 @@ export function hide(comment) {
   }
 }
 
- /*
+/*
     1. find children of current tree and toggle class noThread of
     2. all childrens unless it is false in map, then do not display
     comment

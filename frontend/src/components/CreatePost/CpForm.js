@@ -2,7 +2,14 @@ import { useState } from "react";
 import { addOnePost } from "../../store/posts";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-function CpForm({ currPage, currId, setErrors, errors }) {
+function CpForm({
+  currPage,
+  setCurrPage,
+  currId,
+  setCurrId,
+  setErrors,
+  errors,
+}) {
   const [heading, setHeading] = useState("");
   const [content, setContent] = useState("");
   const dispatch = useDispatch();
@@ -15,7 +22,7 @@ function CpForm({ currPage, currId, setErrors, errors }) {
         onSubmit={async (e) => {
           e.preventDefault();
           setErrors([]);
-          if (!currPage) {
+          if (!currPage || !currId) {
             setErrors(["comSelect"]);
             return;
           }

@@ -5,12 +5,11 @@ import { getCurrentPost } from "../../store/currentPost";
 import { deleteOnePost } from "../../store/posts";
 import { editCurrentPost } from "../../store/currentPost";
 import { togglePostPage } from "../../store/toggles";
-
+import { getAllComments } from "../../store/comments";
 function EpForm() {
   const currentPost = useSelector((state) => state.currentPost);
   const [heading, setHeading] = useState("");
   const [content, setContent] = useState("");
-  const [contentImage, setContentImage] = useState("");
   const dispatch = useDispatch();
   const hist = useHistory();
   const { id } = useParams();
@@ -20,7 +19,6 @@ function EpForm() {
     if (post) {
       setHeading(post.heading);
       setContent(post.content);
-      setContentImage(post.contentImage ? post.contentImage : "");
     }
   }
 
@@ -29,18 +27,19 @@ function EpForm() {
   }, [id]);
 
   return (
-    <div className="createPForm" style={{ minHeight: "600px" }}>
+    <div className="createPForm" style={{ minHeight: "450px" }}>
       <form
         id="editPostForm"
         onSubmit={async (e) => {
           e.preventDefault();
-          const post = { heading, content, contentImage };
+          const post = { heading, content };
           const errors = await dispatch(editCurrentPost(post, currentPost.id));
-          console.log(errors);
           if (!errors.length) {
             document.body.classList.add("mainContentScroll");
-            dispatch(togglePostPage());
+            dispatch(getCurrentPost(currentPost.id));
+            dispatch(getAllComments(currentPost.id));
             hist.push(`/`);
+            dispatch(togglePostPage());
           } else {
             setErrors(errors);
           }
@@ -53,13 +52,6 @@ function EpForm() {
             setHeading(e.target.value);
           }}
           required
-        ></input>
-        <input
-          placeholder="Image (optional)"
-          value={contentImage}
-          onChange={(e) => {
-            setContentImage(e.target.value);
-          }}
         ></input>
         <p>Markdown</p>
         <textarea
@@ -74,13 +66,18 @@ function EpForm() {
           dispay: "flex",
           flexDirection: "column",
           position: "relative",
-          top: "50px",
           color: "red",
         }}
       >
-        {errors.map((e, i) => {
-          return <p key={i}>{e} must not be empty</p>;
-        })}
+        <div>
+          {errors.map((e, i) => {
+            return (
+              <p key={i} style={{ margin: "5px 5px" }}>
+                {e} must not be empty
+              </p>
+            );
+          })}
+        </div>
       </div>
       <div>
         <div className="epfbuttons" style={{ left: "0", bottom: "-50px" }}>

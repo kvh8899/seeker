@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { addPostLikes, delPostLikes } from "../../store/likes";
 import Comment from "./comment";
 import CommentForm from "./commentForm";
-
+import { formatDate } from "../utils";
 function PostContent() {
   const dispatch = useDispatch();
   const hist = useHistory();
@@ -109,10 +109,11 @@ function PostContent() {
                 <i className="fas fa-circle"></i>
                 <p>Posted by</p>
                 <p>{currentPost.owner?.username}</p>
+                <p>{formatDate(currentPost.created_at)}</p>
               </div>
             </div>
             <div className="pageMC">
-              <h4>{currentPost.heading}</h4>
+              <h2>{currentPost.heading}</h2>
               <ReactMarkdown>{currentPost.content}</ReactMarkdown>
               <div>
                 <div className="cDiv">
@@ -121,6 +122,19 @@ function PostContent() {
                     <p>{currentPost.comments}</p>
                     <p>Comments</p>
                   </div>
+                  {session?.id === currentPost.owner_id && (
+                    <div
+                      onClick={(e) => {
+                        dispatch(togglePostPage());
+                        document.body.classList.remove("mainContentScroll");
+                        hist.push(`/posts/${currentPost.id}/edit`);
+                      }}
+                      className="editPost"
+                    >
+                      <i className="fas fa-edit"></i>
+                      <p>Edit Post</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
