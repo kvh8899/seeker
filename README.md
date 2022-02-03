@@ -135,7 +135,7 @@ There is a layer in the Dockerfile that will install psycopg2 (not binary) for u
 9. Release your docker container to heroku
 
    ```bash
-   heroku container:release web -a {NAME_OF_HEROKU_APP}
+   heroku container:release web -a gseeker-app
    ```
 
 10. set up your database
@@ -158,18 +158,18 @@ There is a layer in the Dockerfile that will install psycopg2 (not binary) for u
    {NAME_OF_HEROKU_APP} with your own tag:
 
    ```bash=
-   docker buildx build --platform linux/amd64 -t {NAME_OF_HEROKU_APP} .
+   docker buildx build --platform linux/amd64 -t gseeker-app .
    ```
 
 2. Tag your app with the url for your apps registry. Make sure to use the name
    of your Heroku app in the url and tag name:
 
    ```bash=2
-   docker tag {NAME_OF_HEROKU_APP} registry.heroku.com/{NAME_OF_HEROKU_APP}/web
+   docker tag gseeker-app registry.heroku.com/gseeker-app/web
    ```
 
 3. Use docker to push the image to the Heroku container registry:
 
    ```bash=3
-   docker push registry.heroku.com/{NAME_OF_HEROKU_APP}/web
+   docker push registry.heroku.com/gseeker-app/web
    ```
