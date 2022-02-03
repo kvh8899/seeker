@@ -53,16 +53,19 @@ const TreTitle = styled.a`
 export const BannerTitle = styled.p`
   color: white;
   width: 100%;
+  height:100%;
+  display:flex;
+  align-items:flex-end;
   padding-left: 20px;
   margin-bottom: 0px;
   padding-bottom: 5px;
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0) 20%,
-    rgba(0, 0, 0, 0.4) 40%,
-    rgba(0, 0, 0, 0.5) 70%,
-    rgba(0, 0, 0, 0.8) 100%,
-    rgba(0, 0, 0, 1) 100%
+    rgba(0, 0, 0, 0.1) 40%,
+    rgba(0, 0, 0, 0.2) 70%,
+    rgba(0, 0, 0, 0.3) 100%,
+    rgba(0, 0, 0, 0.4) 100%
   );
 `;
 const TreLi = styled.li`

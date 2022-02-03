@@ -1,13 +1,13 @@
 from .models import db
 from datetime import datetime
-
+import pytz
 class Post(db.Model):
     __tablename__ = "posts"
     id = db.Column(db.Integer,primary_key=True)
     heading = db.Column(db.String(100),nullable=False)
     content = db.Column(db.Text)
     page_id = db.Column(db.Integer,db.ForeignKey("pages.id"),nullable=False)
-    created_at = db.Column(db.DateTime(timezone=True),default=datetime.now())
+    created_at = db.Column(db.DateTime(timezone=True),default=lambda:datetime.now(pytz.timezone('US/Pacific')))
     owner_id = db.Column(db.Integer,db.ForeignKey("users.id"),nullable=False)
     contentImage = db.Column(db.String)
 

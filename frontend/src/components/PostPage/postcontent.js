@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { addPostLikes, delPostLikes } from "../../store/likes";
 import Comment from "./comment";
 import CommentForm from "./commentForm";
-
+import { formatDate } from "../utils";
 function PostContent() {
   const dispatch = useDispatch();
   const hist = useHistory();
@@ -109,6 +109,7 @@ function PostContent() {
                 <i className="fas fa-circle"></i>
                 <p>Posted by</p>
                 <p>{currentPost.owner?.username}</p>
+                <p>{formatDate(currentPost.created_at)}</p>
               </div>
             </div>
             <div className="pageMC">

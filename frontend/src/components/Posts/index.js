@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { getPostLikes, addPostLikes, delPostLikes } from "../../store/likes";
 import { getAllComments } from "../../store/comments";
 import ReactMarkdown from "react-markdown";
+import { formatDate } from "../utils";
 import "./posts.css";
 
 function Posts() {
@@ -114,6 +115,8 @@ function Posts() {
                   <i className="fas fa-circle"></i>
                   <p>Posted by</p>
                   <p>{e.owner?.username}</p>
+                  <p>{}</p>
+                  <p>{formatDate(e.created_at)}</p>
                 </div>
               </div>
               <div className="mainData">

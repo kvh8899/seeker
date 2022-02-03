@@ -62,11 +62,11 @@ function CreatePage() {
               </div>
 
               <p>Community names including capitalization cannot be changed.</p>
-              <p style={{ margin: "5px 0px" }}>Limit: {title.length}/50</p>
+              <p style={{ margin: "5px 0px" }}>Limit: {title.length}/25</p>
               <input
                 value={title}
                 onChange={(e) => {
-                  if (e.target.value.length < 51) {
+                  if (e.target.value.length < 26) {
                     setTitle(e.target.value);
                   }
                 }}

@@ -1,14 +1,9 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { cap, extractDate } from "../utils";
-import { useHistory } from "react-router-dom";
-import { togglePostPage } from "../../store/toggles";
 import JoinButton from "../JoinButton";
 function PageData() {
   const currentPost = useSelector((state) => state.currentPost);
   const session = useSelector((state) => state.session.user);
-  const currentPage = useSelector((state) => state.currentPage);
-  const dispatch = useDispatch();
-  const hist = useHistory();
   return (
     <div className="comSideBar">
       <div className="aboutHeader">
@@ -31,7 +26,7 @@ function PageData() {
           <p>{currentPost.page?.description}</p>
         </div>
         <div id="postPageJoin" className="crd">
-          <JoinButton cp={currentPost.page?.id} sessionId={session.id} />
+          <JoinButton cp={currentPost.page?.id} sessionId={session?.id} />
         </div>
       </div>
     </div>

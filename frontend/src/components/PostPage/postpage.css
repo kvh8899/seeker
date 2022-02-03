@@ -184,6 +184,7 @@
   height: 35px;
   display: flex;
   align-items: center;
+  margin-left: 5px;
   color: gray;
 }
 .editPost {

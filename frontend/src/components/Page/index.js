@@ -2,20 +2,21 @@ import Posts from "../Posts";
 import { getPagePosts } from "../../store/posts";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getCurrentPage } from "../../store/currentPage";
-import { checkFollow } from "../../store/checkFollow";
 import JoinButton from "../JoinButton/index.js";
 import EditPage from "../editPage";
 import ComData from "../comData";
 import FooForm from "../FooForm";
 import TopBar from "../Nav/index";
+import Load from "../loadingAnimations/Load";
 import "./page.css";
 
 function Page() {
   const currentPage = useSelector((state) => state.currentPage);
   const editPageShow = useSelector((state) => state.editPageShow);
   const session = useSelector((state) => state.session.user);
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -23,7 +24,7 @@ function Page() {
     if (id) {
       await dispatch(getPagePosts(id));
       await dispatch(getCurrentPage(id));
-      await dispatch(checkFollow(id, session));
+      setIsLoading(false);
     }
   }
 
@@ -32,11 +33,12 @@ function Page() {
   }
 
   useEffect(() => {
+    setIsLoading(true);
     loadPage();
-    return async() => {
+    return async () => {
       await dispatch(getPagePosts(id));
       await dispatch(getCurrentPage(id));
-    }
+    };
   }, [id, session]);
 
   return (
@@ -59,7 +61,7 @@ function Page() {
         <div
           className="banner"
           style={
-            currentPage.theme
+            currentPage.theme && !isLoading
               ? {
                   backgroundImage: `url(${currentPage.theme})`,
                   backgroundSize: "cover",
@@ -73,15 +75,23 @@ function Page() {
               <div>
                 <img
                   src={
-                    currentPage.profile_image
+                    currentPage.profile_image && !isLoading
                       ? currentPage.profile_image
                       : "https://www.leadershipmartialartsct.com/wp-content/uploads/2017/04/default-image-620x600.jpg"
                   }
                   alt=""
                 ></img>
                 <div className="ptitles">
-                  <h2>{cap(currentPage.title)}</h2>
-                  <p>{currentPage.title}</p>
+                  {!isLoading ? (
+                    <h2>{cap(currentPage.title)}</h2>
+                  ) : (
+                    <h2 id="faker">--------------------------------</h2>
+                  )}
+                  {!isLoading ? (
+                    <p>{currentPage.title}</p>
+                  ) : (
+                    <p id="faker">--------------------------</p>
+                  )}
                 </div>
                 <div className="bannerf">
                   <JoinButton cp={currentPage.id} sessionId={session?.id} />
@@ -93,7 +103,7 @@ function Page() {
         <div className="midContent">
           <div className="postContent">
             <FooForm />
-            <Posts />
+            {!isLoading ? <Posts /> : <Load />}
             <span id="spacer"></span>
           </div>
           <div className="sideBar">
