@@ -115,7 +115,6 @@ function Posts() {
                   <i className="fas fa-circle"></i>
                   <p>Posted by</p>
                   <p>{e.owner?.username}</p>
-                  <p>{}</p>
                   <p>{formatDate(e.created_at)}</p>
                 </div>
               </div>
