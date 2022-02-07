@@ -4,6 +4,7 @@ export function extractDate(str) {
   const year = str.match(/ \d{4} /);
   return `${month.join().trim()} ${day.join().trim()}, ${year.join().trim()} `;
 }
+
 export function formatDate(str) {
   let postedDate = new Date(str);
   let now = Date.now();
@@ -23,6 +24,7 @@ export function formatDate(str) {
   }
   return Math.floor(time) + unit + " ago";
 }
+
 export function cap(str) {
   return <>{str ? str[0].toUpperCase() + str.slice(1) : ""}</>;
 }
