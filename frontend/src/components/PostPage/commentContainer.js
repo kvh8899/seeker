@@ -55,7 +55,7 @@ function CommentContainer({ level, e, path, isOpen }) {
   const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const rep = useRef([]);
-
+  const pp = useRef(null);
   function levels() {
     let arr = [];
     for (let x = 0; x < level; x++) {
@@ -67,6 +67,9 @@ function CommentContainer({ level, e, path, isOpen }) {
           onClick={(ex) => {
             dispatch(setMap(`com${path[level - x - 1]}`));
             toggleClasses(postComments, path[level - x - 1], e);
+            document
+              .querySelector(`#pp${path[level - x - 1]}`)
+              .classList.add("move");
           }}
         ></div>
       );
@@ -119,12 +122,15 @@ function CommentContainer({ level, e, path, isOpen }) {
                   document
                     .querySelector(`#bcom${e.id}`)
                     .classList.add("noThread");
+                  pp.current.classList.remove("move");
                 }}
               >
                 <i className="fas fa-expand-alt"></i>
               </button>
-              <ProfImage src={guardian} alt=""></ProfImage>
-              <div>{e.owner?.username}</div>
+              <div id={`pp${e.id}`} className="pp" ref={pp}>
+                <ProfImage src={guardian} alt=""></ProfImage>
+                <div>{e.owner?.username}</div>
+              </div>
             </ProfileContainer>
             <Text>
               <div
@@ -139,6 +145,7 @@ function CommentContainer({ level, e, path, isOpen }) {
                   document
                     .querySelector(`#bcom${e.id}`)
                     .classList.remove("noThread");
+                  pp.current.classList.add("move");
                 }}
               ></div>
               <div className="ccContent" id={`com${e.id}`}>

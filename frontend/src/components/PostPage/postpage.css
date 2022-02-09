@@ -70,7 +70,6 @@
 }
 .pageMC > h2 {
   font-weight: 400;
-
 }
 .pageMC img,
 .mainData img {
@@ -166,6 +165,7 @@
   font-size: 20px;
   margin-right: 5px;
   transition: 0.5s;
+  position: absolute;
 }
 
 .comSubmit {
@@ -204,4 +204,15 @@
   background-color: transparent;
   color: black;
   border: 1px solid black;
+}
+
+.pp {
+  display: flex;
+  align-items: center;
+  transition:0.2s;
+  transform: translateX(0px);
+}
+.move {
+  transition:0.2s;
+  transform: translateX(30px);
 }
