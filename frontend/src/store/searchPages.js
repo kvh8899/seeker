@@ -7,16 +7,15 @@ const dispatchPages = (pages) => {
   };
 };
 
-export const getPagesByQuery = (query) => async () => {
+export const getPagesByQuery = (query) => async (dispatch) => {
   const res = await fetch(`/api/search/pages/${query}`);
 
   if (res.ok) {
     const pages = await res.json();
-    dispatchEvent(dispatchPages(pages));
+    dispatch(dispatchPages(pages));
   } else if (res.status < 500) {
     return null;
   }
-
 };
 
 function searchPages(state = [], action) {
