@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchUserList } from "../../store/pages";
 import LeftNav from "./LeftNav";
 import RightNav from "./RightNav";
+import MidNav from "./MidNav";
 import "./nav.css";
 import { useState, useEffect, useRef } from "react";
 function Nav({ name, icon }) {
@@ -62,6 +63,7 @@ function Nav({ name, icon }) {
             setIcons={setIcons}
             homeBar={homeBar}
           />
+          <MidNav />
           <RightNav
             setName={setName}
             setIcons={setIcons}
