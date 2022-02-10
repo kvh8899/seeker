@@ -178,3 +178,4 @@ export function toggleClasses(postComments, path, e) {
   document.querySelector(`#bcom${path}`).classList.remove("noThread");
   document.querySelector(`#com${e.id}`).classList.add("noThread");
 }
+
