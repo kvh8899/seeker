@@ -32,11 +32,11 @@ export function cap(str) {
 /*
   for filtering communities by title
 */
-export function subString(str, currPage) {
-  if (!currPage) return;
-  str = str.toLowerCase();
-  let curr = currPage.toLowerCase();
-  return str.indexOf(curr) > -1 ? true : false;
+export function subString(title, currTitle) {
+  if (!currTitle) return;
+  title = title.toLowerCase();
+  let curr = currTitle.toLowerCase();
+  return title.indexOf(curr) > -1 ? true : false;
 }
 
 /*

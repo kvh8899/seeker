@@ -2,16 +2,17 @@ import { getCurrentPage } from "../../store/currentPage";
 import { getPagePosts } from "../../store/posts";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { postPageOff, toggleCreatePage } from "../../store/toggles";
 import { getFollowPosts } from "../../store/posts";
 import guardianImg from "../../images/Guardian.png";
+import { subString } from "../utils";
 function LeftNav({ icon, name, setName, setIcons, homeBar }) {
   const dispatch = useDispatch();
   const session = useSelector((state) => state.session.user);
   const wrapper = useRef(null);
   const hist = useHistory();
-
+  const [filter, setFilter] = useState("");
   const userPages = useSelector((state) => state.pageList);
 
   return (
@@ -64,7 +65,13 @@ function LeftNav({ icon, name, setName, setIcons, homeBar }) {
           </div>
 
           <div className="displayNun" ref={homeBar}>
-            <input placeholder="Filter"></input>
+            <input
+              placeholder="Filter"
+              value={filter}
+              onChange={(e) => {
+                setFilter(e.target.value);
+              }}
+            ></input>
             <div>
               <div className="myComs">
                 <p>My Communities</p>
@@ -78,6 +85,7 @@ function LeftNav({ icon, name, setName, setIcons, homeBar }) {
                 <i className="fas fa-plus"></i> Create Community
               </div>
               {userPages.map((ex) => {
+                if (filter && !subString(ex.title,filter)) return "";
                 return (
                   <div
                     className="comContainer"
