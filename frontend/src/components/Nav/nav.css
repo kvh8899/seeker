@@ -306,7 +306,7 @@ div.comBar input {
   font-size: 30px;
   height: 50px;
   color: black;
-  margin-left: 25px;
+  margin:0px 25px;
   width: 100%;
 }
 .midNav > input {
