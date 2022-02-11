@@ -16,12 +16,16 @@ function MainPage({ icon, name }) {
     await dispatch(getAllPosts());
     setIsLoading(false);
   }
-
   async function loadFollowed() {
     await dispatch(getFollowPosts());
     setIsLoading(false);
   }
-
+  useEffect(() => {
+    let keys = Object.keys(localStorage);
+    keys.forEach((e) => {
+      if (e.startsWith("com")) localStorage.setItem(e, true);
+    });
+  }, []);
   useEffect(() => {
     setIsLoading(true);
     if (!session || name === "All") {
@@ -30,7 +34,6 @@ function MainPage({ icon, name }) {
       loadFollowed();
     }
   }, [session]);
-
   return (
     <div className="mainContent">
       <TopBar icon={icon} name={name} />
