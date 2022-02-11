@@ -7,7 +7,7 @@ import { hide } from "../utils";
 const UserData = styled.div`
   width: 100%;
 `;
-function ReplyForm({ e, levels, rep }) {
+function ReplyForm({ e, levels, rep, pp }) {
   const dispatch = useDispatch();
   const [reply, setReply] = useState("");
   const currentPost = useSelector((state) => state.currentPost);
@@ -39,6 +39,7 @@ function ReplyForm({ e, levels, rep }) {
               document
                 .querySelector(`#bcom${e.id}`)
                 .classList.remove("noThread");
+                pp.current.classList.add("move");
             }}
           ></div>
           <form

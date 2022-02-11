@@ -47,7 +47,7 @@ export function subString(title, currTitle) {
   comment: the comment obj
 */
 export function traversal(value = 0, comment, arr = []) {
-  arr.push([value, comment, true]);
+  arr.push([value, comment, localStorage.getItem(`com${comment.id}`)]);
   if (!comment.replies.length) return arr;
 
   for (let i = 0; i < comment.replies.length; i++) {
@@ -127,7 +127,7 @@ export function reRenderThread(comment, map, value = 0) {
     map[`com${comment.id}`] = true;
   }
 
-  if (map[`com${comment.id}`] || value === 0) {
+  if (map.getItem(`com${comment.id}`)) {
     document.querySelectorAll(`#com${comment.id}`).forEach((e) => {
       e.classList.remove("noThread");
     });
@@ -179,3 +179,18 @@ export function toggleClasses(postComments, path, e) {
   document.querySelector(`#com${e.id}`).classList.add("noThread");
 }
 
+export function hideMany(comment, map, value = 0) {
+
+  document.querySelectorAll(`#com${comment.id}`).forEach((e) => {
+    e.classList.add("noThread");
+  });
+  document.querySelectorAll(`#tab${comment.id}`).forEach((e) => {
+    e.classList.add("noThread");
+  });
+
+  if (!comment.replies.length) return;
+
+  for (let i = 0; i < comment.replies.length; i++) {
+    hideMany(comment.replies[i], map, value);
+  }
+}
