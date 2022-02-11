@@ -1,13 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getPagesByQuery } from "../../store/searchPages";
 import { useDispatch, useSelector } from "react-redux";
+import Load from "../loadingAnimations/Load";
 function MidNav() {
   const [query, setQuery] = useState("");
   const [search, setSearch] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const searchPages = useSelector((state) => state.searchPages);
+  const searchInput = useRef(null);
   useEffect(() => {
-    let close = () => setSearch(false);
+    let close = () => {
+      searchInput.current.blur();
+      setSearch(false);
+    };
     document.body.addEventListener("mouseup", close);
     return () => {
       document.body.removeEventListener("mouseup", close);
@@ -19,6 +25,7 @@ function MidNav() {
       if (query) {
         //dispatch
         dispatch(getPagesByQuery(query));
+        setLoading(false);
       }
     }, 600);
     return () => {
@@ -32,6 +39,7 @@ function MidNav() {
         value={query}
         onChange={(e) => {
           setQuery(e.target.value);
+          setLoading(true);
         }}
         onMouseDown={(e) => {
           e.stopPropagation();
@@ -40,8 +48,34 @@ function MidNav() {
         onMouseUp={(e) => {
           e.stopPropagation();
         }}
+        ref={searchInput}
       ></input>
-      {search && <div className="dropResult"></div>}
+      {search && (
+        <div
+          className="dropResult"
+          onMouseUp={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          {!isLoading ? (
+            searchPages?.search?.length ? (
+              <div className="searchResults">
+                <div>
+                  {searchPages?.search?.map((e) => (
+                    <div>{e.title}</div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              "No Matches"
+            )
+          ) : query ? (
+            <Load />
+          ) : (
+            "Search Communities"
+          )}
+        </div>
+      )}
     </div>
   );
 }

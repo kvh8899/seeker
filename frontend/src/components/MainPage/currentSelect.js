@@ -4,6 +4,7 @@ import { toggleCreatePage, toggleLogin } from "../../store/toggles";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import knight from "../../images/knight.gif";
+import banner from "../../images/banner.png";
 const CurrentDiv = styled.div`
   height: 275px;
   width: 100%;
@@ -17,9 +18,9 @@ const CurrentDiv = styled.div`
 const Banner = styled.div`
   width: 100%;
   height: 40px;
-  background-image: url("https://images.fineartamerica.com/images-medium-large-5/abstract-art-blue-red-white-by-kredart-serg-wiaderny.jpg");
+  background-image: url("${banner}");
   background-size: cover;
-  background-position: top -20px;
+  background-position: top 0px left -10px;
   border-radius: 3px 3px 0px 0px;
   display: flex;
   align-items: flex-end;

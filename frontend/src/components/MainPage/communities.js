@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTrending } from "../../store/trpages";
-
+import banner from "../../images/banner.png";
 const ComList = styled.div`
   max-height: 450px;
   width: 100%;
@@ -15,9 +15,9 @@ const ComList = styled.div`
 const Banner = styled.div`
   width: 100%;
   height: 75px;
-  background-image: url("https://images.fineartamerica.com/images-medium-large-5/abstract-art-blue-red-white-by-kredart-serg-wiaderny.jpg");
+  background-image: url("${banner}");
   background-size: cover;
-  background-position: top -20px;
+  background-position: top 0px left -350px;
   border-radius: 3px 3px 0px 0px;
   display: flex;
   align-items: flex-end;
@@ -53,9 +53,9 @@ const TreTitle = styled.a`
 export const BannerTitle = styled.p`
   color: white;
   width: 100%;
-  height:100%;
-  display:flex;
-  align-items:flex-end;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
   padding-left: 20px;
   margin-bottom: 0px;
   padding-bottom: 5px;
