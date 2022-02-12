@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import CommentContainer from "./commentContainer";
 import { traversal, getPath } from "../utils";
-import { useEffect } from "react";
+import { memo } from "react";
 const CContainer = styled.div`
   width: 100%;
   border-radius: 3px 3px 0px 0px;
@@ -44,5 +44,8 @@ function Comment() {
     </CContainer>
   );
 }
-
-export default Comment;
+/* 
+  memo only allows component to rerender
+  if props are different.
+*/
+export default memo(Comment);

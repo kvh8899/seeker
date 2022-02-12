@@ -47,7 +47,11 @@ export function subString(title, currTitle) {
   comment: the comment obj
 */
 export function traversal(value = 0, comment, arr = []) {
-  arr.push([value, comment, localStorage.getItem(`com${comment.id}`)]);
+  arr.push([
+    value,
+    comment,
+    localStorage.getItem(`com${comment.id}`) === "" ? false : true,
+  ]);
   if (!comment.replies.length) return arr;
 
   for (let i = 0; i < comment.replies.length; i++) {
@@ -180,7 +184,6 @@ export function toggleClasses(postComments, path, e) {
 }
 
 export function hideMany(comment, map, value = 0) {
-
   document.querySelectorAll(`#com${comment.id}`).forEach((e) => {
     e.classList.add("noThread");
   });

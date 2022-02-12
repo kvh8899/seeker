@@ -32,10 +32,10 @@ function Posts() {
           <div
             key={e.id}
             className="mainPosts"
-            onClick={() => {
+            onClick={async() => {
+              await dispatch(getCurrentPost(e.id));
+              await dispatch(getAllComments(e.id));
               dispatch(togglePostPage());
-              dispatch(getCurrentPost(e.id));
-              dispatch(getAllComments(e.id));
               document.body.classList.add("mainContentScroll");
             }}
             onMouseOver={(e) => {

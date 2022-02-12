@@ -39,23 +39,25 @@ function ReplyForm({ e, levels, rep, pp }) {
               document
                 .querySelector(`#bcom${e.id}`)
                 .classList.remove("noThread");
-                pp.current.classList.add("move");
+              pp.current.classList.add("move");
             }}
           ></div>
           <form
             id={`com${e.id}`}
             style={{ position: "relative" }}
-            onSubmit={(event) => {
+            onSubmit={async (event) => {
               event.preventDefault();
-              dispatch(
+              await dispatch(
                 replyTo(e.id, {
                   content: reply,
                   post_id: currentPost.id,
                 })
               );
-              rep.current.classList.toggle("displayNun");
-              rep.current.classList.toggle("reply");
-              setReply("");
+              if (rep.current) {
+                rep.current.classList.toggle("displayNun");
+                rep.current.classList.toggle("reply");
+                setReply("");
+              }
             }}
           >
             <textarea
