@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import CommentContainer from "./commentContainer";
-import { traversal, getPath } from "../utils";
-import { memo } from "react";
+import { render_Comments } from "../utils";
 const CContainer = styled.div`
   width: 100%;
   border-radius: 3px 3px 0px 0px;
@@ -16,32 +15,13 @@ const InnerCContainer = styled.div`
   max-width: 635px;
   margin: 20px;
 `;
-
 function Comment() {
   const postComments = useSelector((state) => state.postComments);
-  function render_Comments(postComments) {
-    let arr = [];
-    postComments?.forEach((e) => {
-      let data = traversal(0, e, []);
-      data.forEach((e) => {
-        let path = getPath(e[1]);
-        arr.push(
-          <CommentContainer
-            e={e[1]}
-            level={e[0]}
-            path={path}
-            isOpen={e[2]}
-            key={Math.random()}
-          ></CommentContainer>
-        );
-        localStorage.setItem(`com${e[1].id}`, e[2]);
-      });
-    });
-    return arr;
-  }
   return (
     <CContainer>
-      <InnerCContainer>{render_Comments(postComments)}</InnerCContainer>
+      <InnerCContainer>
+        {render_Comments(postComments, CommentContainer)}
+      </InnerCContainer>
     </CContainer>
   );
 }

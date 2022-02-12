@@ -263,3 +263,29 @@ export function addListenerToThread(e) {
   });
   return removeListenerFromThread(allTab, tabHover, tabLeave);
 }
+
+/*
+  CommentContainer: CommentContainer component
+  postComments: adjacency list of comments and replies
+  returns: array of comment components
+*/
+export function render_Comments(postComments, CommentContainer) {
+  let arr = [];
+  postComments?.forEach((e) => {
+    let data = traversal(0, e, []);
+    data.forEach((e) => {
+      let path = getPath(e[1]);
+      arr.push(
+        <CommentContainer
+          e={e[1]}
+          level={e[0]}
+          path={path}
+          isOpen={e[2]}
+          key={Math.random()}
+        ></CommentContainer>
+      );
+      localStorage.setItem(`com${e[1].id}`, e[2]);
+    });
+  });
+  return arr;
+}
