@@ -50,7 +50,7 @@ export function traversal(value = 0, comment, arr = []) {
   arr.push([
     value,
     comment,
-    localStorage.getItem(`com${comment.id}`) === "" ? "": true,
+    localStorage.getItem(`com${comment.id}`) === "" ? "" : true,
   ]);
   if (!comment.replies.length) return arr;
 
@@ -182,21 +182,6 @@ export function toggleClasses(postComments, path, e) {
   document.querySelector(`#com${e.id}`).classList.add("noThread");
 }
 
-export function hideMany(comment, map, value = 0) {
-  document.querySelectorAll(`#com${comment.id}`).forEach((e) => {
-    e.classList.add("noThread");
-  });
-  document.querySelectorAll(`#tab${comment.id}`).forEach((e) => {
-    e.classList.add("noThread");
-  });
-
-  if (!comment.replies.length) return;
-
-  for (let i = 0; i < comment.replies.length; i++) {
-    hideMany(comment.replies[i], map, value);
-  }
-}
-
 /*
   level: current level of the comment in the tree
   path: ids of ancestor comments
@@ -222,4 +207,58 @@ export function levels(level, path, postComments, e) {
     );
   }
   return arr;
+}
+
+export function hideMany(comment, map, value = 0) {
+  document.querySelectorAll(`#com${comment.id}`).forEach((e) => {
+    e.classList.add("noThread");
+  });
+  document.querySelectorAll(`#tab${comment.id}`).forEach((e) => {
+    e.classList.add("noThread");
+  });
+
+  if (!comment.replies.length) return;
+
+  for (let i = 0; i < comment.replies.length; i++) {
+    hideMany(comment.replies[i], map, value);
+  }
+}
+
+/*
+  removes event listeners to be called when component unmounts
+*/
+function removeListenerFromThread(allTab, tabHover, tabLeave) {
+  return () =>
+    allTab.forEach((e) => {
+      e.removeEventListener("mouseenter", tabHover);
+      e.removeEventListener("mouseleave", tabLeave);
+    });
+}
+
+/*
+  allTab: array of elements that are the threadlines 
+          of a specific comment
+  purpose: when hovering over a threadline, this function makes
+           it turn orange if hovered, grey if not
+  returns: a function that removes event listener, to be called
+           when component unmounts to prevent memory leak
+*/
+export function addListenerToThread(allTab) {
+  function tabLeave() {
+    allTab.forEach((e) => {
+      e.classList.remove("orangeTab");
+      e.classList.add("greyTab");
+    });
+  }
+  function tabHover() {
+    allTab.forEach((e) => {
+      e.classList.add("orangeTab");
+      e.classList.remove("greyTab");
+    });
+  }
+  allTab.forEach((e) => {
+    e.addEventListener("mouseenter", tabHover);
+    e.addEventListener("mouseleave", tabLeave);
+  });
+  return removeListenerFromThread(allTab, tabHover, tabLeave);
 }

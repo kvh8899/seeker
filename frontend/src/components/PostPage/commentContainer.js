@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRef, useEffect } from "react";
 import { toggleLogin } from "../../store/toggles";
 import ReplyForm from "./replyForm";
-import { toggleClasses, hide, reRenderThread } from "../utils";
+import { hide, reRenderThread } from "../utils";
 import guardian from "../../images/Guardian.png";
-import { hideMany } from "../utils";
+import { hideMany, levels, addListenerToThread } from "../utils";
 const ProfImage = styled.img`
   position: relative;
   height: 30px;
@@ -55,55 +55,9 @@ function CommentContainer({ level, e, path, isOpen }) {
   const rep = useRef([]);
   const pp = useRef(null);
   const content = useRef(null);
-  function levels() {
-    let arr = [];
-    for (let x = 0; x < level; x++) {
-      arr.push(
-        <div
-          className="tab greyTab"
-          key={Math.random()}
-          id={`tab${path[level - x - 1]}`}
-          onClick={(ex) => {
-            localStorage.setItem(`com${path[level - x - 1]}`, "");
-            toggleClasses(postComments, path[level - x - 1], e);
-            document
-              .querySelector(`#pp${path[level - x - 1]}`)
-              .classList.add("move");
-          }}
-        ></div>
-      );
-    }
-    return arr;
-  }
-
   useEffect(() => {
     let allTab = document.querySelectorAll(`#tab${e.id}`);
-    function tabHover() {
-      allTab.forEach((e) => {
-        e.classList.add("orangeTab");
-        e.classList.remove("greyTab");
-      });
-    }
-    function tabLeave() {
-      allTab.forEach((e) => {
-        e.classList.remove("orangeTab");
-        e.classList.add("greyTab");
-      });
-    }
-    allTab.forEach((e) => {
-      e.addEventListener("mouseenter", tabHover);
-      e.addEventListener("mouseleave", tabLeave);
-    });
-
-    return () => {
-      allTab.forEach((e) => {
-        e.removeEventListener("mouseenter", tabHover);
-        e.removeEventListener("mouseleave", tabLeave);
-      });
-    };
-  }, [levels]);
-
-  useEffect(() => {
+    let removeListener = addListenerToThread(allTab);
     if (!isOpen) {
       e.replies.forEach((e) => {
         hideMany(e, localStorage);
@@ -113,13 +67,14 @@ function CommentContainer({ level, e, path, isOpen }) {
       document.querySelector(`#bcom${e.id}`).classList.remove("noThread");
       document.querySelector(`#tab${e.id}`).classList.add("noThread");
     }
+    return () => removeListener();
   }, []);
 
   return (
     <div id={`com${e.id}`} className={`comTop${e.id}`}>
       <div>
         <CContent>
-          {levels()}
+          {levels(level, path, postComments, e)}
           <UserData>
             <ProfileContainer>
               <button
@@ -174,7 +129,7 @@ function CommentContainer({ level, e, path, isOpen }) {
             </Text>
           </UserData>
         </CContent>
-        <ReplyForm levels={levels} e={e} rep={rep} pp={pp} />
+        <ReplyForm level={level} e={e} rep={rep} pp={pp} path={path} />
       </div>
     </div>
   );

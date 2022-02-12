@@ -3,17 +3,18 @@ import styled from "styled-components";
 import { setMap } from "../../store/commentsMap";
 import { replyTo } from "../../store/comments";
 import { useState } from "react";
-import { hide } from "../utils";
+import { hide, levels } from "../utils";
 const UserData = styled.div`
   width: 100%;
 `;
-function ReplyForm({ e, rep, pp, levels }) {
+function ReplyForm({ level, e, rep, pp, path }) {
   const dispatch = useDispatch();
   const [reply, setReply] = useState("");
   const currentPost = useSelector((state) => state.currentPost);
+  const postComments = useSelector((state) => state.postComments);
   return (
     <div id={"repinput" + e.id} className="displayNun" ref={rep}>
-      {levels()}
+      {levels(level, path, postComments, e)}
       <UserData>
         <div
           style={{
