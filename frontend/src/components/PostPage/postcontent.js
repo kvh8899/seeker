@@ -71,9 +71,7 @@ function PostContent() {
                   ></i>
                 )}
               </div>
-
               <p id={`like${currentPost.id}`}>{numLikes}</p>
-              {/* <i class="fas fa-thumbs-up"></i>*/}
             </div>
           </div>
           <div className="postHeadings">

@@ -34,6 +34,7 @@ function Comment() {
             key={Math.random()}
           ></CommentContainer>
         );
+        localStorage.setItem(`com${e[1].id}`, e[2]);
       });
     });
     return arr;

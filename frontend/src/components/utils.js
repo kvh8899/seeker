@@ -50,7 +50,7 @@ export function traversal(value = 0, comment, arr = []) {
   arr.push([
     value,
     comment,
-    localStorage.getItem(`com${comment.id}`) === "" ? false : true,
+    localStorage.getItem(`com${comment.id}`) === "" ? "": true,
   ]);
   if (!comment.replies.length) return arr;
 
@@ -130,7 +130,6 @@ export function reRenderThread(comment, map, value = 0) {
   if (value === 0) {
     map[`com${comment.id}`] = true;
   }
-
   if (map.getItem(`com${comment.id}`)) {
     document.querySelectorAll(`#com${comment.id}`).forEach((e) => {
       e.classList.remove("noThread");
@@ -196,4 +195,31 @@ export function hideMany(comment, map, value = 0) {
   for (let i = 0; i < comment.replies.length; i++) {
     hideMany(comment.replies[i], map, value);
   }
+}
+
+/*
+  level: current level of the comment in the tree
+  path: ids of ancestor comments
+  postComments: list of comments
+  e:current comment
+*/
+export function levels(level, path, postComments, e) {
+  let arr = [];
+  for (let x = 0; x < level; x++) {
+    arr.push(
+      <div
+        className="tab greyTab"
+        key={Math.random()}
+        id={`tab${path[level - x - 1]}`}
+        onClick={(ex) => {
+          localStorage.setItem(`com${path[level - x - 1]}`, "");
+          toggleClasses(postComments, path[level - x - 1], e);
+          document
+            .querySelector(`#pp${path[level - x - 1]}`)
+            .classList.add("move");
+        }}
+      ></div>
+    );
+  }
+  return arr;
 }

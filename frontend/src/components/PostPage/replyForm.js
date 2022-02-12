@@ -7,11 +7,10 @@ import { hide } from "../utils";
 const UserData = styled.div`
   width: 100%;
 `;
-function ReplyForm({ e, levels, rep, pp }) {
+function ReplyForm({ e, rep, pp, levels }) {
   const dispatch = useDispatch();
   const [reply, setReply] = useState("");
   const currentPost = useSelector((state) => state.currentPost);
-
   return (
     <div id={"repinput" + e.id} className="displayNun" ref={rep}>
       {levels()}
@@ -47,12 +46,13 @@ function ReplyForm({ e, levels, rep, pp }) {
             style={{ position: "relative" }}
             onSubmit={async (event) => {
               event.preventDefault();
-              await dispatch(
+              const repl = await dispatch(
                 replyTo(e.id, {
                   content: reply,
                   post_id: currentPost.id,
                 })
               );
+              localStorage.setItem(`com${repl.id}`, true);
               if (rep.current) {
                 rep.current.classList.toggle("displayNun");
                 rep.current.classList.toggle("reply");

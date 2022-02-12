@@ -78,7 +78,7 @@ function CommentContainer({ level, e, path, isOpen }) {
 
   useEffect(() => {
     let allTab = document.querySelectorAll(`#tab${e.id}`);
-    function tabHover(ex) {
+    function tabHover() {
       allTab.forEach((e) => {
         e.classList.add("orangeTab");
         e.classList.remove("greyTab");
@@ -126,7 +126,7 @@ function CommentContainer({ level, e, path, isOpen }) {
                 className="noThread closeButton"
                 id={`bcom${e.id}`}
                 onClick={(ex) => {
-                  reRenderThread(e, localStorage);
+                  reRenderThread(e, window.localStorage);
                   document
                     .querySelector(`#bcom${e.id}`)
                     .classList.add("noThread");
