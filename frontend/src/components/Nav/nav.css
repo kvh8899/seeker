@@ -4,6 +4,12 @@
   width: 100%;
   z-index: 2;
   border-bottom: 1px solid rgb(231, 231, 231);
+  -ms-flex: 0;
+  flex: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin-top: 0;
 }
 .mainNav {
   display: flex;
@@ -331,3 +337,4 @@ div.comBar input {
   display: flex;
   flex-direction: column;
 }
+

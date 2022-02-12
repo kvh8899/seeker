@@ -3,6 +3,9 @@ a {
 }
 body {
   margin: 0px;
+  font-family: sans-serif;
+  width: 100%;
+  height: 100%;
 }
 nav {
   background-color: white;
@@ -12,13 +15,6 @@ nav {
 }
 .mainContentScroll {
   overflow: hidden;
-}
-
-body {
-  font-family: sans-serif;
-  background-color: #dae0e6;
-  width: 100%;
-  height: 100%;
 }
 button {
   cursor: pointer;

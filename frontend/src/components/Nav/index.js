@@ -12,6 +12,7 @@ function TopBar({ icon, name }) {
   const postPageShow = useSelector((state) => state.postPageShow);
   return (
     <>
+      <div className="space"></div>
       <Nav icon={icon} name={name} />
       {loginShow && <FloatingLogin />}
       {signupShow && <FloatingSignup />}
