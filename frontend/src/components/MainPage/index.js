@@ -7,7 +7,7 @@ import FooForm from "../FooForm";
 import TopBar from "../Nav";
 import SideBar from "./sidebar";
 import Load from "../loadingAnimations/Load";
-import { clear } from "../../store/posts";
+
 function MainPage({ icon, name }) {
   const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();

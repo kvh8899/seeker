@@ -5,6 +5,7 @@ import RightNav from "./RightNav";
 import MidNav from "./MidNav";
 import "./nav.css";
 import { useState, useEffect, useRef } from "react";
+import { memo } from "react";
 function Nav({ name, icon }) {
   const session = useSelector((state) => state.session.user);
   const [showDiv, setShowDiv] = useState(false);
@@ -78,4 +79,4 @@ function Nav({ name, icon }) {
   );
 }
 
-export default Nav;
+export default memo(Nav);

@@ -66,4 +66,4 @@ function CommentForm() {
   );
 }
 
-export default CommentForm;
+export default (CommentForm);

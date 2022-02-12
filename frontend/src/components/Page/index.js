@@ -19,7 +19,6 @@ function Page() {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const { id } = useParams();
-
   async function loadPage() {
     if (id) {
       await dispatch(getPagePosts(id));

@@ -56,8 +56,7 @@ function CommentContainer({ level, e, path, isOpen }) {
   const pp = useRef(null);
   const content = useRef(null);
   useEffect(() => {
-    let allTab = document.querySelectorAll(`#tab${e.id}`);
-    let removeListener = addListenerToThread(allTab);
+    let removeListener = addListenerToThread(e);
     if (!isOpen) {
       e.replies.forEach((e) => {
         hideMany(e, localStorage);

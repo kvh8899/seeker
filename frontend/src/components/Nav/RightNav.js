@@ -4,6 +4,7 @@ import { getAllPosts } from "../../store/posts";
 import LogoutButton from "../auth/LogoutButton";
 import { NavLink } from "react-router-dom";
 import guardian from "../../images/Guardian.png";
+import { memo } from "react";
 function RightNav({
   setIcons,
   setName,
@@ -15,9 +16,7 @@ function RightNav({
   const loginShow = useSelector((state) => state.loginShow);
   const session = useSelector((state) => state.session.user);
   const signupShow = useSelector((state) => state.signupShow);
-
   const dispatch = useDispatch();
-
   return (
     <div className="rightnav">
       <div
@@ -142,4 +141,4 @@ function RightNav({
   );
 }
 
-export default RightNav;
+export default memo(RightNav);

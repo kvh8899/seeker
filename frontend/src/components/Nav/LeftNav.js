@@ -2,7 +2,7 @@ import { getCurrentPage } from "../../store/currentPage";
 import { getPagePosts } from "../../store/posts";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { useRef, useState } from "react";
+import { useRef, useState, memo  } from "react";
 import { postPageOff, toggleCreatePage } from "../../store/toggles";
 import { getFollowPosts } from "../../store/posts";
 import guardianImg from "../../images/Guardian.png";
@@ -85,7 +85,7 @@ function LeftNav({ icon, name, setName, setIcons, homeBar }) {
                 <i className="fas fa-plus"></i> Create Community
               </div>
               {userPages.map((ex) => {
-                if (filter && !subString(ex.title,filter)) return "";
+                if (filter && !subString(ex.title, filter)) return "";
                 return (
                   <div
                     className="comContainer"
@@ -127,4 +127,4 @@ function LeftNav({ icon, name, setName, setIcons, homeBar }) {
   );
 }
 
-export default LeftNav;
+export default memo(LeftNav);

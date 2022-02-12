@@ -45,8 +45,5 @@ function Comment() {
     </CContainer>
   );
 }
-/* 
-  memo only allows component to rerender
-  if props are different.
-*/
-export default memo(Comment);
+
+export default Comment;

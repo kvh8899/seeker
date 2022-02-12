@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { getPagesByQuery } from "../../store/searchPages";
 import { useDispatch, useSelector } from "react-redux";
 import Load from "../loadingAnimations/Load";
+import { memo } from "react";
 function MidNav() {
   const [query, setQuery] = useState("");
   const [search, setSearch] = useState(false);
@@ -80,4 +81,4 @@ function MidNav() {
   );
 }
 
-export default MidNav;
+export default memo(MidNav);

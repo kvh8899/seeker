@@ -243,7 +243,8 @@ function removeListenerFromThread(allTab, tabHover, tabLeave) {
   returns: a function that removes event listener, to be called
            when component unmounts to prevent memory leak
 */
-export function addListenerToThread(allTab) {
+export function addListenerToThread(e) {
+  let allTab = document.querySelectorAll(`#tab${e.id}`);
   function tabLeave() {
     allTab.forEach((e) => {
       e.classList.remove("orangeTab");

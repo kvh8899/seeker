@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import PageData from "./PageData";
-import { useEffect, useState } from "react";
 import { addPostLikes, delPostLikes } from "../../store/likes";
 import Comment from "./comment";
 import CommentForm from "./commentForm";
@@ -14,20 +13,6 @@ function PostContent() {
   const currentPost = useSelector((state) => state.currentPost);
   const postLikes = useSelector((state) => state.postLikes);
   const session = useSelector((state) => state.session.user);
-  const [numLikes, setNumLikes] = useState(0);
-  async function loadData() {
-    const res = await fetch(`/api/likes/${currentPost.id}`);
-
-    if (res.ok) {
-      const { likes } = await res.json();
-      setNumLikes(likes);
-    }
-  }
-
-  useEffect(() => {
-    if (currentPost.id) loadData();
-  }, [currentPost]);
-
   return (
     <div className="spostContent">
       <div className="postContent pcBackground">
@@ -71,7 +56,7 @@ function PostContent() {
                   ></i>
                 )}
               </div>
-              <p id={`like${currentPost.id}`}>{numLikes}</p>
+              <p id={`like${currentPost.id}`}>{currentPost.likers}</p>
             </div>
           </div>
           <div className="postHeadings">

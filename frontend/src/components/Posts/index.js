@@ -8,10 +8,9 @@ import { getAllComments } from "../../store/comments";
 import ReactMarkdown from "react-markdown";
 import { formatDate } from "../utils";
 import "./posts.css";
-
+import { memo } from "react";
 function Posts() {
   const postList = useSelector((state) => state.postList);
-  const currentPost = useSelector((state) => state.currentPost);
   const postLikes = useSelector((state) => state.postLikes);
   const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
@@ -22,7 +21,7 @@ function Posts() {
   }
   useEffect(() => {
     loadData();
-  }, [postList, currentPost, session]);
+  }, [postList,session]);
 
   return (
     <>
@@ -32,7 +31,7 @@ function Posts() {
           <div
             key={e.id}
             className="mainPosts"
-            onClick={async() => {
+            onClick={async () => {
               await dispatch(getCurrentPost(e.id));
               await dispatch(getAllComments(e.id));
               dispatch(togglePostPage());
@@ -139,4 +138,4 @@ function Posts() {
   );
 }
 
-export default Posts;
+export default memo(Posts);
