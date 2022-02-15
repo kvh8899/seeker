@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { togglePostPage, toggleLogin } from "../../store/toggles";
 import { getCurrentPost } from "../../store/currentPost";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getPostLikes, addPostLikes, delPostLikes } from "../../store/likes";
 import { getAllComments } from "../../store/comments";
 import ReactMarkdown from "react-markdown";
@@ -11,17 +11,18 @@ import "./posts.css";
 import { memo } from "react";
 function Posts() {
   const postList = useSelector((state) => state.postList);
-  const postLikes = useSelector((state) => state.postLikes);
   const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const hist = useHistory();
-
+  const [likes, setLikes] = useState([]);
   async function loadData() {
-    if (session) await dispatch(getPostLikes(postList));
+    if (session) {
+      setLikes(await dispatch(getPostLikes(postList)));
+    }
   }
   useEffect(() => {
     loadData();
-  }, [postList,session]);
+  }, [postList, session]);
 
   return (
     <>
@@ -56,16 +57,18 @@ function Posts() {
                       return;
                     }
                     let ref = document.querySelector(`#like${e.id}`);
-                    if (!(postLikes.indexOf(e.id) > -1)) {
-                      await dispatch(addPostLikes(e.id));
+                    if (!(likes.indexOf(e.id) > -1)) {
+                      setLikes([...likes, e.id]);
                       ref.innerText = parseInt(ref.innerText) + 1;
+                      await dispatch(addPostLikes(e.id));
                     } else {
-                      await dispatch(delPostLikes(e.id));
+                      setLikes(likes.filter((ex) => ex !== e.id));
                       ref.innerText = parseInt(ref.innerText) - 1;
+                      await dispatch(delPostLikes(e.id));
                     }
                   }}
                 >
-                  {postLikes.indexOf(e.id) > -1 ? (
+                  {likes.indexOf(e.id) > -1 ? (
                     <i
                       className="fas fa-thumbs-up"
                       style={{ color: "#ff7400" }}

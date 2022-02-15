@@ -35,6 +35,7 @@ export const getPostLikes = (postList) => async (dispatch) => {
     }
   }
   dispatch(getLikes(larr));
+  return larr;
 };
 
 export const addPostLikes = (postId) => async (dispatch) => {
@@ -68,7 +69,7 @@ function postLikes(state = [], action) {
     case DELETEUSERLIKE:
       return state.map((e) => {
         if (e === action.like) return 0;
-        return e
+        return e;
       });
     default:
       return state;
