@@ -7,11 +7,12 @@ import { addPostLikes, delPostLikes } from "../../store/likes";
 import Comment from "./comment";
 import CommentForm from "./commentForm";
 import { formatDate } from "../utils";
+import { addSLike, delSLike } from "../../store/stateLikes";
 function PostContent() {
   const dispatch = useDispatch();
   const hist = useHistory();
   const currentPost = useSelector((state) => state.currentPost);
-  const postLikes = useSelector((state) => state.postLikes);
+  const stateLikes = useSelector((state) => state.stateLikes);
   const session = useSelector((state) => state.session.user);
   return (
     <div className="spostContent">
@@ -26,20 +27,26 @@ function PostContent() {
                     return;
                   }
                   let ref = document.querySelectorAll(`#like${currentPost.id}`);
-                  if (postLikes.indexOf(currentPost.id) > -1) {
-                    await dispatch(delPostLikes(currentPost.id));
-                    ref.forEach((e) => {
-                      e.innerText = parseInt(e.innerText) - 1;
-                    });
-                  } else {
-                    await dispatch(addPostLikes(currentPost.id));
+                  let l = document.querySelector(
+                    `#l${currentPost.id}`
+                  ).classList;
+
+                  if (!(stateLikes.indexOf(currentPost.id) > -1)) {
+                    dispatch(addSLike(currentPost.id));
                     ref.forEach((e) => {
                       e.innerText = parseInt(e.innerText) + 1;
                     });
+                    await dispatch(addPostLikes(currentPost.id));
+                  } else {
+                    dispatch(delSLike(currentPost.id));
+                    ref.forEach((e) => {
+                      e.innerText = parseInt(e.innerText) - 1;
+                    });
+                    await dispatch(delPostLikes(currentPost.id));
                   }
                 }}
               >
-                {postLikes.indexOf(currentPost.id) > -1 ? (
+                {stateLikes.indexOf(currentPost.id) > -1 ? (
                   <i
                     className="fas fa-thumbs-up"
                     style={{ color: "#ff7400" }}

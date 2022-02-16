@@ -6,25 +6,53 @@ import { useEffect, useState } from "react";
 import { getPostLikes, addPostLikes, delPostLikes } from "../../store/likes";
 import { getAllComments } from "../../store/comments";
 import ReactMarkdown from "react-markdown";
+import { getAllPosts, getFollowPosts } from "../../store/posts";
 import { formatDate } from "../utils";
 import "./posts.css";
+import Load from "../loadingAnimations/Load";
 import { memo } from "react";
-function Posts() {
+import { addSLike, getSLikes, delSLike } from "../../store/stateLikes";
+function Posts({ name }) {
   const postList = useSelector((state) => state.postList);
   const session = useSelector((state) => state.session.user);
+  const stateLikes = useSelector((state) => state.stateLikes);
   const dispatch = useDispatch();
   const hist = useHistory();
-  const [likes, setLikes] = useState([]);
-  async function loadData() {
-    if (session) {
-      setLikes(await dispatch(getPostLikes(postList)));
+  const [isLoading, setIsLoading] = useState(true);
+  async function loadData(posts) {
+    if (session && !stateLikes.length) {
+      const postLikes = await dispatch(getPostLikes(posts));
+      dispatch(getSLikes(postLikes));
     }
   }
+  async function loadAll() {
+    const posts = await dispatch(getAllPosts());
+    loadData(posts);
+    setIsLoading(false);
+  }
+  async function loadFollowed() {
+    const posts = await dispatch(getFollowPosts());
+    loadData(posts);
+    setIsLoading(false);
+  }
   useEffect(() => {
-    loadData();
-  }, [postList, session]);
+    let keys = Object.keys(localStorage);
+    keys.forEach((e) => {
+      if (e.startsWith("com")) localStorage.setItem(e, true);
+    });
+  }, []);
+  useEffect(() => {
+    setIsLoading(true);
+    if (!session || name === "All") {
+      loadAll();
+    } else {
+      loadFollowed();
+    }
+  }, [session]);
 
-  return (
+  return isLoading ? (
+    <Load />
+  ) : (
     <>
       {postList.length ? "" : "No Posts yet!"}
       {postList.map((e, i) => {
@@ -57,24 +85,26 @@ function Posts() {
                       return;
                     }
                     let ref = document.querySelector(`#like${e.id}`);
-                    if (!(likes.indexOf(e.id) > -1)) {
-                      setLikes([...likes, e.id]);
+                    if (!(stateLikes.indexOf(e.id) > -1)) {
+                      dispatch(addSLike(e.id));
                       ref.innerText = parseInt(ref.innerText) + 1;
                       await dispatch(addPostLikes(e.id));
                     } else {
-                      setLikes(likes.filter((ex) => ex !== e.id));
+                      dispatch(delSLike(e.id));
                       ref.innerText = parseInt(ref.innerText) - 1;
                       await dispatch(delPostLikes(e.id));
                     }
                   }}
                 >
-                  {likes.indexOf(e.id) > -1 ? (
+                  {stateLikes.indexOf(e.id) > -1 ? (
                     <i
                       className="fas fa-thumbs-up"
                       style={{ color: "#ff7400" }}
+                      id={`l${e.id}`}
                     ></i>
                   ) : (
                     <i
+                      id={`l${e.id}`}
                       className="far fa-thumbs-up"
                       onMouseOver={(e) => {
                         e.target.style.color = "#ff7400";

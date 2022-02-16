@@ -11,6 +11,7 @@ import sideBarPages from "./trpages";
 import postComments from "./comments";
 import commentsMap from "./commentsMap";
 import searchPages from "./searchPages";
+import stateLikes from "./stateLikes";
 import {
   createPageShow,
   editPageShow,
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   pageSelect,
   sideBarPages,
   searchPages,
+  stateLikes,
 });
 
 let enhancer;
