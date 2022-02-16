@@ -27,9 +27,6 @@ function PostContent() {
                     return;
                   }
                   let ref = document.querySelectorAll(`#like${currentPost.id}`);
-                  let l = document.querySelector(
-                    `#l${currentPost.id}`
-                  ).classList;
 
                   if (!(stateLikes.indexOf(currentPost.id) > -1)) {
                     dispatch(addSLike(currentPost.id));
