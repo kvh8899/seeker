@@ -1,17 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState, memo } from "react";
 import { useHistory } from "react-router-dom";
-import { togglePostPage, toggleLogin } from "../../store/toggles";
-import { getCurrentPost } from "../../store/currentPost";
-import { useEffect, useState } from "react";
-import { getPostLikes, addPostLikes, delPostLikes } from "../../store/likes";
-import { getAllComments } from "../../store/comments";
 import ReactMarkdown from "react-markdown";
+import { getPostLikes, addPostLikes, delPostLikes } from "../../store/likes";
+import { addSLike, getSLikes, delSLike } from "../../store/stateLikes";
+import { togglePostPage, toggleLogin } from "../../store/toggles";
 import { getAllPosts, getFollowPosts } from "../../store/posts";
+import { getCurrentPost } from "../../store/currentPost";
+import { getAllComments } from "../../store/comments";
+import Load from "../loadingAnimations/Load";
 import { formatDate } from "../utils";
 import "./posts.css";
-import Load from "../loadingAnimations/Load";
-import { memo } from "react";
-import { addSLike, getSLikes, delSLike } from "../../store/stateLikes";
 function Posts({ name }) {
   const postList = useSelector((state) => state.postList);
   const session = useSelector((state) => state.session.user);

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { getPagesByQuery } from "../../store/searchPages";
+import { getPagesByQuery, clearPages } from "../../store/searchPages";
 import { useDispatch, useSelector } from "react-redux";
 import Load from "../loadingAnimations/Load";
 import { memo } from "react";
@@ -26,7 +26,9 @@ function MidNav() {
       if (query) {
         //dispatch
         dispatch(getPagesByQuery(query));
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       }
     }, 600);
     return () => {
@@ -40,6 +42,7 @@ function MidNav() {
         value={query}
         onChange={(e) => {
           setQuery(e.target.value);
+          dispatch(clearPages());
           setLoading(true);
         }}
         onMouseDown={(e) => {
