@@ -20,9 +20,12 @@ function Posts({ name }) {
   const hist = useHistory();
   const [isLoading, setIsLoading] = useState(true);
   async function loadData(posts) {
-    if (session && !stateLikes.length) {
+    if (session) {
       const postLikes = await dispatch(getPostLikes(posts));
+      console.log(postLikes);
       dispatch(getSLikes(postLikes));
+    } else {
+      dispatch(getSLikes([]));
     }
   }
   async function loadAll() {
@@ -41,6 +44,7 @@ function Posts({ name }) {
       if (e.startsWith("com")) localStorage.setItem(e, true);
     });
   }, []);
+
   useEffect(() => {
     setIsLoading(true);
     if (!session || name === "All") {
@@ -48,7 +52,7 @@ function Posts({ name }) {
     } else {
       loadFollowed();
     }
-  }, [session]);
+  }, [session, name]);
 
   return isLoading ? (
     <Load />
