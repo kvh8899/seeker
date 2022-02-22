@@ -47,7 +47,11 @@ export function subString(title, currTitle) {
   comment: the comment obj
 */
 export function traversal(value = 0, comment, arr = []) {
-  arr.push([value, comment, true]);
+  arr.push([
+    value,
+    comment,
+    localStorage.getItem(`com${comment.id}`) === "" ? "" : true,
+  ]);
   if (!comment.replies.length) return arr;
 
   for (let i = 0; i < comment.replies.length; i++) {
@@ -126,8 +130,7 @@ export function reRenderThread(comment, map, value = 0) {
   if (value === 0) {
     map[`com${comment.id}`] = true;
   }
-
-  if (map[`com${comment.id}`] || value === 0) {
+  if (map.getItem(`com${comment.id}`)) {
     document.querySelectorAll(`#com${comment.id}`).forEach((e) => {
       e.classList.remove("noThread");
     });
@@ -177,4 +180,112 @@ export function toggleClasses(postComments, path, e) {
   document.querySelector(`.comTop${path}`).classList.remove("noThread");
   document.querySelector(`#bcom${path}`).classList.remove("noThread");
   document.querySelector(`#com${e.id}`).classList.add("noThread");
+}
+
+/*
+  level: current level of the comment in the tree
+  path: ids of ancestor comments
+  postComments: list of comments
+  e:current comment
+*/
+export function levels(level, path, postComments, e) {
+  let arr = [];
+  for (let x = 0; x < level; x++) {
+    arr.push(
+      <div
+        className="tab greyTab"
+        key={Math.random()}
+        id={`tab${path[level - x - 1]}`}
+        onClick={(ex) => {
+          localStorage.setItem(`com${path[level - x - 1]}`, "");
+          toggleClasses(postComments, path[level - x - 1], e);
+          document
+            .querySelector(`#pp${path[level - x - 1]}`)
+            .classList.add("move");
+        }}
+      ></div>
+    );
+  }
+  return arr;
+}
+
+export function hideMany(comment, map, value = 0) {
+  document.querySelectorAll(`#com${comment.id}`).forEach((e) => {
+    e.classList.add("noThread");
+  });
+  document.querySelectorAll(`#tab${comment.id}`).forEach((e) => {
+    e.classList.add("noThread");
+  });
+
+  if (!comment.replies.length) return;
+
+  for (let i = 0; i < comment.replies.length; i++) {
+    hideMany(comment.replies[i], map, value);
+  }
+}
+
+/*
+  removes event listeners to be called when component unmounts
+*/
+function removeListenerFromThread(allTab, tabHover, tabLeave) {
+  return () =>
+    allTab.forEach((e) => {
+      e.removeEventListener("mouseenter", tabHover);
+      e.removeEventListener("mouseleave", tabLeave);
+    });
+}
+
+/*
+  allTab: array of elements that are the threadlines 
+          of a specific comment
+  purpose: when hovering over a threadline, this function makes
+           it turn orange if hovered, grey if not
+  returns: a function that removes event listener, to be called
+           when component unmounts to prevent memory leak
+*/
+export function addListenerToThread(e) {
+  let allTab = document.querySelectorAll(`#tab${e.id}`);
+  function tabLeave() {
+    allTab.forEach((e) => {
+      e.classList.remove("orangeTab");
+      e.classList.add("greyTab");
+    });
+  }
+  function tabHover() {
+    allTab.forEach((e) => {
+      e.classList.add("orangeTab");
+      e.classList.remove("greyTab");
+    });
+  }
+  allTab.forEach((e) => {
+    e.addEventListener("mouseenter", tabHover);
+    e.addEventListener("mouseleave", tabLeave);
+  });
+  return removeListenerFromThread(allTab, tabHover, tabLeave);
+}
+
+/*
+  CommentContainer: CommentContainer component
+  postComments: adjacency list of comments and replies
+  returns: array of comment components
+*/
+export function render_Comments(postComments, CommentContainer) {
+  let arr = [];
+  postComments?.forEach((e) => {
+    let data = traversal(0, e, []);
+    data.forEach((e) => {
+      let path = getPath(e[1]);
+      arr.push(
+        <CommentContainer
+          e={e[1]}
+          level={e[0]}
+          path={path}
+          isOpen={e[2]}
+          key={Math.random()}
+        ></CommentContainer>
+      );
+      localStorage.setItem(`com${e[1].id}`, e[2]);
+    });
+  });
+  return arr;
 }

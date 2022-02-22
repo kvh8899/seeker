@@ -2,8 +2,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchUserList } from "../../store/pages";
 import LeftNav from "./LeftNav";
 import RightNav from "./RightNav";
+import MidNav from "./MidNav";
 import "./nav.css";
 import { useState, useEffect, useRef } from "react";
+import { memo } from "react";
 function Nav({ name, icon }) {
   const session = useSelector((state) => state.session.user);
   const [showDiv, setShowDiv] = useState(false);
@@ -62,6 +64,7 @@ function Nav({ name, icon }) {
             setIcons={setIcons}
             homeBar={homeBar}
           />
+          <MidNav />
           <RightNav
             setName={setName}
             setIcons={setIcons}
@@ -76,4 +79,4 @@ function Nav({ name, icon }) {
   );
 }
 
-export default Nav;
+export default memo(Nav);

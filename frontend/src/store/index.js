@@ -10,6 +10,8 @@ import postLikes from "./likes";
 import sideBarPages from "./trpages";
 import postComments from "./comments";
 import commentsMap from "./commentsMap";
+import searchPages from "./searchPages";
+import stateLikes from "./stateLikes";
 import {
   createPageShow,
   editPageShow,
@@ -23,19 +25,21 @@ const rootReducer = combineReducers({
   session,
   loginShow,
   signupShow,
-  pageList,
   createPageShow,
-  postList,
-  currentPage,
   editPageShow,
   postPageShow,
-  pageSelect,
+  postList,
+  currentPage,
   currentPost,
   isFollowing,
   postLikes,
-  sideBarPages,
   postComments,
   commentsMap,
+  pageList,
+  pageSelect,
+  sideBarPages,
+  searchPages,
+  stateLikes,
 });
 
 let enhancer;

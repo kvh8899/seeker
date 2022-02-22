@@ -1,41 +1,39 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useEffect, memo } from "react";
 import { useHistory } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import { addPostLikes, delPostLikes } from "../../store/likes";
+import { addSLike, delSLike } from "../../store/stateLikes";
 import { togglePostPage, toggleLogin } from "../../store/toggles";
 import { getCurrentPost } from "../../store/currentPost";
-import { useEffect } from "react";
-import { getPostLikes, addPostLikes, delPostLikes } from "../../store/likes";
 import { getAllComments } from "../../store/comments";
-import ReactMarkdown from "react-markdown";
 import { formatDate } from "../utils";
 import "./posts.css";
-
 function Posts() {
   const postList = useSelector((state) => state.postList);
-  const currentPost = useSelector((state) => state.currentPost);
-  const postLikes = useSelector((state) => state.postLikes);
-  const session = useSelector((state) => state.session.user);
+  const stateLikes = useSelector((state) => state.stateLikes);
+  const session = useSelector((state) => state.session.user)
   const dispatch = useDispatch();
   const hist = useHistory();
-
-  async function loadData() {
-    if (session) await dispatch(getPostLikes(postList));
-  }
+  
   useEffect(() => {
-    loadData();
-  }, [postList, currentPost, session]);
+    let keys = Object.keys(localStorage);
+    keys.forEach((e) => {
+      if (e.startsWith("com")) localStorage.setItem(e, true);
+    });
+  }, []);
 
-  return (
-    <>
+  return <>
       {postList.length ? "" : "No Posts yet!"}
       {postList.map((e, i) => {
         return (
           <div
             key={e.id}
             className="mainPosts"
-            onClick={() => {
+            onClick={async () => {
+              await dispatch(getCurrentPost(e.id));
+              await dispatch(getAllComments(e.id));
               dispatch(togglePostPage());
-              dispatch(getCurrentPost(e.id));
-              dispatch(getAllComments(e.id));
               document.body.classList.add("mainContentScroll");
             }}
             onMouseOver={(e) => {
@@ -57,22 +55,26 @@ function Posts() {
                       return;
                     }
                     let ref = document.querySelector(`#like${e.id}`);
-                    if (!(postLikes.indexOf(e.id) > -1)) {
-                      await dispatch(addPostLikes(e.id));
+                    if (!(stateLikes.indexOf(e.id) > -1)) {
+                      dispatch(addSLike(e.id));
                       ref.innerText = parseInt(ref.innerText) + 1;
+                      await dispatch(addPostLikes(e.id));
                     } else {
-                      await dispatch(delPostLikes(e.id));
+                      dispatch(delSLike(e.id));
                       ref.innerText = parseInt(ref.innerText) - 1;
+                      await dispatch(delPostLikes(e.id));
                     }
                   }}
                 >
-                  {postLikes.indexOf(e.id) > -1 ? (
+                  {stateLikes.indexOf(e.id) > -1 ? (
                     <i
                       className="fas fa-thumbs-up"
                       style={{ color: "#ff7400" }}
+                      id={`l${e.id}`}
                     ></i>
                   ) : (
                     <i
+                      id={`l${e.id}`}
                       className="far fa-thumbs-up"
                       onMouseOver={(e) => {
                         e.target.style.color = "#ff7400";
@@ -136,7 +138,6 @@ function Posts() {
         );
       })}
     </>
-  );
 }
 
-export default Posts;
+export default memo(Posts);

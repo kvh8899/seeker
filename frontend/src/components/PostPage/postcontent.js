@@ -3,31 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import PageData from "./PageData";
-import { useEffect, useState } from "react";
 import { addPostLikes, delPostLikes } from "../../store/likes";
 import Comment from "./comment";
 import CommentForm from "./commentForm";
 import { formatDate } from "../utils";
+import { addSLike, delSLike } from "../../store/stateLikes";
 function PostContent() {
   const dispatch = useDispatch();
   const hist = useHistory();
   const currentPost = useSelector((state) => state.currentPost);
-  const postLikes = useSelector((state) => state.postLikes);
+  const stateLikes = useSelector((state) => state.stateLikes);
   const session = useSelector((state) => state.session.user);
-  const [numLikes, setNumLikes] = useState(0);
-  async function loadData() {
-    const res = await fetch(`/api/likes/${currentPost.id}`);
-
-    if (res.ok) {
-      const { likes } = await res.json();
-      setNumLikes(likes);
-    }
-  }
-
-  useEffect(() => {
-    if (currentPost.id) loadData();
-  }, [currentPost]);
-
   return (
     <div className="spostContent">
       <div className="postContent pcBackground">
@@ -41,20 +27,23 @@ function PostContent() {
                     return;
                   }
                   let ref = document.querySelectorAll(`#like${currentPost.id}`);
-                  if (postLikes.indexOf(currentPost.id) > -1) {
-                    await dispatch(delPostLikes(currentPost.id));
-                    ref.forEach((e) => {
-                      e.innerText = parseInt(e.innerText) - 1;
-                    });
-                  } else {
-                    await dispatch(addPostLikes(currentPost.id));
+
+                  if (!(stateLikes.indexOf(currentPost.id) > -1)) {
+                    dispatch(addSLike(currentPost.id));
                     ref.forEach((e) => {
                       e.innerText = parseInt(e.innerText) + 1;
                     });
+                    await dispatch(addPostLikes(currentPost.id));
+                  } else {
+                    dispatch(delSLike(currentPost.id));
+                    ref.forEach((e) => {
+                      e.innerText = parseInt(e.innerText) - 1;
+                    });
+                    await dispatch(delPostLikes(currentPost.id));
                   }
                 }}
               >
-                {postLikes.indexOf(currentPost.id) > -1 ? (
+                {stateLikes.indexOf(currentPost.id) > -1 ? (
                   <i
                     className="fas fa-thumbs-up"
                     style={{ color: "#ff7400" }}
@@ -71,9 +60,7 @@ function PostContent() {
                   ></i>
                 )}
               </div>
-
-              <p id={`like${currentPost.id}`}>{numLikes}</p>
-              {/* <i class="fas fa-thumbs-up"></i>*/}
+              <p id={`like${currentPost.id}`}>{currentPost.likers}</p>
             </div>
           </div>
           <div className="postHeadings">

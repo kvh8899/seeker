@@ -24,6 +24,7 @@
   position: absolute;
   color: #0277d1;
   animation: fade 1.5s infinite;
+  font-size: 16px;
 }
 
 @keyframes fade {

@@ -1,24 +1,34 @@
 import "./mainpage.css";
-import { useSelector, useDispatch } from "react-redux";
 import Posts from "../Posts";
-import { useEffect, useState } from "react";
-import { getAllPosts, getFollowPosts } from "../../store/posts";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import FooForm from "../FooForm";
 import TopBar from "../Nav";
 import SideBar from "./sidebar";
+import { getAllPosts, getFollowPosts } from "../../store/posts";
+import { getPostLikes } from "../../store/likes";
+import { getSLikes } from "../../store/stateLikes";
 import Load from "../loadingAnimations/Load";
-import { clear } from "../../store/posts";
 function MainPage({ icon, name }) {
+  const [isLoading, setIsLoading] = useState(true);
   const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(true);
+  async function loadData(posts) {
+    if (session) {
+      const postLikes = await dispatch(getPostLikes(posts));
+      dispatch(getSLikes(postLikes));
+    } else {
+      dispatch(getSLikes([]));
+    }
+  }
   async function loadAll() {
-    await dispatch(getAllPosts());
+    const posts = await dispatch(getAllPosts());
+    loadData(posts);
     setIsLoading(false);
   }
-
   async function loadFollowed() {
-    await dispatch(getFollowPosts());
+    const posts = await dispatch(getFollowPosts());
+    loadData(posts);
     setIsLoading(false);
   }
 
@@ -29,7 +39,7 @@ function MainPage({ icon, name }) {
     } else {
       loadFollowed();
     }
-  }, [session]);
+  }, [session, name]);
 
   return (
     <div className="mainContent">
@@ -37,7 +47,7 @@ function MainPage({ icon, name }) {
       <div className="midContent">
         <div className="postContent">
           <FooForm />
-          {!isLoading ? <Posts /> : <Load />}
+          {!isLoading ? <Posts name={name} /> : <Load />}
           <span id="spacer"></span>
         </div>
 

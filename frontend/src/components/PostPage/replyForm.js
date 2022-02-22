@@ -3,18 +3,18 @@ import styled from "styled-components";
 import { setMap } from "../../store/commentsMap";
 import { replyTo } from "../../store/comments";
 import { useState } from "react";
-import { hide } from "../utils";
+import { hide, levels } from "../utils";
 const UserData = styled.div`
   width: 100%;
 `;
-function ReplyForm({ e, levels, rep }) {
+function ReplyForm({ level, e, rep, pp, path }) {
   const dispatch = useDispatch();
   const [reply, setReply] = useState("");
   const currentPost = useSelector((state) => state.currentPost);
-
+  const postComments = useSelector((state) => state.postComments);
   return (
     <div id={"repinput" + e.id} className="displayNun" ref={rep}>
-      {levels()}
+      {levels(level, path, postComments, e)}
       <UserData>
         <div
           style={{
@@ -39,22 +39,26 @@ function ReplyForm({ e, levels, rep }) {
               document
                 .querySelector(`#bcom${e.id}`)
                 .classList.remove("noThread");
+              pp.current.classList.add("move");
             }}
           ></div>
           <form
             id={`com${e.id}`}
             style={{ position: "relative" }}
-            onSubmit={(event) => {
+            onSubmit={async (event) => {
               event.preventDefault();
-              dispatch(
+              const repl = await dispatch(
                 replyTo(e.id, {
                   content: reply,
                   post_id: currentPost.id,
                 })
               );
-              rep.current.classList.toggle("displayNun");
-              rep.current.classList.toggle("reply");
-              setReply("");
+              localStorage.setItem(`com${repl.id}`, true);
+              if (rep.current) {
+                rep.current.classList.toggle("displayNun");
+                rep.current.classList.toggle("reply");
+                setReply("");
+              }
             }}
           >
             <textarea

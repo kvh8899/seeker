@@ -101,13 +101,10 @@ def edit_page(id):
 
 @pages_routes.route("/<int:id>/delete",methods=["DELETE"])
 def delete_page(id):
-    try:
-        page =  Page.query.filter(id == Page.id).first()
-        db.session.delete(page)
-        db.session.commit()
-        return {'delete':'success'}
-    except:
-        return {'delete':'failure'}
+    page =  Page.query.filter(id == Page.id).first()
+    db.session.delete(page)
+    db.session.commit()
+    return {'delete':'success'}
     
 # add a post to a page
 # /api/pages/:id/posts
