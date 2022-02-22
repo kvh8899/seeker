@@ -1,42 +1,21 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState, memo } from "react";
+import { useEffect, memo } from "react";
 import { useHistory } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import { getPostLikes, addPostLikes, delPostLikes } from "../../store/likes";
-import { addSLike, getSLikes, delSLike } from "../../store/stateLikes";
+import { addPostLikes, delPostLikes } from "../../store/likes";
+import { addSLike, delSLike } from "../../store/stateLikes";
 import { togglePostPage, toggleLogin } from "../../store/toggles";
-import { getAllPosts, getFollowPosts } from "../../store/posts";
 import { getCurrentPost } from "../../store/currentPost";
 import { getAllComments } from "../../store/comments";
-import Load from "../loadingAnimations/Load";
 import { formatDate } from "../utils";
 import "./posts.css";
-function Posts({ name }) {
+function Posts() {
   const postList = useSelector((state) => state.postList);
-  const session = useSelector((state) => state.session.user);
   const stateLikes = useSelector((state) => state.stateLikes);
+  const session = useSelector((state) => state.session.user)
   const dispatch = useDispatch();
   const hist = useHistory();
-  const [isLoading, setIsLoading] = useState(true);
-  async function loadData(posts) {
-    if (session) {
-      const postLikes = await dispatch(getPostLikes(posts));
-      console.log(postLikes);
-      dispatch(getSLikes(postLikes));
-    } else {
-      dispatch(getSLikes([]));
-    }
-  }
-  async function loadAll() {
-    const posts = await dispatch(getAllPosts());
-    loadData(posts);
-    setIsLoading(false);
-  }
-  async function loadFollowed() {
-    const posts = await dispatch(getFollowPosts());
-    loadData(posts);
-    setIsLoading(false);
-  }
+  
   useEffect(() => {
     let keys = Object.keys(localStorage);
     keys.forEach((e) => {
@@ -44,19 +23,7 @@ function Posts({ name }) {
     });
   }, []);
 
-  useEffect(() => {
-    setIsLoading(true);
-    if (!session || name === "All") {
-      loadAll();
-    } else {
-      loadFollowed();
-    }
-  }, [session, name]);
-
-  return isLoading ? (
-    <Load />
-  ) : (
-    <>
+  return <>
       {postList.length ? "" : "No Posts yet!"}
       {postList.map((e, i) => {
         return (
@@ -171,7 +138,6 @@ function Posts({ name }) {
         );
       })}
     </>
-  );
 }
 
 export default memo(Posts);
