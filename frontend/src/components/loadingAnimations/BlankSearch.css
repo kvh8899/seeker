@@ -1,0 +1,33 @@
+.fake-result {
+  box-sizing: border-box;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.fake-result > div {
+  background-color: rgb(241, 241, 241);;
+  height: 20px;
+  margin: 20px;
+  transition: 2s;
+  animation: pulse 4s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: lightgray;
+  }
+  25% {
+    background-color: rgb(230, 230, 230);
+  }
+
+  50% {
+    background-color: lightgray;
+  }
+  75% {
+    background-color: rgb(230, 230, 230);
+  }
+  100% {
+    background-color: lightgray;
+  }
+}

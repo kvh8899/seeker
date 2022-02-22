@@ -1,0 +1,29 @@
+.search-posts {
+  display: flex;
+  flex-direction: column;
+}
+.search-posts p {
+  margin: 10px 0px;
+}
+.page-data {
+  display: flex;
+  align-items: center;
+}
+.dropResult {
+  box-sizing: border-box;
+  width: 100%;
+  height: 250px;
+  background-color: white;
+  position: absolute;
+  top: 40px;
+  border-radius: 0px 0px 3px 3px;
+  border: 1px solid rgb(187, 187, 187);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.searchResults {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+}

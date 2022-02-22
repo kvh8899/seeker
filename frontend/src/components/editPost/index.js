@@ -3,7 +3,7 @@ import EpForm from "./EpForm";
 
 function EditPost() {
   return (
-    <div className="mainContent mainContentScroll">
+    <div className="mainContent">
       <TopBar icon={<i className="fas fa-pencil-alt"></i>} name={"Edit Post"} />
       <div className="midContent">
         <div className="cPostForm">

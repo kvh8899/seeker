@@ -4,12 +4,11 @@ a {
 body {
   margin: 0px;
   font-family: sans-serif;
-  width: 100%;
-  height: 100%;
 }
 nav {
   background-color: white;
 }
+
 .unselectable {
   user-select: none;
 }
@@ -24,10 +23,7 @@ button:hover {
   opacity: 0.8;
   transition: 0.5s ease;
 }
-#root {
-  width: 100%;
-  height: 100%;
-}
+
 img {
   object-fit: cover;
 }
