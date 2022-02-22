@@ -62,7 +62,7 @@ function SearchBar() {
           }}
         >
           {!isLoading ? (
-            <SearchResults />
+            <SearchResults setSearch={setSearch} />
           ) : query ? (
             <BlankSearch num={6} />
           ) : (
