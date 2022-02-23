@@ -10,6 +10,9 @@ import ComData from "../comData";
 import FooForm from "../FooForm";
 import TopBar from "../Nav/index";
 import Load from "../loadingAnimations/Load";
+import { getSLikes } from "../../store/stateLikes";
+import { getPostLikes } from "../../store/likes";
+import { cap } from "../utils";
 import "./page.css";
 
 function Page() {
@@ -19,16 +22,19 @@ function Page() {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const { id } = useParams();
+
   async function loadPage() {
     if (id) {
-      await dispatch(getPagePosts(id));
+      const posts = await dispatch(getPagePosts(id));
       await dispatch(getCurrentPage(id));
       setIsLoading(false);
+      if (session) {
+        const postLikes = await dispatch(getPostLikes(posts));
+        dispatch(getSLikes(postLikes));
+      } else {
+        dispatch(getSLikes([]));
+      }
     }
-  }
-
-  function cap(str) {
-    return <>{str ? str[0].toUpperCase() + str.slice(1) : ""}</>;
   }
 
   useEffect(() => {
