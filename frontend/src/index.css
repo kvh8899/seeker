@@ -9,6 +9,11 @@ nav {
   background-color: white;
 }
 
+#root{
+  height:100%;
+  width:100%;
+}
+
 .unselectable {
   user-select: none;
 }
