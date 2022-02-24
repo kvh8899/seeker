@@ -175,3 +175,5 @@ There is a layer in the Dockerfile that will install psycopg2 (not binary) for u
 
    heroku container:release web -a gseeker-app
    ```
+a e f c d b
+
