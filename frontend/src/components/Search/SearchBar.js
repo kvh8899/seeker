@@ -21,15 +21,13 @@ function SearchBar() {
   }, []);
 
   useEffect(() => {
-    let timer = setTimeout(() => {
+    let timer = setTimeout(async () => {
       if (query) {
         //dispatch
-        dispatch(getPagesByQuery(query));
-        setTimeout(() => {
-          setLoading(false);
-        }, 500);
+        await dispatch(getPagesByQuery(query));
+        setLoading(false);
       }
-    }, 600);
+    }, 400);
     return () => {
       clearTimeout(timer);
     };
