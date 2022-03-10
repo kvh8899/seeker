@@ -1,18 +1,25 @@
 import Communities from "./communities";
-import CurrentSelect from "./currentSelect";
 import styled from "styled-components";
+import CurrentSelect from "./currentSelect";
 
 const Sidebar = styled.div`
   margin-left: 30px;
   width: 475px;
 `;
 
-function SideBar({icon,name}) {
+const StickyDiv = styled.div`
+  position: sticky;
+  top: 75px;
+  height: 275px;
+`;
+function SideBar({ icon, name }) {
   return (
     <>
       <Sidebar>
         <Communities />
-        <CurrentSelect icon={icon} name={name}/>
+        <StickyDiv>
+          <CurrentSelect icon={icon} name={name} />
+        </StickyDiv>
       </Sidebar>
     </>
   );

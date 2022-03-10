@@ -2,26 +2,8 @@ import styled from "styled-components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTrending } from "../../store/trpages";
-import banner from "../../images/banner.png";
-const ComList = styled.div`
-  max-height: 450px;
-  width: 100%;
-  background-color: white;
-  border-radius: 3px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-`;
-const Banner = styled.div`
-  width: 100%;
-  height: 75px;
-  background-image: url("${banner}");
-  background-size: cover;
-  background-position: top 0px left -350px;
-  border-radius: 3px 3px 0px 0px;
-  display: flex;
-  align-items: flex-end;
-`;
+import Card from "./card";
+
 const TrendingList = styled.ol`
   list-style: none;
   padding: 0px;
@@ -82,10 +64,7 @@ function Communities() {
   }, []);
 
   return (
-    <ComList>
-      <Banner>
-        <BannerTitle>Most Followed Communities</BannerTitle>
-      </Banner>
+    <Card>
       <TrendingList>
         {sideBarPages.map((e, i) => {
           return (
@@ -101,7 +80,7 @@ function Communities() {
           );
         })}
       </TrendingList>
-    </ComList>
+    </Card>
   );
 }
 
