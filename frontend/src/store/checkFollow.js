@@ -1,6 +1,6 @@
 const ISFOLLOW = "set/ISFOLLOW";
 const UNFOLLOW = "set/UNFOLLOW";
-const FOLLOW = "set/FOLLO";
+const FOLLOW = "set/FOLLOW";
 
 const follow = () => {
   return {

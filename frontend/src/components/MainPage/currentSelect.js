@@ -1,30 +1,9 @@
-import styled from "styled-components";
-import { BannerTitle } from "./communities";
-import { toggleCreatePage, toggleLogin } from "../../store/toggles";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import Card from "./card";
 import knight from "../../images/knight.gif";
-import banner from "../../images/banner.png";
-const CurrentDiv = styled.div`
-  height: 275px;
-  width: 100%;
-  background-color: white;
-  border-radius: 3px;
-  margin-top: 20px;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 70px;
-`;
-const Banner = styled.div`
-  width: 100%;
-  height: 40px;
-  background-image: url("${banner}");
-  background-size: cover;
-  background-position: top 0px left -10px;
-  border-radius: 3px 3px 0px 0px;
-  display: flex;
-  align-items: flex-end;
-`;
+import { toggleCreatePage, toggleLogin } from "../../store/toggles";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 const Description = styled.p`
   margin: 10px;
   top: -65px;
@@ -48,15 +27,12 @@ const SideButtonCo = styled.button`
   font-size: 16px;
   margin: 5px 10px;
 `;
-function CurrentSelect({ name }) {
+function CurrentSelect({ name, icon }) {
   const dispatch = useDispatch();
   const hist = useHistory();
   const session = useSelector((state) => state.session.user);
   return (
-    <CurrentDiv>
-      <Banner>
-        <BannerTitle></BannerTitle>
-      </Banner>
+    <Card showBanner={true}>
       <div style={{ display: "flex", alignItems: "flex-end" }}>
         <img
           src={knight}
@@ -122,7 +98,7 @@ function CurrentSelect({ name }) {
           Create a Community
         </SideButtonCo>
       </div>
-    </CurrentDiv>
+    </Card>
   );
 }
 

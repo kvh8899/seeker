@@ -23,12 +23,12 @@ function MainPage({ icon, name }) {
   }
   async function loadAll() {
     const posts = await dispatch(getAllPosts());
-    loadData(posts);
+    await loadData(posts);
     setIsLoading(false);
   }
   async function loadFollowed() {
     const posts = await dispatch(getFollowPosts());
-    loadData(posts);
+    await loadData(posts);
     setIsLoading(false);
   }
 

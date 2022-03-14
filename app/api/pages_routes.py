@@ -40,7 +40,7 @@ def all_posts():
 # get trending pages by follows
 @pages_routes.route("/trending")
 def tre_posts():
-    pages = db.session.query(Page,func.count(Page_Follow.user_id).label('total')).join(Page_Follow).group_by(Page).order_by(desc('total')).limit(5).all();
+    pages = db.session.query(Page,func.count(Page_Follow.user_id).label('total')).join(Page_Follow,isouter=True).group_by(Page).order_by(desc('total')).all();
     arr = [ i[0].to_dict() for i in pages ]
     return {'pages':arr}
 #get posts of a page /api/posts/:pageId

@@ -18,7 +18,7 @@ def validation_errors_to_error_messages(validation_errors):
 #get trending posts /api/posts/
 @post_routes.route("/")
 def trending():
-    posts = db.session.query(Post,func.count(Like.id).label("total")).join(Like).group_by(Post).order_by(desc('total')).limit(10).all()
+    posts = db.session.query(Post,func.count(Like.id).label("total")).join(Like,isouter=True).group_by(Post).order_by(desc('total')).limit(10).all()
     print(posts)
     posts_t = []
     for i in posts:
