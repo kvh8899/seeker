@@ -1,17 +1,17 @@
 import { toggleLogin, toggleSignup, togglePageOff } from "../../store/toggles";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllPosts } from "../../store/posts";
-import LogoutButton from "../auth/LogoutButton";
+import Profile from "./Profile";
 import { NavLink } from "react-router-dom";
-import guardian from "../../images/Guardian.png";
+
 import { memo } from "react";
 function RightNav({
   setIcons,
   setName,
-  showDiv,
-  setShowDiv,
   profileDrop,
   profile,
+  showDiv,
+  setShowDiv,
 }) {
   const loginShow = useSelector((state) => state.loginShow);
   const session = useSelector((state) => state.session.user);
@@ -101,41 +101,12 @@ function RightNav({
         </>
       )}
       {session && (
-        <li
-          className="profile"
-          onClick={(e) => {
-            e.stopPropagation();
-            profile.current.classList.toggle("profileStick");
-            profileDrop.current.classList.toggle("displayNun");
-            profileDrop.current.classList.toggle("profileDrop");
-          }}
-          ref={profile}
-        >
-          <div className="profileMeta">
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <img
-                src={guardian}
-                width="30px"
-                alt=""
-                style={{ marginRight: "5px" }}
-              ></img>
-              <div>{session && session.username}</div>
-            </div>
-            <i className="fas fa-chevron-down"></i>
-          </div>
-
-          <div
-            className="displayNun"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            ref={profileDrop}
-          >
-            <div style={{ margin: "10px" }}>
-              <LogoutButton showDiv={showDiv} setShowDiv={setShowDiv} />
-            </div>
-          </div>
-        </li>
+        <Profile
+          profileDrop={profileDrop}
+          profile={profile}
+          showDiv={showDiv}
+          setShowDiv={setShowDiv}
+        ></Profile>
       )}
     </div>
   );

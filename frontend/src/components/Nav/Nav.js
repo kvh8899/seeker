@@ -67,11 +67,11 @@ function Nav({ name, icon }) {
           <MidNav />
           <RightNav
             setName={setName}
-            setIcons={setIcons}
-            showDiv={showDiv}
-            setShowDiv={setShowDiv}
+            setIcons={setIcons}   
             profileDrop={profileDrop}
             profile={profile}
+            setShowDiv={setShowDiv}
+            showDiv={showDiv}
           />
         </ul>
       </nav>

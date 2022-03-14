@@ -162,7 +162,7 @@ div.comBar input {
 
 .profileDrop {
   position: fixed;
-  top: 39px;
+  top: 40px;
   width: 210px;
   right: 10px;
   height: 400px;
@@ -217,9 +217,7 @@ div.comBar input {
 .profileStick {
   border: 1px solid lightgray;
 }
-.profile i {
-  margin-left: 10px;
-}
+
 .homeChild:hover {
   cursor: pointer;
 }
