@@ -1,7 +1,7 @@
 import Communities from "./communities";
 import styled from "styled-components";
 import CurrentSelect from "./currentSelect";
-
+import Footer from "./footer";
 const Sidebar = styled.div`
   margin-left: 30px;
   width: 475px;
@@ -17,8 +17,9 @@ function SideBar({ icon, name }) {
     <>
       <Sidebar>
         <Communities />
+        <CurrentSelect icon={icon} name={name} />
         <StickyDiv>
-          <CurrentSelect icon={icon} name={name} />
+          <Footer></Footer>
         </StickyDiv>
       </Sidebar>
     </>

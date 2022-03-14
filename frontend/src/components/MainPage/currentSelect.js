@@ -32,7 +32,7 @@ function CurrentSelect({ name, icon }) {
   const hist = useHistory();
   const session = useSelector((state) => state.session.user);
   return (
-    <Card>
+    <Card showBanner={true}>
       <div style={{ display: "flex", alignItems: "flex-end" }}>
         <img
           src={knight}

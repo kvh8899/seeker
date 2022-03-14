@@ -5,13 +5,14 @@ const CurrentDiv = styled.div`
   width: 100%;
   background-color: white;
   border-radius: 3px;
-  margin-top: 20px;
+  margin-bottom: 20px;
   top: 70px;
   height: 275px;
+  border: 1px solid rgb(187, 187, 187);
 `;
 const Banner = styled.div`
   width: 100%;
-  height: 40px;
+  height: 45px;
   background-image: url("${banner}");
   background-size: cover;
   background-position: top 0px left -10px;
@@ -20,12 +21,16 @@ const Banner = styled.div`
   align-items: flex-end;
 `;
 
-function Card({ children }) {
+function Card({ children, showBanner, bannerTitle }) {
   return (
     <CurrentDiv>
-      <Banner>
-        <BannerTitle></BannerTitle>
-      </Banner>
+      {showBanner ? (
+        <Banner>
+          <BannerTitle>{bannerTitle}</BannerTitle>
+        </Banner>
+      ) : (
+        ""
+      )}
       {children}
     </CurrentDiv>
   );

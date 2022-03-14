@@ -64,7 +64,7 @@ function Communities() {
   }, []);
 
   return (
-    <Card>
+    <Card showBanner={true} bannerTitle={"Top Communities"}>
       <TrendingList>
         {sideBarPages.map((e, i) => {
           return (
