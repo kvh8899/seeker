@@ -6,7 +6,12 @@ import MainPage from "./components/MainPage";
 import Page from "./components/Page";
 import CreatePost from "./components/CreatePost";
 import EditPost from "./components/editPost";
-
+import UserSettings from "./components/UserSettings";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUserGear,
+  faArrowRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -38,6 +43,9 @@ function App() {
         </Route>
         <Route path="/all" exact={true}>
           <MainPage icon={<i className="fas fa-signal"></i>} name="All" />
+        </Route>
+        <Route path="/settings" exact={true}>
+          <UserSettings icon={<FontAwesomeIcon icon={faUserGear}></FontAwesomeIcon>} name="Settings"></UserSettings>
         </Route>
       </Switch>
     </BrowserRouter>

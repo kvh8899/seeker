@@ -4,11 +4,14 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import FooForm from "../FooForm";
 import TopBar from "../Nav";
-import SideBar from "./sidebar";
+import SideBar from "../Sidebar/sidebar";
 import { getAllPosts, getFollowPosts } from "../../store/posts";
 import { getPostLikes } from "../../store/likes";
 import { getSLikes } from "../../store/stateLikes";
 import Load from "../loadingAnimations/Load";
+import Communities from "./communities";
+import CurrentSelect from "./currentSelect";
+
 function MainPage({ icon, name }) {
   const [isLoading, setIsLoading] = useState(true);
   const session = useSelector((state) => state.session.user);
@@ -51,7 +54,10 @@ function MainPage({ icon, name }) {
           <span id="spacer"></span>
         </div>
 
-        <SideBar icon={icon} name={name} />
+        <SideBar>
+          <Communities />
+          <CurrentSelect icon={icon} name={name} />
+        </SideBar>
       </div>
     </div>
   );

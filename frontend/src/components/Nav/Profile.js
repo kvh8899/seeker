@@ -3,11 +3,15 @@ import LogoutButton from "../auth/LogoutButton";
 import UserSettingsButton from "../User/UserSettingsButton";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/session";
 import {
   faUserGear,
   faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+
 const ProfileButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -18,16 +22,28 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 10px;
+  padding: 5px 0px;
+  &:hover {
+    background-color: rgb(28, 138, 228);
+    color: white;
+    cursor: pointer;
+  }
 `;
 const ButtonWrapper = styled.div`
   width: 170px;
+  color: inherit;
 `;
 const IconWrapper = styled.div`
   margin-left: 10px;
 `;
 function Profile({ profileDrop, profile, setShowDiv, showDiv }) {
   const session = useSelector((state) => state.session.user);
+  const hist = useHistory();
+  const dispatch = useDispatch();
+  const onLogout = async (e) => {
+    setShowDiv(false);
+    await dispatch(logout());
+  };
   return (
     <li
       className="profile"
@@ -59,7 +75,11 @@ function Profile({ profileDrop, profile, setShowDiv, showDiv }) {
         ref={profileDrop}
       >
         <ProfileButtonContainer>
-          <ButtonContainer>
+          <ButtonContainer
+            onClick={(e) => {
+              hist.push("/settings");
+            }}
+          >
             <IconWrapper>
               <FontAwesomeIcon icon={faUserGear}></FontAwesomeIcon>
             </IconWrapper>
@@ -68,12 +88,12 @@ function Profile({ profileDrop, profile, setShowDiv, showDiv }) {
             </ButtonWrapper>
           </ButtonContainer>
 
-          <ButtonContainer>
+          <ButtonContainer onClick={onLogout}>
             <IconWrapper>
               <FontAwesomeIcon icon={faArrowRightFromBracket}></FontAwesomeIcon>
             </IconWrapper>
             <ButtonWrapper>
-              <LogoutButton setShowDiv={setShowDiv} showDiv={showDiv} />
+              <LogoutButton />
             </ButtonWrapper>
           </ButtonContainer>
         </ProfileButtonContainer>

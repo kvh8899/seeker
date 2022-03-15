@@ -13,6 +13,7 @@ import Load from "../loadingAnimations/Load";
 import { getSLikes } from "../../store/stateLikes";
 import { getPostLikes } from "../../store/likes";
 import { cap } from "../utils";
+import SideBar from "../Sidebar/sidebar";
 import "./page.css";
 
 function Page() {
@@ -107,10 +108,9 @@ function Page() {
             {!isLoading ? <Posts /> : <Load />}
             <span id="spacer"></span>
           </div>
-          <div className="sideBar">
+          <SideBar>
             <ComData />
-            <span className="spacer" style={{ height: "200px" }}></span>
-          </div>
+          </SideBar>
         </div>
       </div>
     </>
