@@ -32,7 +32,7 @@ function Page() {
       setIsLoading(false);
       if (session) {
         const postLikes = await dispatch(getPostLikes(posts));
-        dispatch(getSLikes(postLikes));
+        if(postLikes) dispatch(getSLikes(postLikes));
       } else {
         dispatch(getSLikes([]));
       }

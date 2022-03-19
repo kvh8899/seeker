@@ -72,7 +72,8 @@ function CurrentSelect({ name, icon }) {
           display: "flex",
           position: "relative",
           flexDirection: "column",
-          top: "-70px",
+          marginTop: "-60px",
+          marginBottom: "10px",
         }}
       >
         <SideButtonC
