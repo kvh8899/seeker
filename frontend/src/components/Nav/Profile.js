@@ -1,6 +1,6 @@
 import guardian from "../../images/Guardian.png";
 import LogoutButton from "../auth/LogoutButton";
-import UserSettingsButton from "../User/UserSettingsButton";
+import UserSettingsButton from "../UserSettings/UserSettingsButton";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from "react-router-dom";
