@@ -8,6 +8,7 @@ import Comment from "./comment";
 import CommentForm from "./commentForm";
 import { formatDate } from "../utils";
 import { addSLike, delSLike } from "../../store/stateLikes";
+import SideBar from "../Sidebar/sidebar.js";
 function PostContent() {
   const dispatch = useDispatch();
   const hist = useHistory();
@@ -130,9 +131,9 @@ function PostContent() {
         <Comment />
         <CommentForm />
       </div>
-      <div className="sideBar">
+      <SideBar>
         <PageData />
-      </div>
+      </SideBar>
     </div>
   );
 }

@@ -14,6 +14,7 @@ import { getSLikes } from "../../store/stateLikes";
 import { getPostLikes } from "../../store/likes";
 import { cap } from "../utils";
 import SideBar from "../Sidebar/sidebar";
+import Card from "../MainPage/card";
 import "./page.css";
 
 function Page() {
