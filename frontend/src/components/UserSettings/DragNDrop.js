@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileArrowUp, faCheck } from "@fortawesome/free-solid-svg-icons";
 const DropZone = styled.div`
@@ -28,6 +28,7 @@ function DragNDrop() {
   const [file, setFile] = useState(null);
   const onDropHandler = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     const item = e.dataTransfer.items[0];
     if (item.kind === "file") {
       const uploadFile = item.getAsFile();
@@ -39,7 +40,7 @@ function DragNDrop() {
     e.preventDefault();
   };
   return (
-    <DropZone id="drop-zone" onDrop={onDropHandler} onDrag={onDragHandler}>
+    <DropZone id="drop-zone" onDrop={onDropHandler} onDragOver={onDragHandler}>
       {!fileName ? (
         <div>
           <p>
