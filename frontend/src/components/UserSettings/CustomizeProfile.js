@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
-
+import DragNDrop from "./DragNDrop";
 const CustomizeContainer = styled.div`
   margin: 0px 150px;
   width: 40%;
@@ -53,7 +53,7 @@ function CustomizeProfile() {
         </div>
         <div>
           <InputLabel>Avatar</InputLabel>
-          {/* Drag and drop component goes here */}
+          <DragNDrop />
         </div>
       </div>
     </CustomizeContainer>
