@@ -23,18 +23,11 @@ const ChooseFile = styled.label`
     padding: 1px;
   }
 `;
-const Confirm = styled.p`
-  color: ${(props) => props.theme.main};
-`;
-Confirm.defaultProps = {
-  theme: {
-    main: "#1A67F5",
-  },
-};
 function DragNDrop() {
   const [fileName, setFileName] = useState("");
   const [file, setFile] = useState(null);
   const onDropHandler = (e) => {
+    e.preventDefault();
     const item = e.dataTransfer.items[0];
     if (item.kind === "file") {
       const uploadFile = item.getAsFile();
@@ -68,12 +61,10 @@ function DragNDrop() {
         </div>
       ) : (
         <div>
-          <ThemeProvider theme={"green"}>
-            <Confirm>
-              <FontAwesomeIcon icon={faCheck} />
-            </Confirm>
-          </ThemeProvider>
-          <Confirm>{fileName}</Confirm>
+          <div>
+            <FontAwesomeIcon icon={faCheck} />
+          </div>
+          <div>{fileName}</div>
         </div>
       )}
     </DropZone>
