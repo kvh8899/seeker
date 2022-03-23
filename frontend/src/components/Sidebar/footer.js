@@ -1,4 +1,4 @@
-import Card from "./card";
+import Card from "../MainPage/card";
 import styled from "styled-components";
 
 const ListContainer = styled.div`

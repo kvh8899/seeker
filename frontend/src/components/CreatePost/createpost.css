@@ -1,6 +1,7 @@
 .cPostForm {
   width: 100%;
   position: relative;
+  height:100vh;
 }
 .divider {
   border: 1px solid white;

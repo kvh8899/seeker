@@ -3,6 +3,12 @@ import { useDispatch } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 import BlankSearch from "../loadingAnimations/BlankSearch";
 import SearchResults from "./SearchResults";
+import styled from "styled-components";
+
+const SearchInputStyle = styled.input`
+  line-height: 25px;
+  background-color: #f6f7f8;
+`;
 function SearchBar() {
   const [query, setQuery] = useState("");
   const [search, setSearch] = useState(false);
@@ -35,7 +41,7 @@ function SearchBar() {
 
   return (
     <>
-      <input
+      <SearchInputStyle
         placeholder="Search for Communities"
         value={query}
         onChange={(e) => {
@@ -51,7 +57,7 @@ function SearchBar() {
           e.stopPropagation();
         }}
         ref={searchInput}
-      ></input>
+      ></SearchInputStyle>
       {search && (
         <div
           className="dropResult"

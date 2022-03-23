@@ -1,24 +1,15 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { logout } from "../../store/session";
-const LogoutButton = ({ setShowDiv }) => {
-  const dispatch = useDispatch();
-  const onLogout = async (e) => {
-    setShowDiv(false);
-    await dispatch(logout());
-  };
+import styled from "styled-components";
 
-  return (
-    <button
-      onClick={onLogout}
-      style={{
-        border: "none",
-        backgroundColor: "transparent",
-      }}
-    >
-      <i className="fas fa-sign-out-alt"></i> Logout
-    </button>
-  );
+const LogoutButtonStyle = styled.button`
+  font: inherit;
+  border: none;
+  background-color: transparent;
+  color: inherit;
+  transition: 0s;
+`;
+const LogoutButton = ({ setShowDiv }) => {
+  return <LogoutButtonStyle>Logout</LogoutButtonStyle>;
 };
 
 export default LogoutButton;

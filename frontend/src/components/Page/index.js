@@ -13,6 +13,8 @@ import Load from "../loadingAnimations/Load";
 import { getSLikes } from "../../store/stateLikes";
 import { getPostLikes } from "../../store/likes";
 import { cap } from "../utils";
+import SideBar from "../Sidebar/sidebar";
+import Card from "../MainPage/card";
 import "./page.css";
 
 function Page() {
@@ -30,7 +32,7 @@ function Page() {
       setIsLoading(false);
       if (session) {
         const postLikes = await dispatch(getPostLikes(posts));
-        dispatch(getSLikes(postLikes));
+        if(postLikes) dispatch(getSLikes(postLikes));
       } else {
         dispatch(getSLikes([]));
       }
@@ -107,10 +109,9 @@ function Page() {
             {!isLoading ? <Posts /> : <Load />}
             <span id="spacer"></span>
           </div>
-          <div className="sideBar">
+          <SideBar>
             <ComData />
-            <span className="spacer" style={{ height: "200px" }}></span>
-          </div>
+          </SideBar>
         </div>
       </div>
     </>

@@ -7,7 +7,6 @@ const CurrentDiv = styled.div`
   border-radius: 3px;
   margin-bottom: 20px;
   top: 70px;
-  height: 275px;
   border: 1px solid rgb(187, 187, 187);
 `;
 const Banner = styled.div`
