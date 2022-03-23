@@ -28,7 +28,7 @@ function Posts() {
       {postList.map((e, i) => {
         return (
           <div
-            key={e.id}
+            key={i}
             className="mainPosts"
             onClick={async () => {
               await dispatch(getCurrentPost(e.id));

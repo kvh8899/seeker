@@ -4,7 +4,7 @@ const FOLLOWPOSTS = "set/FOLLOWPOSTS";
 const PAGEPOSTS = "set/PAGEPOSTS";
 const ADDPOST = "set/ADDPOST";
 const DELETEPOST = "set/DELETEPOST";
-
+const ADDMOREPOSTS = "set/ADDMORE";
 const deletePost = (postId) => {
   return {
     type: DELETEPOST,
@@ -16,6 +16,12 @@ const addPost = (post) => {
   return { type: ADDPOST, post };
 };
 
+const addMorePosts = (posts) => {
+  return {
+    type: ADDMOREPOSTS,
+    payload: posts,
+  };
+};
 const getPage = (pagePosts) => {
   return {
     type: PAGEPOSTS,
@@ -45,7 +51,18 @@ export const getAllPosts = () => async (dispatch) => {
     return null;
   }
 };
+export const getMorePosts = (index) => async (dispatch) => {
+  const res = await fetch(`/api/posts?offset=${index}`);
 
+  if (res.status < 500) {
+    const { posts_t } = await res.json();
+    if (!posts_t.length) return index;
+    dispatch(addMorePosts(posts_t));
+    return index + 1;
+  } else {
+    return 0;
+  }
+};
 // get posts user follows
 export const getFollowPosts = () => async (dispatch) => {
   const res = await fetch("/api/posts/following");
@@ -102,7 +119,6 @@ export const deleteOnePost = (id) => async (dispatch) => {
   }
 };
 
-
 function postList(state = [], action) {
   switch (action.type) {
     case ALLPOSTS:
@@ -115,6 +131,8 @@ function postList(state = [], action) {
       return [...state, action.post];
     case DELETEPOST:
       return state.filter((e) => e.id === action.postId);
+    case ADDMOREPOSTS:
+      return [...state, ...action.payload];
     default:
       return state;
   }
