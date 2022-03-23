@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import DragNDrop from "./DragNDrop";
+import SubmitProfileChangeButton from "./SubmitProfileChangeButton";
 const CustomizeContainer = styled.div`
   margin: 0px 150px;
   width: 40%;
@@ -16,6 +17,7 @@ const CustomizeProfileSubTitle = styled.h3`
   font-size: 12px;
   font-weight: 400;
   margin: 5px 0px;
+  cursor: default;
 `;
 const SubTitleContainer = styled.div`
   border-bottom: 1px solid lightgray;
@@ -24,6 +26,10 @@ const InputLabel = styled.h3`
   font-size: 19px;
   font-weight: 300;
   margin-top: 40px;
+`;
+const UserNameChangeInput = styled.input`
+  box-sizing: border-box;
+  width: 100%;
 `;
 function CustomizeProfile() {
   const [userName, setUsername] = useState("");
@@ -37,7 +43,7 @@ function CustomizeProfile() {
       <div>
         <div>
           <InputLabel>Username</InputLabel>
-          <input
+          <UserNameChangeInput
             placeholder="Username"
             value={userName}
             onChange={(e) => {
@@ -46,7 +52,7 @@ function CustomizeProfile() {
                 setRemaining(30 - e.target.value.length);
               }
             }}
-          ></input>
+          ></UserNameChangeInput>
           <CustomizeProfileSubTitle>
             {remaining} Characters Remaining
           </CustomizeProfileSubTitle>
@@ -54,6 +60,7 @@ function CustomizeProfile() {
         <div>
           <InputLabel>Avatar</InputLabel>
           <DragNDrop />
+          <SubmitProfileChangeButton>Submit</SubmitProfileChangeButton>
         </div>
       </div>
     </CustomizeContainer>

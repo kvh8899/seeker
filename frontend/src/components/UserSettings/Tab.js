@@ -14,14 +14,36 @@ const TabSelector = styled.div`
     cursor: pointer;
     margin: 0px;
   }
+  .underline {
+    border-bottom: 3px solid rgb(28, 138, 228);
+  }
 `;
-function Tab() {
+function Tab({ tabs, setTabs }) {
+  /*
+    index: integer representing index of tab in array
+   */
+  const mapper = (index) => {
+    return tabs.map((e, i) => {
+      return i === index ? true : false;
+    });
+  };
+
   return (
     <TabSelector>
-      <div>
+      <div
+        onClick={(e) => {
+          setTabs(mapper(0));
+        }}
+        className={tabs[0] && "underline"}
+      >
         <p>Profile</p>
       </div>
-      <div>
+      <div
+        onClick={(e) => {
+          setTabs(mapper(1));
+        }}
+        className={tabs[1] && "underline"}
+      >
         <p>Account</p>
       </div>
     </TabSelector>

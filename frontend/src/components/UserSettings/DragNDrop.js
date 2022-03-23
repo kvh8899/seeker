@@ -5,12 +5,13 @@ import { faFileArrowUp, faCheck } from "@fortawesome/free-solid-svg-icons";
 const DropZone = styled.div`
   box-sizing: border-box;
   height: 300px;
-  width: 500px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
   border: 5px lightgray dashed;
+  margin-bottom: 20px;
 `;
 const ChooseFile = styled.label`
   color: white;
@@ -23,6 +24,7 @@ const ChooseFile = styled.label`
     padding: 1px;
   }
 `;
+
 function DragNDrop() {
   const [fileName, setFileName] = useState("");
   const [file, setFile] = useState(null);
@@ -32,6 +34,8 @@ function DragNDrop() {
     const item = e.dataTransfer.items[0];
     if (item.kind === "file") {
       const uploadFile = item.getAsFile();
+
+      //use regex to make sure file is an image
       setFileName(uploadFile.name);
       setFile(uploadFile);
     }
