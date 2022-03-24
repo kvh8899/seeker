@@ -47,9 +47,10 @@ function Footer() {
             <a href="https://github.com/kvh8899">My Github</a>
             <a href="https://angel.co/u/kyle-huang-7">Angelist</a>
             <a href="https://www.linkedin.com/in/kylevhuang461/">LinkedIn</a>
+            <a href="https://kvh8899.github.io/">Kyle's Portfolio</a>
           </List>
         </ListContainer>
-        <List>Seeker © 2022. More Features coming Soon™</List>
+        <List>Seeker © 2022. Created by Kyle H. More Features coming Soon™</List>
       </CardContainer>
     </Card>
   );
