@@ -5,10 +5,16 @@ import { useSelector, useDispatch } from "react-redux";
 import FooForm from "../FooForm";
 import TopBar from "../Nav";
 import SideBar from "../Sidebar/sidebar";
-import { getAllPosts, getFollowPosts, getMorePosts } from "../../store/posts";
+import {
+  getAllPosts,
+  getFollowPosts,
+  getMoreAllPosts,
+  getMoreFollowedPosts,
+} from "../../store/posts";
 import { getPostLikes } from "../../store/likes";
 import { getSLikes } from "../../store/stateLikes";
 import Load from "../loadingAnimations/Load";
+import ThreeDots from "../loadingAnimations/ThreeDots";
 import Communities from "./communities";
 import CurrentSelect from "./currentSelect";
 
@@ -40,13 +46,20 @@ function MainPage({ icon, name }) {
     await loadData(posts);
     setIsLoading(false);
   }
-  const iterate = async () => {
-    const page = await dispatch(getMorePosts(offset));
-    setOffset(page);
+  const iterateAll = async () => {
+    const newIdx = await dispatch(getMoreAllPosts(offset));
+    setOffset(newIdx);
   };
+
+  const iterateFollow = async () => {
+    const newIdx = await dispatch(getMoreFollowedPosts(offset));
+    setOffset(newIdx);
+  };
+
   const trigger = ([entry]) => {
     setIntersecting(entry.isIntersecting);
   };
+
   useEffect(() => {
     setIsLoading(true);
     if (!session || name === "All") {
@@ -62,12 +75,16 @@ function MainPage({ icon, name }) {
 
     observer.observe(loader.current);
     return () => {
-      observer.unobserve();
+      observer.disconnect();
     };
   }, []);
 
   useEffect(() => {
-    if (isIntersecting && name === "All") iterate();
+    if (isIntersecting && name === "All") {
+      iterateAll();
+    } else if (isIntersecting && name === "Home") {
+      iterateFollow();
+    }
   }, [isIntersecting]);
 
   return (
@@ -77,7 +94,11 @@ function MainPage({ icon, name }) {
         <div className="postContent">
           <FooForm />
           {!isLoading ? <Posts name={name} /> : <Load />}
-          <span id="spacer" ref={loader}></span>
+          <span id="spacer" ref={loader}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <ThreeDots />
+            </div>
+          </span>
         </div>
 
         <SideBar>

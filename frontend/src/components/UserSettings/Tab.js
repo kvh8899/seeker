@@ -34,7 +34,7 @@ function Tab({ tabs, setTabs }) {
         onClick={(e) => {
           setTabs(mapper(0));
         }}
-        className={tabs[0] && "underline"}
+        className={tabs[0] ? "underline" : ""}
       >
         <p>Profile</p>
       </div>
@@ -42,7 +42,7 @@ function Tab({ tabs, setTabs }) {
         onClick={(e) => {
           setTabs(mapper(1));
         }}
-        className={tabs[1] && "underline"}
+        className={tabs[1] ? "underline" : ""}
       >
         <p>Account</p>
       </div>

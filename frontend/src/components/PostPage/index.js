@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentPost } from "../../store/currentPost";
 import PostContent from "./postcontent";
 import { useEffect } from "react";
+
 function PostPage() {
   const dispatch = useDispatch();
   const currentPost = useSelector((state) => state.currentPost);

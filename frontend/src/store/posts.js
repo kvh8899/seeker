@@ -4,7 +4,8 @@ const FOLLOWPOSTS = "set/FOLLOWPOSTS";
 const PAGEPOSTS = "set/PAGEPOSTS";
 const ADDPOST = "set/ADDPOST";
 const DELETEPOST = "set/DELETEPOST";
-const ADDMOREPOSTS = "set/ADDMORE";
+const ADDMOREALLPOSTS = "set/ADDMOREALL";
+const ADDMOREFOLLOWPOSTS = "set/ADDMOREFOLLOW";
 const deletePost = (postId) => {
   return {
     type: DELETEPOST,
@@ -16,9 +17,15 @@ const addPost = (post) => {
   return { type: ADDPOST, post };
 };
 
-const addMorePosts = (posts) => {
+const addMoreAllPosts = (posts) => {
   return {
-    type: ADDMOREPOSTS,
+    type: ADDMOREALLPOSTS,
+    payload: posts,
+  };
+};
+const addMoreFollowPosts = (posts) => {
+  return {
+    type: ADDMOREFOLLOWPOSTS,
     payload: posts,
   };
 };
@@ -51,13 +58,26 @@ export const getAllPosts = () => async (dispatch) => {
     return null;
   }
 };
-export const getMorePosts = (index) => async (dispatch) => {
+export const getMoreAllPosts = (index) => async (dispatch) => {
   const res = await fetch(`/api/posts?offset=${index}`);
 
   if (res.status < 500) {
     const { posts_t } = await res.json();
     if (!posts_t.length) return index;
-    dispatch(addMorePosts(posts_t));
+    dispatch(addMoreAllPosts(posts_t));
+    return index + 1;
+  } else {
+    return 0;
+  }
+};
+
+export const getMoreFollowedPosts = (index) => async (dispatch) => {
+  const res = await fetch(`/api/posts/following?offset=${index}`);
+
+  if (res.status < 500) {
+    const { posts_t } = await res.json();
+    if (!posts_t.length) return index;
+    dispatch(addMoreFollowPosts(posts_t));
     return index + 1;
   } else {
     return 0;
@@ -131,7 +151,9 @@ function postList(state = [], action) {
       return [...state, action.post];
     case DELETEPOST:
       return state.filter((e) => e.id === action.postId);
-    case ADDMOREPOSTS:
+    case ADDMOREALLPOSTS:
+      return [...state, ...action.payload];
+    case ADDMOREFOLLOWPOSTS:
       return [...state, ...action.payload];
     default:
       return state;

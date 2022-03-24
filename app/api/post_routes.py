@@ -18,8 +18,9 @@ def validation_errors_to_error_messages(validation_errors):
 #get trending posts /api/posts/
 @post_routes.route("/")
 def trending():
-    posts = db.session.query(Post,func.count(Like.id).label("total")).join(Like,isouter=True).group_by(Post).order_by(desc('total')).limit(10).all()
-    print(posts)
+    offset = request.args.get('offset',default=0,type=int);
+
+    posts = db.session.query(Post,func.count(Like.id).label("total")).join(Like,isouter=True).group_by(Post).order_by(desc('total')).limit(5).offset(offset*5).all()
     posts_t = []
     for i in posts:
         post = i[0].to_dict()
@@ -39,7 +40,8 @@ def trending():
 @post_routes.route("/following")
 @login_required
 def following():
-    posts = Post.query.join(Page).join(Page_Follow).filter(Page_Follow.user_id == current_user.id).order_by(desc(Post.id)).all()
+    offset = request.args.get('offset',default=0,type=int)
+    posts = Post.query.join(Page).join(Page_Follow).filter(Page_Follow.user_id == current_user.id).order_by(desc(Post.id)).limit(5).offset(offset * 5).all()
     posts_t = []
     for i in posts:
         post = i.to_dict()
