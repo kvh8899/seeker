@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllPosts } from "../../store/posts";
 import Profile from "./Profile";
 import { NavLink } from "react-router-dom";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faK } from "@fortawesome/free-solid-svg-icons";
 import { memo } from "react";
 function RightNav({
   setIcons,
@@ -72,6 +73,11 @@ function RightNav({
         <li>
           <a style={{ color: "black" }} href="https://angel.co/u/kyle-huang-7">
             <i className="fab fa-angellist"></i>
+          </a>
+        </li>
+        <li>
+          <a style={{ color: "black" }} href="https://kvh8899.github.io/">
+            <FontAwesomeIcon icon={faK} />
           </a>
         </li>
       </div>
