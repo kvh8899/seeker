@@ -13,6 +13,7 @@ function RightNav({
   profile,
   showDiv,
   setShowDiv,
+  loadAll,
 }) {
   const loginShow = useSelector((state) => state.loginShow);
   const session = useSelector((state) => state.session.user);
@@ -28,7 +29,8 @@ function RightNav({
           <>
             <li
               onClick={(e) => {
-                dispatch(getAllPosts());
+                loadAll();
+                window.scrollTo(0, 0);
                 dispatch(togglePageOff());
                 setIcons(<i className="fas fa-signal"></i>);
                 document.body.classList.remove("mainContentScroll");
