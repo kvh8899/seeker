@@ -87,9 +87,12 @@ function MainPage({ icon, name }) {
     if (name === "All") {
       setIsLoadingInfinite(true);
       iterateAll();
-    } else if (name === "Home") {
+    } else if (session && name === "Home") {
       setIsLoadingInfinite(true);
       iterateFollow();
+    } else {
+      setIsLoadingInfinite(true);
+      iterateAll();
     }
   }, [isIntersecting]);
 
