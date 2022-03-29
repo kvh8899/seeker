@@ -6,7 +6,7 @@ import MidNav from "./MidNav";
 import "./nav.css";
 import { useState, useEffect, useRef } from "react";
 import { memo } from "react";
-function Nav({ name, icon }) {
+function Nav({ name, icon, loadFollowed, loadAll }) {
   const session = useSelector((state) => state.session.user);
   const [showDiv, setShowDiv] = useState(false);
   const [names, setName] = useState(name);
@@ -63,15 +63,17 @@ function Nav({ name, icon }) {
             setName={setName}
             setIcons={setIcons}
             homeBar={homeBar}
+            loadFollowed={loadFollowed}
           />
           <MidNav />
           <RightNav
             setName={setName}
-            setIcons={setIcons}   
+            setIcons={setIcons}
             profileDrop={profileDrop}
             profile={profile}
             setShowDiv={setShowDiv}
             showDiv={showDiv}
+            loadAll={loadAll}
           />
         </ul>
       </nav>

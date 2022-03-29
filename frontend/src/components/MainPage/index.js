@@ -20,6 +20,7 @@ import CurrentSelect from "./currentSelect";
 
 function MainPage({ icon, name }) {
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingInfinite, setIsLoadingInfinite] = useState(false);
   const loader = useRef();
   const session = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
@@ -35,25 +36,27 @@ function MainPage({ icon, name }) {
   }
   async function loadAll() {
     const posts = await dispatch(getAllPosts(0));
-    setOffset(1);
+    setOffset(() => 1);
     await loadData(posts);
     setIsLoading(false);
   }
 
   async function loadFollowed() {
     const posts = await dispatch(getFollowPosts(0));
-    setOffset(1);
+    setOffset(() => 1);
     await loadData(posts);
     setIsLoading(false);
   }
   const iterateAll = async () => {
     const newIdx = await dispatch(getMoreAllPosts(offset));
     setOffset(newIdx);
+    setIsLoadingInfinite(false);
   };
 
   const iterateFollow = async () => {
     const newIdx = await dispatch(getMoreFollowedPosts(offset));
     setOffset(newIdx);
+    setIsLoadingInfinite(false);
   };
 
   const trigger = ([entry]) => {
@@ -80,23 +83,31 @@ function MainPage({ icon, name }) {
   }, []);
 
   useEffect(() => {
-    if (isIntersecting && name === "All") {
+    if (isLoading || !isIntersecting) return;
+    if (name === "All") {
+      setIsLoadingInfinite(true);
       iterateAll();
-    } else if (isIntersecting && name === "Home") {
+    } else if (name === "Home") {
+      setIsLoadingInfinite(true);
       iterateFollow();
     }
   }, [isIntersecting]);
 
   return (
     <div className="mainContent">
-      <TopBar icon={icon} name={name} />
+      <TopBar
+        icon={icon}
+        name={name}
+        loadFollowed={loadFollowed}
+        loadAll={loadAll}
+      />
       <div className="midContent">
         <div className="postContent">
           <FooForm />
           {!isLoading ? <Posts name={name} /> : <Load />}
           <span id="spacer" ref={loader}>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <ThreeDots />
+              {isLoadingInfinite && <ThreeDots />}
             </div>
           </span>
         </div>

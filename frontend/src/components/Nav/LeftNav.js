@@ -2,12 +2,11 @@ import { getCurrentPage } from "../../store/currentPage";
 import { getPagePosts } from "../../store/posts";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { useRef, useState, memo  } from "react";
+import { useRef, useState, memo } from "react";
 import { postPageOff, toggleCreatePage } from "../../store/toggles";
-import { getFollowPosts } from "../../store/posts";
 import guardianImg from "../../images/Guardian.png";
 import { subString } from "../utils";
-function LeftNav({ icon, name, setName, setIcons, homeBar }) {
+function LeftNav({ icon, name, setName, setIcons, homeBar, loadFollowed }) {
   const dispatch = useDispatch();
   const session = useSelector((state) => state.session.user);
   const wrapper = useRef(null);
@@ -23,11 +22,12 @@ function LeftNav({ icon, name, setName, setIcons, homeBar }) {
           onClick={async (e) => {
             dispatch(postPageOff());
             if (session) {
-              await dispatch(getFollowPosts());
+              loadFollowed();
             }
             setName("Home");
             setIcons(<i className="fas fa-home"></i>);
             document.body.classList.remove("mainContentScroll");
+            window.scrollTo(0, 0);
             hist.push("/");
           }}
           style={{ cursor: "pointer" }}
