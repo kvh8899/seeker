@@ -10,7 +10,6 @@ import UserSettings from "./components/UserSettings";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUserGear,
-  faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 function App() {
   const [loaded, setLoaded] = useState(false);
