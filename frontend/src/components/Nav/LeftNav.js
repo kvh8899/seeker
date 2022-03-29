@@ -21,7 +21,7 @@ function LeftNav({ icon, name, setName, setIcons, homeBar, loadFollowed }) {
           className="logo"
           onClick={async (e) => {
             dispatch(postPageOff());
-            if (session) {
+            if (session && loadFollowed) {
               loadFollowed();
             }
             setName("Home");
