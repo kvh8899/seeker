@@ -1,6 +1,5 @@
 import { toggleLogin, toggleSignup, togglePageOff } from "../../store/toggles";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllPosts } from "../../store/posts";
 import Profile from "./Profile";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,7 +28,7 @@ function RightNav({
           <>
             <li
               onClick={(e) => {
-                loadAll();
+                if (loadAll) loadAll();
                 window.scrollTo(0, 0);
                 dispatch(togglePageOff());
                 setIcons(<i className="fas fa-signal"></i>);

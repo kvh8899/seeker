@@ -22,7 +22,7 @@ function SearchResults({ setSearch }) {
                 src={e.profile_image}
                 width="30px"
                 height="30px"
-                alt="profile"
+                alt=""
               ></img>
             </div>
             <div>

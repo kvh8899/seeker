@@ -19,6 +19,14 @@ export function formatDate(str) {
       if (time > 24) {
         time = time / 24;
         unit = " days";
+        if (time > 30) {
+          time = time / 30;
+          unit = " months";
+          if (time >= 12) {
+            time = time / 12;
+            unit = " years";
+          }
+        }
       }
     }
   }
